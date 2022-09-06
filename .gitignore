@@ -1,0 +1,9 @@
+
+# virtual environment
+venv
+
+# testing
+coverage
+
+# react dependencies
+node_modules
