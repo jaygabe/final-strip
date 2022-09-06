@@ -126,6 +126,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 ######   ADDED FIELDS   ######
 
 
+# makes all 403 http errors 401
+REST_FRAMEWORK = {
+    'EXCEPTION_HANDLER':'core.exceptions.status_code_handler'
+}
 
 # add css and images here
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
@@ -142,7 +146,7 @@ ACCOUNT_AUTHENTICATION_METHOD = 'email'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 ACCOUNT_EMAIL_VERIFICATION = "none"
 
-# myaccount.google.com/lesssecureapps
+# myaccount.google.com/lesssecureapps   # this is now obsolete
 # myaccount.google.com/apppasswords
 # myaccount.google.com/DisplayUnlockCaptcha
 

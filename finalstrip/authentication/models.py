@@ -34,6 +34,7 @@ class UserManager(BaseUserManager):
     return user
 
 
+# Custom user model
 class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(max_length=254, unique=True)
     name = models.CharField(max_length=254, null=True, blank=True)
@@ -44,9 +45,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField(default=True)
     last_login = models.DateTimeField(null=True, blank=True)
     date_joined = models.DateTimeField(auto_now_add=True)
-    
-
-    shareable = models.BooleanField(default=True)
+    require_mfa = models.BooleanField(default=False)
+    tfa_secret = models.CharField(max_length=255, default='')
     usfa_membership = models.IntegerField(null=True, blank=True)
     user_handle = models.CharField(max_length=25, null=True, blank=True, unique=True)
 
@@ -55,3 +55,17 @@ class User(AbstractBaseUser, PermissionsMixin):
     REQUIRED_FIELDS = []
 
     objects = UserManager()
+
+
+# Used to store JWTs
+class UserToken(models.Model):
+    user_id = models.IntegerField()
+    token = models.CharField(max_length=255)
+    create_at = models.DateTimeField(auto_now_add=True)
+    expired_at = models.DateTimeField()
+
+
+# Reset email model
+class Reset(models.Model):
+    email = models.CharField(max_length=255)
+    token = models.CharField(max_length=255, unique=True)
