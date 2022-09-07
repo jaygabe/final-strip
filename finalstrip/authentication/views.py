@@ -88,7 +88,6 @@ class LoginAPIView(APIView):
         return Response({'Bad Request':'Login Error'}, status=status.HTTP_400_BAD_REQUEST)
         
 
-
 class TwoFactorAPIView(APIView):
     def post(self, request):
         
