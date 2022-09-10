@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 import {setAuth} from '../redux/authSlice'
 import {RootState} from '../redux/store'
 
+import {PushNote} from "./PushNote";
+
 
 export const Home = () => {
     const [message, setMessage] = useState("You are not Logged In")
@@ -28,6 +30,9 @@ export const Home = () => {
     return (
         <div className="container mt-5 text-center">
             <h3>{auth ? message : 'You are not authenticated'}</h3>
+
+            <PushNote />
+
         </div>
     )
 }

@@ -1,38 +1,92 @@
-.App {
-  text-align: center;
+/*
+REFERENCES: 
+Auth forms:  https://codepen.io/ibrahimjabbari/pen/qBWYBYv
+Nav bar:  https://codepen.io/ctedesco02/pen/Mjxwzw
+*/
+
+
+body {
+  background: linear-gradient(white, rgb(57,33,255));
+  background-attachment: fixed;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+* {
+  box-sizing: border-box
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.find-me {
+  height: 5rem;
+  outline: 3px dashed green;
+  background-color: coral;
+  color: yellow;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.header-fixed {
+	/* background-color:#292c2f; */
+  background-color:#b3b4b4;
+	box-shadow:0 1px 1px #ccc;
+	padding: 20px 40px;
+	height: 80px;
+	color: #ffffff;
+	box-sizing: border-box;
+	top:-100px;
+
+	-webkit-transition:top 0.3s;
+	transition:top 0.3s;
+}
+
+.container {
+  padding: 20px;
+  width:min(500px, 100%);
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+    border:1px solid #ccc;
+    border-radius:10px;
+    background:white;
+-webkit-box-shadow: 2px 1px 21px -9px rgba(0,0,0,0.38);
+-moz-box-shadow: 2px 1px 21px -9px rgba(0,0,0,0.38);
+box-shadow: 2px 1px 21px -9px rgba(0,0,0,0.38);
+}
+
+input[type=text], input[type=password], input[type=email] {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  display: inline-block;
+  border: none;
+  background: #e0e0e0;
+	font-family: Montserrat,Arial, Helvetica, sans-serif;
+}
+
+.submit-button {
+  background-color: rgb(209, 46, 95);
   color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+	font-size:16px;
+	font-family: Montserrat,Arial, Helvetica, sans-serif;
+	border-radius:10px;
 }
 
-.App-link {
-  color: #61dafb;
+.submit-button:hover {
+  opacity:1;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.mb {
+  margin-bottom: 1rem;
+}
+
+.google-login {
+  
+  justify-self: center;
+  /* display: inline-block; */
+
+  /* left: 50%; */
+  /* transform: translateX(-50%); */
 }

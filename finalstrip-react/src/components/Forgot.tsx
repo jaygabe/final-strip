@@ -37,20 +37,18 @@ export const Forgot = () => {
     }
 
     return (
-        <main className="form-signin w-100 m-auto mt-5">
+        <main className="container">
             {info}
             
             <form onSubmit={submit}>
-            <h1 className="h1 mb-3 fw-bold">Please enter you email</h1>
+            <h1 className="mb">Please enter you email</h1>
 
-            <div className="form-floating">
-                <input type="email" className="form-control" id="floatingInput" placeholder="name@example.com"
-                    onChange={e => setEmail(e.target.value)}
-                />
-                <label htmlFor="floatingInput">Email address</label>
-            </div>
-            
-            <button className="w-100 btn btn-lg btn-primary" type="submit">Submit Email</button>
+            <label htmlFor="floatingInput">Email Address: </label>
+            <input type="email" className="form-control" id="floatingInput" placeholder="name@example.com"
+                onChange={e => setEmail(e.target.value)}
+            />
+        
+            <button className="submit-button" type="submit">Submit Email</button>
             </form>
         </main>
     )

@@ -37,7 +37,7 @@ export const Login = () => {
     }
 
     return (
-        <main className="form-signin w-100 m-auto mt-5">
+        <main className="container">
             {form}
         </main>
     )

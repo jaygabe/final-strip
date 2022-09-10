@@ -43,19 +43,16 @@ export const AuthenticatorForm = (props: {
     return(
         <>
             <form onSubmit={submit}>
-                <h1 className="h1 mb-3 fw-bold">Please enter authenticator code</h1>
-
-                <div className="form-floating">
-                    <input className="form-control" id="floatingInput" placeholder="6 digit code"
-                        onChange={e => setCode(e.target.value)}
-                    />
-                    <label htmlFor="floatingInput">Authenticator Code</label>
-                </div>
+                <h1 className="mb">Please enter authenticator code</h1>
                 
-                <button className="w-100 btn btn-lg btn-primary" type="submit">Submit</button>
+                <label htmlFor="floatingInput">Authenticator Code: </label>
+                <input type="text" className="form-control" id="floatingInput" placeholder="6 digit code"
+                    onChange={e => setCode(e.target.value)}
+                /> 
+                
+                <button className="submit-button" type="submit">Submit</button>
             </form>
             {img}
         </>
-        
     )
 }

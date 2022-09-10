@@ -10,6 +10,7 @@ export const Register = () => {
     const [password, setPassword] = useState("");
     const [passwordConfirm, setPasswordConfirm] = useState("");
     const [redirect, setRedirect] = useState(false);
+    const [usafNumber, setUsafNumber] = useState("");
 
     const submit = async (e: SyntheticEvent) => {
         e.preventDefault();  // prevents page from reloading.
@@ -17,6 +18,7 @@ export const Register = () => {
         await axios.post("register", {
             first_name: firstName,
             last_name: lastName,
+            usaf_number: usafNumber,
             email,
             password,
             password_confirm: passwordConfirm
@@ -31,41 +33,42 @@ export const Register = () => {
     }
 
     return (
-        <main className="form-signin w-100 m-auto mt-5">
+        <main className="container">
             <form onSubmit={submit}>
-                <h1 className="h1 mb-3 fw-bold">Please Register</h1>
+                <h1 className="h1 mb">Please Register</h1>
 
-                <div className="form-floating">
-                    <input type="text" className="form-control" id="floatingInput" placeholder="First Name"
-                        onChange={e => setFirstName(e.target.value)}
-                    />
-                    <label htmlFor="floatingInput">First Name</label>
-                </div>
-                <div className="form-floating">
-                    <input type="text" className="form-control" id="floatingInput" placeholder="Last Name"
-                        onChange={e => setLastName(e.target.value)}
-                    />
-                    <label htmlFor="floatingInput">Last Name</label>
-                </div>
-                <div className="form-floating">
-                    <input type="email" className="form-control" id="floatingInput" placeholder="name@example.com"
-                        onChange={e => setEmail(e.target.value)}
-                    />
-                    <label htmlFor="floatingInput">Email address</label>
-                </div>
-                <div className="form-floating">
-                    <input type="password" className="form-control" id="floatingPassword" placeholder="Password"
-                        onChange={e => setPassword(e.target.value)}
-                    />
-                    <label htmlFor="floatingPassword">Password</label>
-                </div>
-                <div className="form-floating">
-                    <input type="password" className="form-control" id="floatingPasswordConfirm" placeholder="Password Confirm"
-                        onChange={e => setPasswordConfirm(e.target.value)}
-                    />
-                    <label htmlFor="floatingPassword">Confirm Password</label>
-                </div>
-                <button className="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+                <label htmlFor="email">Email address: </label>
+                <input type="email" className="" id="email" placeholder="name@example.com"
+                    onChange={e => setEmail(e.target.value)} required
+                />
+            
+                <label htmlFor="password">Password: </label>
+                <input type="password" className="form-control" id="password" placeholder="Password"
+                    onChange={e => setPassword(e.target.value)} required
+                />
+            
+                <label htmlFor="passwordConfirm">Confirm Password: </label>
+                <input type="password" className="form-control" id="passwordConfirm" placeholder="Password Confirm"
+                    onChange={e => setPasswordConfirm(e.target.value)} required
+                />
+                
+                <label htmlFor="firstName">First Name: </label>
+                <input type="text" className="form-control" id="firstName" placeholder="First Name"
+                    onChange={e => setFirstName(e.target.value)}
+                />
+                
+                
+                <label htmlFor="lastName">Last Name: </label>
+                <input type="text" className="form-control" id="lastName" placeholder="Last Name"
+                    onChange={e => setLastName(e.target.value)}
+                />
+                
+                <label htmlFor="fencingNumber">USA Fencing Number: </label>
+                <input type="text" className="form-control id-field" id="fencingNumber" placeholder="100000000"
+                    onChange={e => setUsafNumber(e.target.value)}
+                />
+
+                <button className="submit-button" type="submit">Sign in</button>
             </form>
         </main>
     )

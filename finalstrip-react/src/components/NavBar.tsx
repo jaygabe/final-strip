@@ -16,21 +16,21 @@ export const NavBar = () => {
 
     if (auth) {
         links = <div className="text-end">
-                    <Link to="/login" className="btn btn-outline-light me-2" onClick={logout}>Logout</Link>
+                    <Link to="/login" className="find-me" onClick={logout}>Logout</Link>
                 </div>
     } else {
         links = <div className="text-end">
-                    <Link to="/login" className="btn btn-outline-light me-2">Login</Link>
-                    <Link to="/register" className="btn btn-outline-light me-2">Register</Link>
+                    <Link to="/login" className="find-me">Login</Link>
+                    <Link to="/register" className="find-me">Register</Link>
                 </div>
     }
 
     return (
-        <header className="p-3 text-bg-dark">
-            <div className="container">
-            <div className="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+        <header className="header-fixed">
+            <div className="header-class">
+            <div className="header-contents">
 
-                <ul className="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                <ul className="home-button">
                     <li><Link to="/" className="nav-link px-2 text-secondary">Home</Link></li>
                 </ul>
 
