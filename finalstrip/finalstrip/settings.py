@@ -14,7 +14,7 @@ SECRET_KEY = 'django-insecure-g+sm3k0+cm_d9a*f!5w*v8%a-(^1d$t5p&w3zq5n6oqntiz96i
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost']
 
 
 # Application definition
@@ -126,13 +126,23 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 ######   ADDED FIELDS   ######
 
 
+
+# cross site headers
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_CREDENTIALS = True  # allows us to use the cookie
+SESSION_COOKIE_SAMESITE = None
+CSRF_COOKIE_SAMESITE = None
+
+
 # makes all 403 http errors 401
 REST_FRAMEWORK = {
-    'EXCEPTION_HANDLER':'core.exceptions.status_code_handler'
+    'EXCEPTION_HANDLER':'authentication.exceptions.status_code_handler'
 }
+
 
 # add css and images here
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+
 
 # custom user model
 AUTH_USER_MODEL = 'authentication.User'

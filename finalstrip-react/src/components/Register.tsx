@@ -29,7 +29,7 @@ export const Register = () => {
     }
 
     if (redirect){
-        return <Navigate to="/login" />
+        return <Navigate to="auth/login" />
     }
 
     return (

@@ -1,0 +1,144 @@
+.navbar {
+    height: 3.5rem;
+    display: flex;
+    flex-direction: row;
+    background-color: #333;
+    align-items: center;
+    justify-content: space-between;
+}
+  
+.navbar-links {
+    height: 100%;
+    /* display: flex; */
+}
+
+.navbar-links ul {
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar-links li {
+    list-style: none;
+}
+
+.navbar-links li a {
+    display: block;
+    text-decoration: none;
+    color: white;
+    padding: 1rem;
+}
+
+.navbar-links li:hover {
+    background-color: #555;
+}
+
+.navbar-account-button {
+    padding: .25rem;
+    margin: .25rem .75rem;
+    background-color: white;
+    color: black;
+    border: none;
+    outline: none;
+    position: relative;
+    border-radius: 5px;
+    text-decoration: none;
+
+    --border-size:  2px;
+}
+
+.navbar-account-button.pop::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    /* z-index: -1; */
+    border-radius: 5px;
+    border: 2px solid white;
+    transition: top, left, right, bottom, 100ms ease-in-out;
+}
+
+.navbar-account-button.pop:hover::before,
+.navbar-account-button.pop:focus::before {
+    top: calc(var(--border-size) * -2);
+    left: calc(var(--border-size) * -2);
+    right: calc(var(--border-size) * -2);
+    bottom: calc(var(--border-size) * -2);
+}
+
+
+
+
+@media only screen and (max-width: 800px) {
+
+    .logo {
+        display: none;
+    }
+
+    .navbar {
+        z-index: 2;
+        width: 100%;
+        justify-content: normal;
+    }
+
+    .navbar-links {
+        /* this stuff should be move to navbar class */
+        display: flex;
+        width: 100%;
+        height: 80vh;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: var(--accent1);
+        opacity: 50%;
+        position: fixed;
+        left: 0;
+        bottom: -100vh;
+        transform: bottom 650ms;
+        z-index: 2;
+    }
+
+    .navbar.open-menu {
+    z-index: 2;
+    width: 100%;
+    height: 100vh;
+    }
+  
+    .navbar-links.open-menu {
+    top: 0;
+    }
+
+    .navbar-links.open-menu ul{
+        flex-direction: column;
+        top: 0;
+    }
+
+    .navbar-account.open-menu {
+        position: absolute;
+        display: grid;
+        grid-auto-flow: column;
+        grid-column: span 2;
+        grid-row: span 1;
+        height: 20vh;
+        width: 100%;
+        bottom: 0px;
+        align-items: center;
+        justify-items: center;
+    }
+
+    .navbar-account-button.open-menu.pop {
+        color: blue;
+        padding: .5rem;
+        justify-items: center;
+        font-size: x-large;
+
+    }
+}
+
+    
+
+
+
+  

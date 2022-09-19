@@ -1,40 +1,41 @@
 /*
 REFERENCES: 
 Auth forms:  https://codepen.io/ibrahimjabbari/pen/qBWYBYv
-Nav bar:  https://codepen.io/ctedesco02/pen/Mjxwzw
+Nav bar:  https://codepen.io/WebDevSimplified/pen/LqKQRK
+hamburger:  https://codepen.io/codwerk/pen/bGGJzyq
+buttons:  https://codepen.io/WebDevSimplified/pen/jOEorZN
+
 */
 
 
-body {
-  background: linear-gradient(white, rgb(57,33,255));
-  background-attachment: fixed;
+@import './styles/hamburger.css';
+@import 'styles/navbar.css';
+
+
+:root {
+  --primary: rgb(57,33,255);
+  --secondary: white;
+  --accent1: rgb(176,23,69);
+  
 }
 
-* {
+*, *::before, *::after {
   box-sizing: border-box
 }
 
-.find-me {
-  height: 5rem;
-  outline: 3px dashed green;
-  background-color: coral;
-  color: yellow;
+body {
+  background: linear-gradient(var(--secondary), var(--primary));
+  background-attachment: fixed;
 }
 
-.header-fixed {
-	/* background-color:#292c2f; */
-  background-color:#b3b4b4;
-	box-shadow:0 1px 1px #ccc;
-	padding: 20px 40px;
-	height: 80px;
-	color: #ffffff;
-	box-sizing: border-box;
-	top:-100px;
-
-	-webkit-transition:top 0.3s;
-	transition:top 0.3s;
+.hidden {
+  display: none;
 }
 
+
+
+
+/* really just a card */
 .container {
   padding: 20px;
   width:min(500px, 100%);
@@ -45,9 +46,9 @@ body {
     border:1px solid #ccc;
     border-radius:10px;
     background:white;
--webkit-box-shadow: 2px 1px 21px -9px rgba(0,0,0,0.38);
--moz-box-shadow: 2px 1px 21px -9px rgba(0,0,0,0.38);
-box-shadow: 2px 1px 21px -9px rgba(0,0,0,0.38);
+  -webkit-box-shadow: 2px 1px 21px -9px rgba(0,0,0,0.38);
+  -moz-box-shadow: 2px 1px 21px -9px rgba(0,0,0,0.38);
+  box-shadow: 2px 1px 21px -9px rgba(0,0,0,0.38);
 }
 
 input[type=text], input[type=password], input[type=email] {
@@ -61,7 +62,7 @@ input[type=text], input[type=password], input[type=email] {
 }
 
 .submit-button {
-  background-color: rgb(209, 46, 95);
+  background-color: var(--accent1);
   color: white;
   padding: 14px 20px;
   margin: 8px 0;
@@ -78,6 +79,8 @@ input[type=text], input[type=password], input[type=email] {
   opacity:1;
 }
 
+
+/* generic classes to scooch things around */
 .mb {
   margin-bottom: 1rem;
 }
@@ -90,3 +93,5 @@ input[type=text], input[type=password], input[type=email] {
   /* left: 50%; */
   /* transform: translateX(-50%); */
 }
+
+

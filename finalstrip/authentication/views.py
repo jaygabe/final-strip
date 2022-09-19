@@ -232,7 +232,7 @@ class GoogleAuthAPIView(APIView):
     
     def post(self, request):
 
-        print('request looks like: ', request.data)  #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        
         token = request.data['token']
         
         google_user = id_token.verify_token(token, GoogleRequest()) # verifies token with Google

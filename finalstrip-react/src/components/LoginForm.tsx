@@ -29,7 +29,7 @@ export const LoginForm = (props: {
     const onSuccess = async (googleUser: any) => {
         
         // console.log(googleUser)
-        const {status, data} = await axios.post('google-auth', {
+        const {status, data} = await axios.post('auth/google-auth', {
             token: googleUser.credential
         }, {withCredentials: true});
 

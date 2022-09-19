@@ -28,7 +28,7 @@ export const AuthenticatorForm = (props: {
     const submit = async (e: SyntheticEvent) => {
         e.preventDefault();
         
-        const {status, data} = await axios.post('two-factor', {
+        const {status, data} = await axios.post('auth/two-factor', {
             ...props.loginData,
             code
         }, {withCredentials: true});

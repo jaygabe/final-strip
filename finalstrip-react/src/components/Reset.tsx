@@ -13,7 +13,7 @@ export const Reset = () => {
     const submit = async (e: SyntheticEvent) => {
         e.preventDefault();
 
-        await axios.post('reset', {
+        await axios.post('auth/reset', {
             token,
             password,
             password_confirm: passwordConfirm
@@ -22,7 +22,7 @@ export const Reset = () => {
     }
 
     if(redirect){
-        return <Navigate to="/login" />
+        return <Navigate to="auth/login" />
     }
     
     return (

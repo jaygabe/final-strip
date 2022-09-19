@@ -14,7 +14,7 @@ export const Forgot = () => {
         e.preventDefault()
 
         try{
-            await axios.post('forgot', {email});
+            await axios.post('auth/forgot', {email});
             setNotify({
                 show: true,
                 error: false,

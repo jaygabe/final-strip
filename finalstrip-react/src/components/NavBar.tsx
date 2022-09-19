@@ -3,41 +3,57 @@ import { useSelector } from "react-redux";
 import axios from "axios"
 
 import { RootState } from "../redux/store";
+import { useState } from "react";
 
 
 export const NavBar = () => {
+    const [mobileLinks, setMobileLinks] = useState(false)
     let links;
+
     const auth = useSelector((state: RootState) => state.auth.value)
 
+
+    // const navLinks = () => {
+    //     mobileLinks ? "nav-links mobile" : "nav-links hidden"
+    // }
+
     const logout = async () => {
-        await axios.post('logout');
+        await axios.post('auth/logout', {withCredentials: true});
         axios.defaults.headers.common['Authorization'] = '';
     }
 
     if (auth) {
-        links = <div className="text-end">
-                    <Link to="/login" className="find-me" onClick={logout}>Logout</Link>
+        links = <div className={mobileLinks ? "navbar-account open-menu" : "navbar-account"}>
+                    <Link to="login" className={mobileLinks ? "navbar-account-button open-menu pop" : "navbar-account-button pop"} onClick={logout}>Logout</Link>
                 </div>
     } else {
-        links = <div className="text-end">
-                    <Link to="/login" className="find-me">Login</Link>
-                    <Link to="/register" className="find-me">Register</Link>
+        links = <div className={mobileLinks ? "navbar-account open-menu" : "navbar-account"}>
+                    <Link to="login" className={mobileLinks ? "navbar-account-button open-menu pop" : "navbar-account-button pop"}>Login</Link>
+                    <Link to="register" className={mobileLinks ? "navbar-account-button open-menu pop" : "navbar-account-button pop"}>Register</Link>
                 </div>
     }
 
     return (
-        <header className="header-fixed">
-            <div className="header-class">
-            <div className="header-contents">
-
-                <ul className="home-button">
-                    <li><Link to="/" className="nav-link px-2 text-secondary">Home</Link></li>
+        <nav className={mobileLinks ? "navbar open-menu" : "navbar"}>
+            <div className="logo">Brand Name</div>
+            
+            <div className={mobileLinks ? "navbar-links open-menu" : "navbar-links"}>
+                <ul>
+                    <li><Link to="/" className="navbar-link">Home</Link></li>
+                    <li><Link to="/" className="navbar-link">Tournaments</Link></li>
+                    <li><Link to="/" className="navbar-link">Lessons</Link></li>
+                    <li><Link to="/" className="navbar-link">Fencers</Link></li>
                 </ul>
+            </div>
+            
+            {links}
 
-                {links}
-            </div>
-            </div>
-        </header>
+            <a href="#" className={mobileLinks ? "hamburger open-menu" : "hamburger"}  onClick={() => setMobileLinks(!mobileLinks)}>
+                <span className="line"></span>
+                <span className="line"></span>
+                <span className="line"></span>
+            </a>
+        </nav>
     )
 }
 
