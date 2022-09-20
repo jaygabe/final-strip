@@ -1,9 +1,16 @@
-from django.shortcuts import render
+from urllib import response
+from django.shortcuts import render, get_object_or_404, get_list_or_404
 from django.db.models import Q
 
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import exceptions, status
+
+from .models import Fencer, Tournament, Event, Bout, Lesson, USAFencingInfo
 from authentication.models import User
 from social.models import ConnectFencers
-from .models import Tournament
+from .serializers import FencerSerializer
+
 
 def profile_page(request, user_id):
 
@@ -33,4 +40,12 @@ def profile_page(request, user_id):
     }
 
     return render(request, 'authentication/auth_accounts.html', context)
+
+class FencerView(APIView):
+
+    serializer_class = FencerSerializer
+
+    def get(self, request, slug):
+        fencer = get_object_or_404(Fencer, slug=slug)
+        return Response(FencerSerializer(fencer).data)
 

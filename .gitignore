@@ -7,3 +7,12 @@ coverage
 
 # react dependencies
 node_modules
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+finalstrip/authentication/__pycache__/authentication.cpython-39.pyc
+finalstrip/finalstrip/__pycache__/settings.cpython-39.pyc
+finalstrip/finalstrip/__pycache__/urls.cpython-39.pyc
+
+# development database
+finalstrip/db.sqlite3
