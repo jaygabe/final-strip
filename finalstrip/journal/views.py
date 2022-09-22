@@ -1,4 +1,5 @@
 from urllib import response
+from django.http import JsonResponse
 from django.shortcuts import render, get_object_or_404, get_list_or_404
 from django.db.models import Q
 
@@ -9,7 +10,8 @@ from rest_framework import exceptions, status
 from .models import Fencer, Tournament, Event, Bout, Lesson, USAFencingInfo
 from authentication.models import User
 from social.models import ConnectFencers
-from .serializers import FencerSerializer
+from .serializers import FencerSerializer, TournamentSerializer, EventSerializer, BoutSerializer, LessonSerializer, USAFencingSerializer
+from authentication.authentication import JWTAuthentication
 
 
 def profile_page(request, user_id):
@@ -41,11 +43,22 @@ def profile_page(request, user_id):
 
     return render(request, 'authentication/auth_accounts.html', context)
 
-class FencerView(APIView):
 
-    serializer_class = FencerSerializer
+
+class FencerView(APIView):
+    # authentication_classes = [JWTAuthentication]
+    serializer_classes = [FencerSerializer, BoutSerializer]
 
     def get(self, request, slug):
-        fencer = get_object_or_404(Fencer, slug=slug)
-        return Response(FencerSerializer(fencer).data)
+
+        fencer = get_object_or_404(Fencer, user=request.user, slug=slug)
+        user_bouts = Bout.objects.filter(user=request.user)
+        bouts = user_bouts.filter(Q(fencer_a__slug=slug)|Q(fencer_b__slug=slug))
+
+        data = {
+            'Fencer': FencerSerializer(fencer).data, 
+            'Bouts': BoutSerializer(bouts, many=True).data
+        }
+
+        return Response(data, status=status.HTTP_200_OK)
 

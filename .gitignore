@@ -13,6 +13,19 @@ __pycache__/
 finalstrip/authentication/__pycache__/authentication.cpython-39.pyc
 finalstrip/finalstrip/__pycache__/settings.cpython-39.pyc
 finalstrip/finalstrip/__pycache__/urls.cpython-39.pyc
+finalstrip/journal/__pycache__/admin.cpython-39.pyc
+finalstrip/journal/__pycache__/models.cpython-39.pyc
+finalstrip/journal/__pycache__/admin.cpython-39.pyc
+finalstrip/journal/__pycache__/models.cpython-39.pyc
+
+# db migrations
+migrations/
+finalstrip/journal/migrations/0001_initial.py
 
 # development database
 finalstrip/db.sqlite3
+
+
+
+finalstrip/journal/__pycache__/admin.cpython-39.pyc
+finalstrip/journal/__pycache__/models.cpython-39.pyc
