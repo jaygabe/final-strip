@@ -11,6 +11,7 @@ from .models import Fencer, Tournament, Event, Bout, Lesson, USAFencingInfo
 from authentication.models import User
 from social.models import ConnectFencers
 from .serializers import FencerSerializer, TournamentSerializer, EventSerializer, BoutSerializer, LessonSerializer, USAFencingSerializer
+from .serializers import AddFencerSerializer
 from authentication.authentication import JWTAuthentication
 
 
@@ -47,18 +48,54 @@ def profile_page(request, user_id):
 
 class FencerView(APIView):
     # authentication_classes = [JWTAuthentication]
-    serializer_classes = [FencerSerializer, BoutSerializer]
+    serializer_classes = [FencerSerializer, BoutSerializer, AddFencerSerializer]
+
+    def get(self, request, slug=None):
+
+        if slug != None:
+            fencer = get_object_or_404(Fencer, user=request.user, slug=slug)
+            user_bouts = Bout.objects.filter(user=request.user)
+            bouts = user_bouts.filter(Q(fencer_a__slug=slug)|Q(fencer_b__slug=slug))
+            data = {
+                'Fencer': FencerSerializer(fencer).data, 
+                'Bouts': BoutSerializer(bouts, many=True).data
+            }
+        else:
+            fencer = get_list_or_404(Fencer, user=request.user)
+            data = {
+                'Fencer': FencerSerializer(fencer, many=True).data, 
+            }
+        
+        return Response(data, status=status.HTTP_200_OK)
+
+    # saves a new fencer to the db
+    def post(self, request, slug=None):
+
+        serializer = self.serializer_classes[2](data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+
+            return Response({'Good Request': 'Fencer Added'}, status=status.HTTP_201_CREATED)
+        
+        return Response({'Bad Request': 'Invalid fencer data...'}, status=status.HTTP_400_BAD_REQUEST)
+
+
+
+
+class TournamentView(APIView):
+    
+    # authentication_classes = [JWTAuthentication]
+    serializer_classes = [TournamentSerializer]
 
     def get(self, request, slug):
-
-        fencer = get_object_or_404(Fencer, user=request.user, slug=slug)
-        user_bouts = Bout.objects.filter(user=request.user)
-        bouts = user_bouts.filter(Q(fencer_a__slug=slug)|Q(fencer_b__slug=slug))
-
+        
+        if slug != None:
+            tournament = get_object_or_404(Tournament, user=request.user, slug=slug)
+        else:
+            tournament = get_list_or_404(Tournament, user=request.user)
+        
         data = {
-            'Fencer': FencerSerializer(fencer).data, 
-            'Bouts': BoutSerializer(bouts, many=True).data
-        }
-
+                'Tournament': tournament
+            }
         return Response(data, status=status.HTTP_200_OK)
 

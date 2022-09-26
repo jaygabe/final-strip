@@ -9,6 +9,12 @@ class FencerSerializer(serializers.ModelSerializer):
         exclude = ('id',)
 
 
+class AddFencerSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Fencer
+        exclude = ('id','slug')
+
+
 class TournamentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Tournament

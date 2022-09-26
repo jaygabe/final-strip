@@ -3,6 +3,8 @@ from django.db.models import Q
 from authentication.models import User
 from social.models import ConnectFencers
 
+from django_extensions.db.fields import AutoSlugField
+
 # to drop from db using manage.py:
 # 1) pen the db shell using python manage.py dbshell
 # 2) DROP TABLE {app-name}_{model-name}
@@ -64,7 +66,7 @@ class Tournament(models.Model):
         ('World', 'World'),
     )
 
-    slug = models.SlugField(max_length=10, unique=True)
+    slug = AutoSlugField(max_length=10, unique=True, populate_from=('name',), editable=True)
     user = models.ForeignKey(User, related_name="tourn_user", on_delete=models.SET_NULL, null=True, blank=True)
     name = models.CharField(max_length=200)
     time = models.DateField(default="2/2/2022")
@@ -99,7 +101,7 @@ class Event(models.Model):
     ('Modern Pentathlon','Modern Pentathlon')
     )
 
-    slug = models.SlugField(max_length=10, unique=True)
+    slug = AutoSlugField(max_length=10, unique=True, populate_from=('name',), editable=True)
     user = models.ForeignKey(User, related_name="event_user", on_delete=models.SET_NULL, null=True, blank=True)
     name= models.CharField(max_length=200)
     time = models.DateField(default="2/2/2022")
@@ -121,7 +123,7 @@ class Fencer(models.Model):
     ('excellent', 'excellent')
     )
 
-    slug = models.SlugField(max_length=10, unique=True)
+    slug = AutoSlugField(max_length=10, unique=True, populate_from=('last_name',), editable=True)
     # defined by who created it
     user = models.ForeignKey(User, related_name="user_fencer", on_delete=models.SET_NULL, null=True, blank=True)
     # input by user
@@ -179,7 +181,7 @@ class Bout(models.Model):
         ('Other', 'Other')
     )
 
-    slug = models.SlugField(max_length=10, unique=True)
+    slug = AutoSlugField(max_length=10, unique=True, populate_from=('notes',), editable=True)
     user = models.ForeignKey(User, related_name="bout_user", on_delete=models.SET_NULL, null=True, blank=True)
     winner_is_a = models.BooleanField(default=True)
     fencer_a = models.ForeignKey(Fencer, related_name="fencer_a", on_delete=models.SET_NULL, null=True, blank=True)
@@ -229,7 +231,7 @@ class Bout(models.Model):
 
 
 class Lesson(models.Model):
-    slug = models.SlugField(max_length=10, unique=True)
+    slug = AutoSlugField(max_length=10, unique=True, populate_from=('coach',), editable=True)
     user = models.ForeignKey(User, related_name='fencer', on_delete=models.SET_NULL, null=True, blank=True)
     coach = models.ForeignKey(User, related_name='instructor', on_delete=models.SET_NULL, null=True, blank=True)
     lesson_date = models.DateField(default="1/1/1900")
