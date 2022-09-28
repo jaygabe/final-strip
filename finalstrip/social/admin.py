@@ -1,3 +1,5 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import ConnectFencers
+
+admin.site.register(ConnectFencers)

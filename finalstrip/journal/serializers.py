@@ -21,22 +21,45 @@ class TournamentSerializer(serializers.ModelSerializer):
         exclude = ('id',)
 
 
+class AddTournamentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Tournament
+        exclude = ('id','slug')
+
+
 class EventSerializer(serializers.ModelSerializer):
     class Meta:
         model = Event
         exclude = ('id',)
 
 
+class AddEventSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Event
+        exclude = ('id','slug')
+
+
 class BoutSerializer(serializers.ModelSerializer):
     class Meta:
         model = Bout
         exclude = ('id',)
-        
+
+
+class AddBoutSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Bout
+        exclude = ('id','slug')
+
 
 class LessonSerializer(serializers.ModelSerializer):
     class Meta:
         model = Lesson
-        exclude = ('id',)      
+        exclude = ('id',)  
+
+class AddLessonSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Lesson
+        exclude = ('id','slug')    
 
 
 class USAFencingSerializer(serializers.ModelSerializer):
