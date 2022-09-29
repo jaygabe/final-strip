@@ -1,10 +1,10 @@
 import { SyntheticEvent, useState } from "react";
 import { Link, Navigate } from "react-router-dom";
 import {useDispatch} from "react-redux";
-import {setAuth} from "../redux/authSlice";
+import {setAuth} from "../../../redux/authSlice";
 
-import { LoginForm } from "./LoginForm";
-import { AuthenticatorForm } from "./AuthenticatorForm";
+import { LoginForm } from "../../forms/LoginForm";
+import { AuthenticatorForm } from "../../forms/AuthenticatorForm";
 
 
 export const Login = () => {

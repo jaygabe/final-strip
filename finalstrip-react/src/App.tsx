@@ -2,12 +2,13 @@ import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import "./App.css";
-import {Login} from "./components/Login";
-import {Register} from "./components/Register";
+
+import {Login} from "./components/pages/auth/Login";
+import {Register} from "./components/pages/auth/Register";
 import {NavBar} from "./components/NavBar";
-import { Home } from "./components/Home";
-import { Forgot } from "./components/Forgot";
-import { Reset } from "./components/Reset"
+import { Home } from "./components/pages/admin/Home";
+import { Forgot } from "./components/pages/auth/Forgot";
+import { Reset } from "./components/pages/auth/Reset";
 
 
 function App() {
