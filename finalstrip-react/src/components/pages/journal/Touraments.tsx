@@ -1,10 +1,11 @@
 
 
 
-export const Tournements = () => {
+export const Tournaments = () => {
 
     return(
         <>
+            <p>tournaments</p>
         </>
     )
 }

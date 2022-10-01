@@ -3,7 +3,7 @@
 
 
 
-export const Payment = () => {
+export const Pricing = () => {
 
     return(
         <>
