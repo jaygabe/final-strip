@@ -15,16 +15,17 @@ from .authentication import create_access_token, create_refresh_token, decode_re
 
 class RegisterAPIView(APIView):
     def post(self, request):
-
+        print('start')
         data = request.data
-
+        print('data received')
         if data['password'] != data['password_confirm']:
             raise exceptions.APIException('Passwords do not match!')
-        
+        print('password confirmed')
         serializer = UserSerializer(data=data)
         serializer.is_valid(raise_exception=True) # makes sure all fields are present
+        print('registration is valid')
         serializer.save()
-        return Response(serializer.data)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 class LoginAPIView(APIView):

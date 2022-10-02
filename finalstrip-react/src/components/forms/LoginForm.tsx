@@ -16,11 +16,13 @@ export const LoginForm = (props: {
     const submit = async (e: SyntheticEvent) => {
         e.preventDefault();  // prevents page from reloading.
         
-        const {data} = await axios.post("login", {
+        const {data} = await axios.post("auth/login", {
             email,
             password,
-        });  //credentials might be added in the interceptor
-
+        }, {withCredentials: true});  //credentials might be added in the interceptor
+        if (data == undefined) {
+            return 
+        }
         props.loginData(data);
     }
 

@@ -15,21 +15,20 @@ export const Register = () => {
     const submit = async (e: SyntheticEvent) => {
         e.preventDefault();  // prevents page from reloading.
         
-        await axios.post("register", {
+        await axios.post("auth/register", {
             first_name: firstName,
             last_name: lastName,
             usaf_number: usafNumber,
             email,
             password,
             password_confirm: passwordConfirm
-
-        });
+        }, {withCredentials: true});
 
         setRedirect(true);
     }
 
     if (redirect){
-        return <Navigate to="auth/login" />
+        return <Navigate to="/login" />
     }
 
     return (

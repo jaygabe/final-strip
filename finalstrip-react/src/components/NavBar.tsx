@@ -24,12 +24,27 @@ export const NavBar = () => {
 
     if (auth) {
         auth_links = <div className={mobileLinks ? 'navbar-account open-menu' : 'navbar-account'}>
-                        <Link to="login" className={mobileLinks ? 'navbar-account-button open-menu pop' : 'navbar-account-button pop'} onClick={logout}>Logout</Link>
+                        <Link 
+                            to="login" 
+                            className={mobileLinks ? 'navbar-account-button open-menu pop' : 'navbar-account-button pop'} 
+                            onClick={logout}>
+                                Logout
+                        </Link>
                     </div>
     } else {
         auth_links = <div className={mobileLinks ? 'navbar-account open-menu' : 'navbar-account'}>
-                        <Link to="login" className={mobileLinks ? "navbar-account-button open-menu pop" : "navbar-account-button pop"}>Login</Link>
-                        <Link to="register" className={mobileLinks ? "navbar-account-button open-menu pop" : "navbar-account-button pop"}>Register</Link>
+                        <Link 
+                            to="login" 
+                            className={mobileLinks ? "navbar-account-button open-menu pop" : "navbar-account-button pop"}
+                            onClick={() => setMobileLinks(false)}>
+                                Login
+                        </Link>
+                        <Link 
+                            to="register" 
+                            className={mobileLinks ? "navbar-account-button open-menu pop" : "navbar-account-button pop"}
+                            onClick={() => setMobileLinks(false)}>
+                                Register
+                        </Link>
                     </div>
     }
 
@@ -39,10 +54,11 @@ export const NavBar = () => {
             
             <div className={mobileLinks ? "navbar-links open-menu" : "navbar-links"}>
                 <ul>
-                    <li><Link to="/" className="navbar-link">Home</Link></li>
-                    <li><Link to="/journal/tournaments" className="navbar-link">Tournaments</Link></li>
-                    <li><Link to="/journal/lessons" className="navbar-link">Lessons</Link></li>
-                    <li><Link to="/journal/fencers" className="navbar-link">Fencers</Link></li>
+                    <li><Link to="/" className="navbar-link" onClick={() => setMobileLinks(!mobileLinks)}>Home</Link></li>
+                    <li><Link to="/journal/" className="navbar-link" onClick={() => setMobileLinks(!mobileLinks)}>Journal</Link></li>
+                    <li><Link to="/journal/tournaments" className="navbar-link" onClick={() => setMobileLinks(!mobileLinks)}>Tournaments</Link></li>
+                    <li><Link to="/journal/lessons" className="navbar-link" onClick={() => setMobileLinks(!mobileLinks)}>Lessons</Link></li>
+                    <li><Link to="/journal/fencers" className="navbar-link" onClick={() => setMobileLinks(!mobileLinks)}>Fencers</Link></li>
                 </ul>
             </div>
             

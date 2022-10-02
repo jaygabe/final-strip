@@ -47,6 +47,10 @@ export const Home = () => {
                 <li>https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0218959</li>
                 <li>https://scholar.google.com/scholar?hl=en&as_sdt=0%2C7&as_vis=1&q=fencing+journal+&btnG=</li>
             </ul>
+            <h4>To do list</h4>
+            <ul>
+                <li>Journal component could be a footer bar</li>
+            </ul>
         </div>
     )
 }
