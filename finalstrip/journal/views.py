@@ -94,11 +94,12 @@ class TournamentView(APIView):
         if slug != None:
             tournament = get_object_or_404(Tournament, user=request.user, slug=slug)
         else:
-            tournament = get_list_or_404(Tournament, user=request.user)
+            tournament = get_list_or_404(Tournament) # user=request.user
         
         data = {
-                'Tournament': tournament
-            }
+            'Tournament': TournamentSerializer(tournament).data
+        }
+
         return Response(data, status=status.HTTP_200_OK)
     
     def post(self, request, slug=None):
@@ -121,7 +122,7 @@ class EventView(APIView):
             event = get_list_or_404(Event, user=request.user)
         
         data = {
-                'Event': event
+                'Event': EventSerializer(event).data
             }
         return Response(data, status=status.HTTP_200_OK)
     
@@ -145,7 +146,7 @@ class BoutView(APIView):
             bout = get_list_or_404(Bout, user=request.user)
         
         data = {
-                'Bout': bout
+                'Bout': BoutSerializer(bout).data
             }
         return Response(data, status=status.HTTP_200_OK)
     
@@ -169,7 +170,7 @@ class LessonView(APIView):
             lesson = get_list_or_404(Lesson, user=request.user)
         
         data = {
-                'Lesson': lesson
+                'Lesson': LessonSerializer(lesson).data
             }
         return Response(data, status=status.HTTP_200_OK)
     
