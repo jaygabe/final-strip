@@ -50,6 +50,7 @@ export const Home = () => {
             <h4>To do list</h4>
             <ul>
                 <li>Journal component could be a footer bar</li>
+                <li>use querysets to clean up views</li>
             </ul>
         </div>
     )

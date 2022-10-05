@@ -8,7 +8,6 @@ import { AuthenticatorForm } from "../../forms/AuthenticatorForm";
 
 
 export const Login = () => {
-    // https://getbootstrap.com/docs/5.2/examples/sign-in/
     const dispatch = useDispatch();
     const [redirect, setRedirect] = useState(false);
     const [loginData, setLoginData] = useState<{
@@ -34,7 +33,8 @@ export const Login = () => {
     if (loginData?.id === 0) {
         form = <LoginForm loginData={setLoginData} success={success} />
     } else {
-        form = <AuthenticatorForm loginData={loginData} success={success} />
+        // form = <AuthenticatorForm loginData={loginData} success={success} />
+        form = <h1>You are already logged in.</h1>
     }
 
     return (

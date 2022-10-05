@@ -54,6 +54,8 @@ def profile_page(request, user_id):
 
     return render(request, 'authentication/auth_accounts.html', context)
 
+def get_requested_model(Model):
+    pass
 
 
 class FencerView(APIView):
@@ -92,13 +94,11 @@ class TournamentView(APIView):
 
     def get(self, request, slug=None):
         if slug != None:
-            tournament = get_object_or_404(Tournament, user=request.user, slug=slug)
+            raw_data = get_object_or_404(Tournament, user=request.user, slug=slug)
+            data = self.serializer_classes[0](raw_data).data
         else:
-            tournament = get_list_or_404(Tournament) # user=request.user
-        
-        data = {
-            'Tournament': TournamentSerializer(tournament).data
-        }
+            raw_data = get_list_or_404(Tournament) # user=request.user
+            data = self.serializer_classes[0](raw_data, many=True).data
 
         return Response(data, status=status.HTTP_200_OK)
     
@@ -118,8 +118,10 @@ class EventView(APIView):
     def get(self, request, slug):
         if slug != None:
             event = get_object_or_404(Event, user=request.user, slug=slug)
+            data = self.serializer_classes[0](event).data
         else:
             event = get_list_or_404(Event, user=request.user)
+            
         
         data = {
                 'Event': EventSerializer(event).data
@@ -142,6 +144,7 @@ class BoutView(APIView):
     def get(self, request, slug):
         if slug != None:
             bout = get_object_or_404(Bout, user=request.user, slug=slug)
+            data = self.serializer_classes[0](bout).data
         else:
             bout = get_list_or_404(Bout, user=request.user)
         
@@ -166,6 +169,7 @@ class LessonView(APIView):
     def get(self, request, slug):
         if slug != None:
             lesson = get_object_or_404(Lesson, user=request.user, slug=slug)
+            data = self.serializer_classes[0](lesson).data
         else:
             lesson = get_list_or_404(Lesson, user=request.user)
         
