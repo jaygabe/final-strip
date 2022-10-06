@@ -104,10 +104,12 @@ class TournamentView(APIView):
     
     def post(self, request, slug=None):
         serializer = self.serializer_classes[1](data=request.data)
+        print(serializer)
         if serializer.is_valid():
             serializer.save()
-
+        
             return Response({'Good Request': 'Tournement Added'}, status=status.HTTP_201_CREATED)
+        print('ending: ',serializer.errors)
         return Response({'Bad Request': 'Invalid Tournement Data...'}, status=status.HTTP_400_BAD_REQUEST)
 
 

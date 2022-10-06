@@ -24,7 +24,7 @@ class TournamentSerializer(serializers.ModelSerializer):
 class AddTournamentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Tournament
-        exclude = ('id','slug')
+        exclude = ('id','slug', 'user')
 
 
 class EventSerializer(serializers.ModelSerializer):

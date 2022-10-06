@@ -106,18 +106,11 @@ LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
 
-USE_I18N = True
+USE_I18N = False
 
 USE_TZ = True
 
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/4.1/howto/static-files/
-
 STATIC_URL = 'static/'
-
-# Default primary key field type
-# https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
@@ -126,6 +119,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 ######   ADDED FIELDS   ######
 
 
+# change date format
+DATE_FORMAT = '%m/%d/%Y'
+USE_L10N = False
 
 
 # cross site headers
@@ -133,19 +129,12 @@ CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True  # allows us to use the cookie
 SESSION_COOKIE_SAMESITE = None
 CSRF_COOKIE_SAMESITE = None
-# CSRF_TRUSTED_ORIGINS = [
-#     'http://'
-# ],
-# ALLOWED_HOSTS = [
-#     'localhost',
-# ],
-# CORS_ORIGIN_WHITELIST = [
-#     'http://',
-# ]
 
-# makes all 403 http errors 401
+
+
 REST_FRAMEWORK = {
-    'EXCEPTION_HANDLER':'authentication.exceptions.status_code_handler'
+    'DATE_FORMAT': '%m/%d/%Y',
+    'EXCEPTION_HANDLER':'authentication.exceptions.status_code_handler'  # makes all 403 http errors 401
 }
 
 
