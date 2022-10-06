@@ -10,11 +10,16 @@ node_modules
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
+finalstrip/authentication/__pycache__/
+finalstrip/finalstrip/__pycache__/
+finalstrip/journal/__pycache__/
+finalstrip/social/__pycache__/
 finalstrip/authentication/__pycache__/authentication.cpython-39.pyc
 finalstrip/finalstrip/__pycache__/settings.cpython-39.pyc
 finalstrip/finalstrip/__pycache__/urls.cpython-39.pyc
 finalstrip/journal/__pycache__/admin.cpython-39.pyc
 finalstrip/journal/__pycache__/models.cpython-39.pyc
+finalstrip\journal\__pycache__\serializers.cpython-39.pyc
 
 # db migrations
 migrations/
