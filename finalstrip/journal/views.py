@@ -104,9 +104,10 @@ class TournamentView(APIView):
     
     def post(self, request, slug=None):
         serializer = self.serializer_classes[1](data=request.data)
-        print(serializer)
         if serializer.is_valid():
-            serializer.save()
+            
+            serializer.save()   # !!!!!!!! does not save the user in db
+            
         
             return Response({'Good Request': 'Tournement Added'}, status=status.HTTP_201_CREATED)
         print('ending: ',serializer.errors)
