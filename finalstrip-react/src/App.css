@@ -33,6 +33,11 @@ body {
   display: none;
 }
 
+/* generic classes to scooch things around */
+.mb {
+  margin-bottom: 1rem;
+}
+
 
 
 
@@ -54,16 +59,6 @@ body {
   word-break: break-all;
 } 
 
-input[type=text], input[type=password], input[type=email] {
-  width: 100%;
-  padding: 15px;
-  margin: 5px 0 22px 0;
-  display: inline-block;
-  border: none;
-  background: #e0e0e0;
-	font-family: Montserrat,Arial, Helvetica, sans-serif;
-}
-
 .submit-button {
   background-color: var(--accent1);
   color: white;
@@ -82,10 +77,14 @@ input[type=text], input[type=password], input[type=email] {
   opacity:1;
 }
 
-
-/* generic classes to scooch things around */
-.mb {
-  margin-bottom: 1rem;
+.auth-form > input {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  display: inline-block;
+  border: none;
+  background: #e0e0e0;
+	font-family: Montserrat,Arial, Helvetica, sans-serif;
 }
 
 .google-login {
@@ -96,6 +95,9 @@ input[type=text], input[type=password], input[type=email] {
   /* left: 50%; */
   /* transform: translateX(-50%); */
 }
+
+
+
 
 .old-container {
   padding: 20px;

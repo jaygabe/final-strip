@@ -1,3 +1,7 @@
+.logo {
+    color: white;
+}
+
 .navbar {
     height: 3.5rem;
     display: flex;
@@ -75,7 +79,6 @@
 
     .logo {
         display: none;
-        color: white;
     }
 
     .navbar {

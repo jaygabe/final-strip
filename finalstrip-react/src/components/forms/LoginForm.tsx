@@ -50,7 +50,7 @@ export const LoginForm = (props: {
 
     return(
         <>
-            <form onSubmit={submit}>
+            <form className='auth-form' onSubmit={submit}>
                 
                 <h1 className="h1">Please sign in</h1>
 

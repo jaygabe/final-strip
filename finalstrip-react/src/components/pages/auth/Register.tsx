@@ -33,11 +33,11 @@ export const Register = () => {
 
     return (
         <main className="container">
-            <form onSubmit={submit}>
+            <form className='auth-form' onSubmit={submit}>
                 <h1 className="h1 mb">Please Register</h1>
 
                 <label htmlFor="email">Email address: </label>
-                <input type="email" className="" id="email" placeholder="name@example.com"
+                <input type="email" className="form-control" id="email" placeholder="name@example.com"
                     onChange={e => setEmail(e.target.value)} required
                 />
             
