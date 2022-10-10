@@ -1,0 +1,55 @@
+/* reference:  https://codepen.io/nikstech/pen/xmMxpr */
+
+.form-input {
+	position:relative;
+	margin-bottom:25px;
+}
+
+.form-input label{
+	position:absolute;
+	top:0px;
+	left:0px;
+	font-size:16px;
+	color:black;	
+	transition: all 0.5s ease-in-out;
+}
+
+.form-input input, 
+.form-input select{ 
+  border:0;
+  border-bottom:1px solid rgb(61, 61, 61);  
+  background:transparent;
+  width:100%;
+  padding:8px 0 5px 0;
+  font-size:16px;
+  color:rgb(0, 0, 0);
+}
+
+.form-input input:focus{ 
+ border:none;	
+ outline:none;
+ border-bottom:1px solid var(--accent3);	
+}
+
+.form-input input:focus ~ label,
+.form-input input:active ~ label{
+	top:-12px;
+	font-size:12px;
+	
+}
+
+.form-input > .jumped {
+    top:-12px;
+	font-size:12px;
+}
+
+.form-input input[type="date"] {
+    color: white;
+    transition: color 250ms ease-in;
+  }
+
+  input[type="date"]:focus,
+  input[type="date"]:active {
+    color: black;
+  }
+

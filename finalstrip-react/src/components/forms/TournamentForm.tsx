@@ -1,14 +1,15 @@
 import {useState, SyntheticEvent} from 'react';
 import axios from 'axios';
+import { FormTextElement } from './FormTextElement';
 
 
 export const TournamentForm = () => {
 
-    const [tournName, setTournName] = useState('')
-    const [date, setDate] = useState('')
-    const [location, setLocation] = useState('')
-    const [eventLevel, setEvetLevel] = useState('')
-    const [club, setClub] = useState('')
+    const [tournName, setTournName] = useState<string>('')
+    const [date, setDate] = useState<string>('')
+    const [location, setLocation] = useState<string>('')
+    const [eventLevel, setEvetLevel] = useState<string>('')
+    const [club, setClub] = useState<string>('')
     
     const submit = async (e: SyntheticEvent) => {
         e.preventDefault();  // prevents page from reloading.
@@ -24,39 +25,46 @@ export const TournamentForm = () => {
 
     return(
         <div className='container'>
+        
             <form onSubmit={submit}>
                 
                 <h1 className='h1'>New Tournament</h1>
-                <div>
-                    <label htmlFor='nameInput'>Tournament Name:</label>
-                    <input type='tournName' className='form-control' id='nameInput' placeholder='Tournament'
-                        onChange={e => setTournName(e.target.value)}
-                    />
-                </div>
-                <div>
-                    <label htmlFor='dateInput'>Date:</label>
-                    <input type='date' className='form-control' id='dateInput' placeholder='01-01-1900'
+
+                <FormTextElement setValue={setTournName} labelText='Tourn'/>
+                
+                <div className='form-input'>
+                    <input type='date' id='dateInput' placeholder=''
                         onChange={e => setDate(e.target.value)}
                     />
+                    <label htmlFor='dateInput'>Date</label>
                 </div>
-                <div>
-                    <label htmlFor='locationInput'>Location:</label>
-                    <input type='location' className='form-control' id='locationInput' placeholder='Washington, DC'
+                <FormTextElement setValue={setLocation} labelText='Location'/>
+                <FormTextElement setValue={setClub} labelText='Host Club'/>
+                {/* <div className='form-input'>
+                    <input type='text' id='locationInput' placeholder=''
                         onChange={e => setLocation(e.target.value)}
                     />
+                    <label htmlFor='locationInput'>Location</label>
                 </div>
-                <div>
-                    <label htmlFor='clubInput'>Club:</label>
-                    <input type='string' className='form-control' id='clubInput' placeholder='USA Fencing'
+                <div className='form-input'>
+                    <input type='text' id='clubInput'
                         onChange={e => setClub(e.target.value)}
                     />
-                </div>
-                <div>
-                    <label htmlFor='eventLevelInput'>Event Level:</label>
-                    <input type='string' className='form-control' id='eventLevelInput' placeholder='Local'
+                    <label htmlFor='clubInput'>Club</label>
+                </div>*/}
+                <div className='form-input'>
+                    <select id='eventLevelInput'
                         onChange={e => setEvetLevel(e.target.value)}
-                    />
+                    >
+                        <option value=""></option>
+                        <option value="Local">Local</option>
+                        <option value="Regional">Regional</option>
+                        <option value="National">National</option>
+                        <option value="World">World</option>
+                    </select>
+                    <label htmlFor='eventLevelInput'>Event Level</label>
                 </div>
+
                 <button className='submit-button' type='submit'>Add Tournament</button>
             </form>
         </div>  

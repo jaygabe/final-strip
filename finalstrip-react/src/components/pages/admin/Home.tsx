@@ -51,6 +51,11 @@ export const Home = () => {
             <ul>
                 <li>Journal component could be a footer bar</li>
                 <li>use querysets to clean up views</li>
+                <li>add image/icon to tournament cards</li>
+                <li>fix transparent mobile menu and make bottom sticky</li>
+                <li></li>
+                <li></li>
+                <li></li>
             </ul>
         </div>
     )

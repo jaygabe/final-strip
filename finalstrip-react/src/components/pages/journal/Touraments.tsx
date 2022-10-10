@@ -43,12 +43,8 @@ export const Tournaments = () => {
 
     return(
         <>
-            <h1>
-                Tournaments
-            </h1>
-
             {Object.entries(tournaments).map(([key, value]) => (
-                <div className='container'>
+                <div key={key} className='container'>
                     <a href={'journal/tournaments/' && value.slug}>
                         <h2>{value.name}</h2>
                         <p><b>Date: </b>{ value.date}</p>

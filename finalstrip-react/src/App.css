@@ -9,7 +9,8 @@ buttons:  https://codepen.io/WebDevSimplified/pen/jOEorZN
 
 
 @import './styles/hamburger.css';
-@import 'styles/navbar.css';
+@import './styles/navbar.css';
+@import './styles/forms.css';
 
 
 :root {
@@ -97,7 +98,10 @@ body {
 }
 
 
-
+.form >*> input[type=text] {
+  border: none;
+  border-bottom: 2px solid red;
+}
 
 .old-container {
   padding: 20px;
