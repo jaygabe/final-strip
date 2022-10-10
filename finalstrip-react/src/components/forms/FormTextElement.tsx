@@ -1,4 +1,4 @@
-import { SyntheticEvent, useState } from "react"
+import { useState } from "react"
 
 
 export const FormTextElement = ({ 
@@ -12,7 +12,7 @@ export const FormTextElement = ({
     
     // keep label from covering the input when filled in
     const [className, setClassName]  = useState<string>('')
-    
+
     function onChange(entry:string) {
         setValue(entry)
         if (entry != '') {

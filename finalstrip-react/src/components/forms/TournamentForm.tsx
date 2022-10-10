@@ -38,20 +38,10 @@ export const TournamentForm = () => {
                     />
                     <label htmlFor='dateInput'>Date</label>
                 </div>
+                
                 <FormTextElement setValue={setLocation} labelText='Location'/>
                 <FormTextElement setValue={setClub} labelText='Host Club'/>
-                {/* <div className='form-input'>
-                    <input type='text' id='locationInput' placeholder=''
-                        onChange={e => setLocation(e.target.value)}
-                    />
-                    <label htmlFor='locationInput'>Location</label>
-                </div>
-                <div className='form-input'>
-                    <input type='text' id='clubInput'
-                        onChange={e => setClub(e.target.value)}
-                    />
-                    <label htmlFor='clubInput'>Club</label>
-                </div>*/}
+                
                 <div className='form-input'>
                     <select id='eventLevelInput'
                         onChange={e => setEvetLevel(e.target.value)}
