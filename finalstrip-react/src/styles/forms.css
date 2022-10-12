@@ -38,11 +38,6 @@
 	
 }
 
-.form-input > .jumped {
-    top:-12px;
-	font-size:12px;
-}
-
 .form-input input[type="date"] {
     color: white;
     transition: color 250ms ease-in;
@@ -52,4 +47,14 @@
   input[type="date"]:active {
     color: black;
   }
+
+
+  .form-input > .jumped {
+    top:-12px;
+	font-size:12px;
+}
+
+.form-input input[type="date"].jumped {
+    color: black
+}
 

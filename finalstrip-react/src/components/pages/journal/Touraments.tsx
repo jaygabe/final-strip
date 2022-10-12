@@ -55,7 +55,10 @@ export const Tournaments = () => {
 
             <br />
             
-            <TournamentForm />
+            <div className='container'>
+                <TournamentForm />
+            </div>
+            
         </>
     )
 }

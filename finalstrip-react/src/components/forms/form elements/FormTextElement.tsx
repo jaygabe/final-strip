@@ -1,12 +1,16 @@
-import { useState } from "react"
+import { useState } from 'react'
 
 
 export const FormTextElement = ({ 
     setValue,
-    labelText
+    placeholder,
+    labelText,
+    elementName
     }:{ 
         setValue: React.Dispatch<React.SetStateAction<string>>,  
-        labelText: string
+        placeholder: string,
+        labelText: string,
+        elementName: string
     }) => {
 
     
@@ -24,7 +28,11 @@ export const FormTextElement = ({
 
     return (
         <div className='form-input'>
-            <input type='text' id='nameInput' placeholder=''
+            <input 
+                id='nameInput' 
+                name={elementName}
+                type='text' 
+                placeholder={placeholder}
                 onChange={e => onChange(e.target.value)}
             />
             <label className={className} htmlFor='nameInput'>{labelText}</label>
