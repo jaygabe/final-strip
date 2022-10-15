@@ -12,7 +12,15 @@ export const TournamentForm = () => {
     const [location, setLocation] = useState<string>('')
     const [eventLevel, setEventLevel] = useState<string>('')
     const [club, setClub] = useState<string>('')
-    
+
+    const tournaments = {
+        'Local': 'Local',
+        'Regional': 'Regional',
+        'National': 'National',
+        'World': 'World'
+    }
+
+    // Send form to the backend to be processed
     const submit = async (e: SyntheticEvent) => {
         e.preventDefault();  // prevents page from reloading.
         
@@ -24,7 +32,6 @@ export const TournamentForm = () => {
             'event_level': eventLevel
         }, {withCredentials: true});
     }
-    
 
     return(
         <>
@@ -36,7 +43,7 @@ export const TournamentForm = () => {
                 <FormDateElement setValue={setDate} elementName='date' placeholder='' labelText='Date' />
                 <FormTextElement setValue={setLocation} elementName='location' placeholder='' labelText='Location'/>
                 <FormTextElement setValue={setClub} elementName='host' placeholder='' labelText='Host Club'/>
-                <FormSelectElement setValue={setEventLevel} elementName='eventlevel' placeholder='' labelText='Event Level'/>
+                <FormSelectElement setValue={setEventLevel} selectOptions={tournaments} elementName='eventlevel' placeholder='' labelText='Event Level'/>
 
                 <button className='submit-button' type='submit'>Add Tournament</button>
             </form>

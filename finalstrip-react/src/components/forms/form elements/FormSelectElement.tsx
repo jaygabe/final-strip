@@ -5,15 +5,18 @@ export const FormSelectElement = ({
     setValue,
     placeholder,
     labelText,
-    elementName
+    elementName,
+    selectOptions
     }:{ 
     setValue: React.Dispatch<React.SetStateAction<string>>,  
     placeholder: string,
     labelText: string,
-    elementName: string
+    elementName: string,
+    selectOptions: { [key: string]: string}
 }) => {
     
 
+    // move label out of the way if the select menu is filled in
     const [className, setClassName]  = useState<string>('')
 
     function onChange(entry:string) {
@@ -24,11 +27,6 @@ export const FormSelectElement = ({
             setClassName('')
         }
     } 
-
-    let tournaments = {
-        'Intergalactic': 'Intergalactic',
-        'Interplanetary': 'Interplanetary'
-    }
     
     return (
         <div className='form-input'>
@@ -36,17 +34,16 @@ export const FormSelectElement = ({
                 onChange={e => onChange(e.target.value)}
                 name={elementName}
             >
-                <option value=''>{placeholder}</option>
+                {/*placeholder value to present component*/}
+                <option value={placeholder}>{placeholder}</option> 
 
-                {Object.entries(tournaments).map(([key, value]) => (
+                {/*rest of the select menu options*/}
+                {Object.entries(selectOptions).map(([key, value]) => (
                     <option key={key} value={key}>{value}</option>
                 ))}
 
-                <option value="Local">Local</option>
-                <option value="Regional">Regional</option>
-                <option value="National">National</option>
-                <option value="World">World</option>
             </select>
+            <span className='arrow'></span>
             <label className={className} htmlFor='eventLevelInput'>{labelText}</label>
         </div>
     )
