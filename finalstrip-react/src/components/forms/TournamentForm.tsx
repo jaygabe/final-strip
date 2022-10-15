@@ -13,7 +13,8 @@ export const TournamentForm = () => {
     const [eventLevel, setEventLevel] = useState<string>('')
     const [club, setClub] = useState<string>('')
 
-    const tournaments = {
+    // select options
+    const eventLevelOptions = {
         'Local': 'Local',
         'Regional': 'Regional',
         'National': 'National',
@@ -43,7 +44,7 @@ export const TournamentForm = () => {
                 <FormDateElement setValue={setDate} elementName='date' placeholder='' labelText='Date' />
                 <FormTextElement setValue={setLocation} elementName='location' placeholder='' labelText='Location'/>
                 <FormTextElement setValue={setClub} elementName='host' placeholder='' labelText='Host Club'/>
-                <FormSelectElement setValue={setEventLevel} selectOptions={tournaments} elementName='eventlevel' placeholder='' labelText='Event Level'/>
+                <FormSelectElement setValue={setEventLevel} selectOptions={eventLevelOptions} elementName='eventlevel' placeholder='' labelText='Event Level'/>
 
                 <button className='submit-button' type='submit'>Add Tournament</button>
             </form>
