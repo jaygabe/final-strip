@@ -10,7 +10,7 @@ class JWTAuthentication(BaseAuthentication):
     def authenticate(self, request):
         
         auth = get_authorization_header(request).split()
-        #  
+
         # cookie_headers = request.headers['Cookie'].split()
         # print(cookie_headers)
         # cookie_dic = {}

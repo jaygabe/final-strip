@@ -233,14 +233,16 @@ class GoogleAuthAPIView(APIView):
     
     def post(self, request):
 
-        
+        print('initiate')
         token = request.data['token']
-        
         google_user = id_token.verify_token(token, GoogleRequest()) # verifies token with Google
+        print("sent to google")
 
         if not google_user:
             raise exceptions.AuthenticationFailed('unauthenticated')
         
+
+        # create a new user if one does not exist
         user = User.objects.filter(email=google_user['email']).first()
 
         if not user:
