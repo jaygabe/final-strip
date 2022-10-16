@@ -102,11 +102,12 @@ class Event(models.Model):
     )
 
     slug = AutoSlugField(max_length=10, unique=True, populate_from=('name',), editable=True)
-    user = models.ForeignKey(User, related_name="event_user", on_delete=models.SET_NULL, null=True, blank=True)
-    name= models.CharField(max_length=200)
+    user = models.ForeignKey(User, related_name="event_user", on_delete=models.CASCADE, null=True, blank=True)
+    tournament = models.ForeignKey(Tournament, related_name='tournament', on_delete=models.CASCADE)
+    name= models.CharField(max_length=200, null=True, blank=True)
     date = models.DateField(default='2/2/2022')
     event_type = models.CharField(max_length=200, choices=EVENT_CHOICES, null=True)
-    notes = models.TextField()
+    notes = models.TextField(null=True, blank=True)
 
     def __str__(self):
         return self.name

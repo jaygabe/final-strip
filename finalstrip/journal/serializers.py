@@ -26,6 +26,10 @@ class AddTournamentSerializer(serializers.ModelSerializer):
         model = Tournament
         exclude = ('id','slug', 'user')
 
+    # def create(self, validated_data):
+    #     validated_data['user'] = self.context['request'].user
+    #     return super(AddTournamentSerializer, self).create(validated_data)
+
 
 class EventSerializer(serializers.ModelSerializer):
     class Meta:

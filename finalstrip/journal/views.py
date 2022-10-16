@@ -90,12 +90,18 @@ class FencerView(APIView):
 
 class TournamentView(APIView):
     # authentication_classes = [JWTAuthentication]
-    serializer_classes = [TournamentSerializer, AddTournamentSerializer]
+    serializer_classes = [TournamentSerializer, AddTournamentSerializer, EventSerializer]
 
     def get(self, request, slug=None):
         if slug != None:
-            raw_data = get_object_or_404(Tournament, user=request.user, slug=slug)
-            data = self.serializer_classes[0](raw_data).data
+            tournament = get_object_or_404(Tournament, slug=slug) # user=request.user,
+            events = get_list_or_404(Event, tournament=tournament.id)
+            print(EventSerializer(events, many=True).data)
+            data = {
+                'tournament': TournamentSerializer(tournament).data,
+                'events': EventSerializer(events, many=True).data
+            }
+
         else:
             raw_data = get_list_or_404(Tournament) # user=request.user
             data = self.serializer_classes[0](raw_data, many=True).data
@@ -105,8 +111,10 @@ class TournamentView(APIView):
     def post(self, request, slug=None):
         serializer = self.serializer_classes[1](data=request.data)
         if serializer.is_valid():
-            
-            serializer.save()   # !!!!!!!! does not save the user in db
+            # instance = serializer
+            # instance.user = request.user
+            # instance.save()
+            serializer.save(user=request.user)   # !!!!!!!! does not save the user in db
             
         
             return Response({'Good Request': 'Tournement Added'}, status=status.HTTP_201_CREATED)
