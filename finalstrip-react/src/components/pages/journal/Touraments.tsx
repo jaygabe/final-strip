@@ -1,7 +1,5 @@
-import axios from 'axios';
 import {useEffect, useState} from 'react';
-
-
+import axios from 'axios';
 import { TournamentForm } from "../../forms/TournamentForm";
 
 
@@ -32,20 +30,12 @@ export const Tournaments = () => {
 
     }, []);
 
-    const convertDateFormat = (date: string) => {
-        console.log('date: ', date)
-        let newDate = date.split('-')
-
-        console.log(newDate)
-        return newDate
-    }
-
 
     return(
         <>
             {Object.entries(tournaments).map(([key, value]) => (
                 <div key={key} className='container'>
-                    <a href={'journal/tournaments/' && value.slug}>
+                    <a href={'/journal/events/' + value.slug}>
                         <h2>{value.name}</h2>
                         <p><b>Date: </b>{ value.date}</p>
                         <p><b>Location: </b>{value.location}</p>

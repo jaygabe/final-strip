@@ -30,6 +30,27 @@ export const Home = () => {
     return (
         <div className="container text-center">
             <h3>{auth ? message : 'You are not authenticated'}</h3>
+            
+            <h4>To do list</h4>
+            <ul>
+                
+                <li>fix transparent mobile menu and make bottom sticky</li>
+                <li>Journal component could be a footer bar for mobile display</li>
+                <li>views repeat a lot create a custom abstract model to handle it better</li>
+                <li>create a card framework for tourns, events, and bouts with delete and edit buttons</li>
+                <li>button to return to top of the page</li>
+                <li>clean up paranthesis and make single over entire project</li>
+                <li></li>
+            </ul>
+            <p>Other links</p>
+            <ul>
+                <li>not sure why I am saving this one: https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0218959</li>
+                <li>scientific fencing papers:  https://scholar.google.com/scholar?hl=en&as_sdt=0%2C7&as_vis=1&q=fencing+journal+&btnG=</li>
+                <li>PWA service worker:  https://medium.com/delivus/creating-pwa-with-react-in-typescript-2174ac4a89a2</li>
+                <li></li>
+                <li></li>
+            </ul>
+
             <p>Welcome to the home page!</p>
             <ul>
                 <li>Keep track of progess and competitions</li>
@@ -41,21 +62,6 @@ export const Home = () => {
                 <br />
                 <li>https://academyoffencingmasters.com/blog/fencing-journal-a-how-to-guide/</li>
                 <li>https://www.usafencing.org/american-fencing-magazine ads starts at $638</li>
-            </ul>
-            <p>Other links</p>
-            <ul>
-                <li>https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0218959</li>
-                <li>https://scholar.google.com/scholar?hl=en&as_sdt=0%2C7&as_vis=1&q=fencing+journal+&btnG=</li>
-            </ul>
-            <h4>To do list</h4>
-            <ul>
-                <li>Journal component could be a footer bar</li>
-                <li>use querysets to clean up views</li>
-                <li>add image/icon to tournament cards</li>
-                <li>fix transparent mobile menu and make bottom sticky</li>
-                <li></li>
-                <li></li>
-                <li></li>
             </ul>
         </div>
     )

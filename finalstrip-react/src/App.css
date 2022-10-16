@@ -39,6 +39,11 @@ body {
   margin-bottom: 1rem;
 }
 
+/* Use for placing  */
+.test{
+  background-color: yellow;
+  color: red;
+}
 
 
 

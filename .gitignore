@@ -14,6 +14,7 @@ finalstrip/authentication/__pycache__/
 finalstrip/finalstrip/__pycache__/
 finalstrip/journal/__pycache__/
 finalstrip/social/__pycache__/
+finalstrip/social/__pycache__/admin.cpython-39.pyc
 finalstrip/authentication/__pycache__/authentication.cpython-39.pyc
 finalstrip/finalstrip/__pycache__/settings.cpython-39.pyc
 finalstrip/finalstrip/__pycache__/urls.cpython-39.pyc
@@ -27,5 +28,6 @@ finalstrip/journal/migrations/0001_initial.py
 
 # development database
 finalstrip/db.sqlite3
+
 
 
