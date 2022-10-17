@@ -93,15 +93,13 @@ class TournamentView(APIView):
     serializer_classes = [TournamentSerializer, AddTournamentSerializer, EventSerializer]
 
     def get(self, request, slug=None):
-        if slug != None:
+        if slug:
             tournament = get_object_or_404(Tournament, slug=slug) # user=request.user,
             events = get_list_or_404(Event, tournament=tournament.id)
-            print(EventSerializer(events, many=True).data)
             data = {
                 'tournament': TournamentSerializer(tournament).data,
                 'events': EventSerializer(events, many=True).data
             }
-
         else:
             raw_data = get_list_or_404(Tournament) # user=request.user
             data = self.serializer_classes[0](raw_data, many=True).data
@@ -127,16 +125,17 @@ class EventView(APIView):
     serializer_classes = [EventSerializer, AddEventSerializer]
 
     def get(self, request, slug):
-        if slug != None:
-            event = get_object_or_404(Event, user=request.user, slug=slug)
-            data = self.serializer_classes[0](event).data
-        else:
-            event = get_list_or_404(Event, user=request.user)
-            
-        
-        data = {
-                'Event': EventSerializer(event).data
+        if slug:
+            event = get_object_or_404(Event, slug=slug) # user=request.user,
+            bouts = get_list_or_404(Bout, event=event.id)
+            data = {
+                'event': EventSerializer(event).data,
+                'bouts': BoutSerializer(bouts, many=True).data
             }
+        else:
+            raw_data = get_list_or_404(Event) # user=request.user
+            data = self.serializer_classes[0](raw_data, many=True).data
+
         return Response(data, status=status.HTTP_200_OK)
     
     def post(self, request, slug=None):

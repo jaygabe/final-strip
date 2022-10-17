@@ -182,7 +182,7 @@ class Bout(models.Model):
         ('Other', 'Other')
     )
 
-    slug = AutoSlugField(max_length=10, unique=True, populate_from=('notes',), editable=True)
+    slug = AutoSlugField(max_length=10, unique=True, populate_from=('fencer_b',), editable=True)
     user = models.ForeignKey(User, related_name="bout_user", on_delete=models.SET_NULL, null=True, blank=True)
     winner_is_a = models.BooleanField(default=True)
     fencer_a = models.ForeignKey(Fencer, related_name="fencer_a", on_delete=models.SET_NULL, null=True, blank=True)
@@ -216,8 +216,8 @@ class Bout(models.Model):
     fencer_a_notes = models.TextField(null=True, blank=True)
     fencer_b_notes = models.TextField(null=True, blank=True)
     
-    tournament = models.ForeignKey(Tournament, on_delete=models.SET_NULL, null=True, blank=True)
-    event = models.ForeignKey(Event, on_delete=models.SET_NULL, null=True, blank=True)
+    tournament = models.ForeignKey(Tournament, on_delete=models.CASCADE, null=True, blank=True)
+    event = models.ForeignKey(Event, on_delete=models.CASCADE, null=True, blank=True)
     referee = models.CharField(max_length=200, null=True, blank=True)
     bout_type = models.CharField(max_length=200, null=True, blank=True, choices=BOUT_CHOICES)
     round = models.IntegerField(default=1)
