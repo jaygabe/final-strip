@@ -4,24 +4,7 @@ import { useParams } from "react-router-dom"
 import axios from 'axios';
 
 import { EventForm } from "../../forms/EventForm";
-
-type tournamentType = {
-    id: number
-    slug: string
-    name: string
-    date?: string
-    location?: string
-}
-
-type eventType = {
-    id: number,
-    slug: string,
-    name: string,
-    date: string,
-    eventLevel: string,
-    notes: string
-}
-
+import { tournamentType, eventType } from "../../../config/VarTypes";
 
 
 export const Events = () => {
@@ -78,7 +61,7 @@ export const Events = () => {
             {Object.entries(events).map(([key, value]) => (
                 
                 <div key={key} className='container'>
-                    <a href={'/journal/events/' + value.slug}>
+                    <a href={'/journal/bouts/' + value.slug}>
                         <h2>{value.name}</h2>
                         
                         <p><b>Date: </b>{ value.date}</p>

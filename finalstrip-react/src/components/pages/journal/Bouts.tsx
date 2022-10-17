@@ -3,58 +3,9 @@ import { useParams } from 'react-router-dom'
 
 import axios from 'axios';
 
+import { eventType, boutType } from '../../../config/VarTypes'
 
-type eventType = {
-    id: number,
-    slug: string,
-    name: string,
-    date: string,
-    eventLevel: string,
-    notes: string
-}
 
-type boutType = {
-    id: number
-    slug: string
-    winnerIsA: boolean
-    fencerA: string
-    fencerB: string
-    scoreA: number,
-    scoreB: number,
-    fencerAHand: string
-    fencerBHand: string
-    fencerAYellowCard: boolean
-    fencerBYellowCard: boolean
-    fencerARedCard: boolean
-    fencerBRedCard: boolean
-    fencerABlackCarded: boolean
-    fencerBBlackCarded: boolean
-    fencerAPassivity: boolean
-    fencerBPassivity: boolean
-    fencerAMedical: boolean
-    fencerBMedical: boolean
-    fencerAVideoUsed: number
-    fencerBVideoUsed: number
-    fencerAFootwork: string
-    fencerBFootwork: string
-    fencerABladework: string
-    fencerBBladework: string
-    fencerADistance: string
-    fencerBDistance: string
-    fencerATiming: string
-    fencerBTiming: string
-    fencerAEnergy: string
-    fencerBEnergy: string
-    fencerANotes: string
-    fencerBNotes: string
-    referee: string
-    boutFormat: string
-    round: number
-    notes: string
-    public: boolean
-    shareCoach: boolean
-    deleted: boolean
-}
 
 export const Bouts = () => {
     const { eventSlug } = useParams()
@@ -117,8 +68,7 @@ export const Bouts = () => {
         const getData = async () => {
             const result = await axios.get('journal/event/' + eventSlug, {withCredentials: true})
             
-            setEvent(result.data.event)
-            setBouts(result.data.bouts.map((value: any, key: number) => {
+            setEvent(result.data.event.map((value: any, key: number) => {
                 return {
                     id: key,
                     slug: value.slug,
@@ -126,6 +76,22 @@ export const Bouts = () => {
                     date: value.date,
                     eventLevel: value.event_type,
                     notes: value.notes
+                }
+            }))
+            setBouts(result.data.event.map((value: any, key: number) => {
+                return {
+                    id: key,
+                    slug: '',
+                    winnerIsA: true,
+                    fencerA: '',
+                    fencerB: '',
+                    scoreA: 0,
+                    scoreB: 0,
+                    boutFormat: '',
+                    round: 0,
+                    public: true,
+                    shareCoach: true,
+                    deleted: true
                 }
             })) 
         }

@@ -1,15 +1,15 @@
-import axios from "axios"
-import { useEffect, useState } from "react"
-import { useDispatch, useSelector } from "react-redux";
+import axios from 'axios'
+import { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
 
 import {setAuth} from '../../../redux/authSlice'
 import {RootState} from '../../../redux/store'
 
-import {PushNote} from "../../PushNote";
+import {PushNote} from '../../PushNote';
 
 
 export const Home = () => {
-    const [message, setMessage] = useState("You are not Logged In")
+    const [message, setMessage] = useState('You are not Logged In')
     const dispatch = useDispatch()
     const auth = useSelector((state: RootState) => state.auth.value)
 
@@ -28,30 +28,47 @@ export const Home = () => {
     }, [])
 
     return (
-        <div className="container text-center">
-            <h3>{auth ? message : 'You are not authenticated'}</h3>
+        <div className='container text-center'>
+            <h3 className='test'>{auth ? message : 'You are not authenticated'}</h3>
             
-            <h4>To do list</h4>
+            <h2>To do list</h2>
             <ul>
-                
+                <li>figure out python dependency issue</li>
+                <li>Fix auth that may be related to dependency issue</li>
+                <li>tourn and event forms need to add user before save, pass into parent serializer?</li>
                 <li>fix transparent mobile menu and make bottom sticky</li>
-                <li>Journal component could be a footer bar for mobile display</li>
-                <li>views repeat a lot create a custom abstract model to handle it better</li>
+                <li>migrate to postgres</li>
+                <li>add stripe</li>
+                <li>add docker and deploy</li>
+                <li>get logo and icons</li>
+                <li></li>
+                <br />
                 <li>create a card framework for tourns, events, and bouts with delete and edit buttons</li>
                 <li>button to return to top of the page</li>
-                <li>clean up paranthesis and make single over entire project</li>
+                <li>move types and constants to one folder</li>
+                <li>cards should be counted not bool</li>
+                <br />
+                <li>Journal component could be a footer bar for mobile display</li>
+                <li>views repeat a lot create a custom abstract model to handle it better</li>
+                <li>clean up paranthesis and make single over entire project (mostly auth)</li>
+                <li>make usfa fencer data linked</li>
+                <li>make referee data linkable</li>
+                <li>web links to tournament</li>
+                <li>video links to bouts</li>
+                <li>robot.txt with honeypot</li>
+                <li>front and backend testing</li>
                 <li></li>
             </ul>
-            <p>Other links</p>
+            <h4>Other links</h4>
             <ul>
                 <li>not sure why I am saving this one: https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0218959</li>
                 <li>scientific fencing papers:  https://scholar.google.com/scholar?hl=en&as_sdt=0%2C7&as_vis=1&q=fencing+journal+&btnG=</li>
                 <li>PWA service worker:  https://medium.com/delivus/creating-pwa-with-react-in-typescript-2174ac4a89a2</li>
-                <li></li>
+                <li>referee database to scrape:  https://member.usafencing.org/referees/search?page=2</li>
                 <li></li>
             </ul>
 
-            <p>Welcome to the home page!</p>
+            <h4>Welcome to the home page!</h4>
             <ul>
                 <li>Keep track of progess and competitions</li>
                 <li>Review past bouts and tournaments</li>
