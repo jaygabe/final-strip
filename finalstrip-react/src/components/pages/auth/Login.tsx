@@ -29,7 +29,8 @@ export const Login = () => {
 
     let form;
 
-
+    console.log('login id is: ', loginData?.id)
+    
     if (loginData?.id === 0) {
         form = <LoginForm loginData={setLoginData} success={success} />
     } else {

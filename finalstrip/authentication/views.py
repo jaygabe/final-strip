@@ -32,7 +32,7 @@ class LoginAPIView(APIView):
     def post(self, request):
         email = request.data['email']
         password = request.data['password']
-
+        print('Logging in ', email)
         user = User.objects.get(email=email)
     
         # check if email is in database

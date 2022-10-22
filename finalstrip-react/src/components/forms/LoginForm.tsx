@@ -20,6 +20,11 @@ export const LoginForm = (props: {
             email,
             password,
         }, {withCredentials: true});  //credentials might be added in the interceptor
+
+
+        // stores bearer token in the cookies
+        axios.defaults.headers.common["Authorization"] = `Bearer ${data.token}`;
+        
         if (data == undefined) {
             return 
         }
