@@ -49,6 +49,7 @@ export const Home = () => {
                 <li>cards should be counted not bool</li>
                 <br />
                 <li>Journal component could be a footer bar for mobile display</li>
+                <li>clean up auth and redirects in Login.tsx and LoginForm.tsx</li>
                 <li>views repeat a lot create a custom abstract model to handle it better</li>
                 <li>clean up paranthesis and make single over entire project (mostly auth)</li>
                 <li>make usfa fencer data linked</li>

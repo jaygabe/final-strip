@@ -1,5 +1,5 @@
 import { SyntheticEvent, useState } from "react";
-import { Link} from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import axios from "axios"
 import { GoogleLogin } from '@react-oauth/google';
 
@@ -10,7 +10,7 @@ export const LoginForm = (props: {
 }) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-
+    const [redirect, setRedirect] = useState(false);
 
     //send email and password to django for JWT
     const submit = async (e: SyntheticEvent) => {
@@ -24,7 +24,15 @@ export const LoginForm = (props: {
 
         // stores bearer token in the cookies
         axios.defaults.headers.common["Authorization"] = `Bearer ${data.token}`;
-        
+
+        //this is duplicated in login.tsx and should be cleaned up at some point
+        setRedirect(true);
+        if (redirect){
+            return <Navigate to="/" />
+        }
+
+
+        // I don't remember why this is here
         if (data == undefined) {
             return 
         }
