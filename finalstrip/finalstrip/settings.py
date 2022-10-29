@@ -164,3 +164,22 @@ EMAIL_PORT = 1025 # 587 # port for gmail
 # EMAIL_HOST_PASSWORD =''
 # EMAIL_USE_TLS = False # true for gmail
 # EMAIL_USE_SSL = False
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "formatters": {
+        "verbose": {
+            "format": "%(levelname)s %(name)-12s %(asctime)s %(module)s "
+            "%(process)d %(thread)d %(message)s"
+        }
+    },
+    "handlers": {
+        "console": {
+            "level": "DEBUG",
+            "class": "logging.StreamHandler",
+            "formatter": "verbose",
+        }
+    },
+    "root": {"level": "INFO", "handlers": ["console"]},
+}
