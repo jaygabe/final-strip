@@ -42,7 +42,7 @@ def create_access_token(id):
 def create_refresh_token(id):
     return jwt.encode({
         'user_id': id, 
-        'exp': datetime.datetime.utcnow() + datetime.timedelta(days=7), 
+        'exp': datetime.datetime.utcnow() + datetime.timedelta(days=10), 
         'iat': datetime.datetime.utcnow()  
     }, 'refresh_secret', algorithm='HS256')
 
