@@ -165,6 +165,8 @@ EMAIL_PORT = 1025 # 587 # port for gmail
 # EMAIL_USE_TLS = False # true for gmail
 # EMAIL_USE_SSL = False
 
+
+# Configuration for django logging of errors
 LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,

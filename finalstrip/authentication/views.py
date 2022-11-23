@@ -77,7 +77,10 @@ class LoginAPIView(APIView):
 
             response = Response()
             # setting the cookie to http-only will keep the cookie on the backend
-            response.set_cookie(key='refresh_token', value=refresh_token, httponly=True) 
+            response.set_cookie(key='refresh_token', value=refresh_token, httponly=True)
+            
+            # added token to cookies to see if this helps
+            # response.set_cookie(key='token', value=access_token, httponly=True)
 
             response.data = {
                 'token': access_token
