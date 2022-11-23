@@ -7,14 +7,15 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import exceptions, status
 
-from .models import Fencer, Tournament, Event, Bout, Lesson, USAFencingInfo
+from .models import Fencer, Event, Bout, Lesson, USAFencingInfo
+from journal_apps.tournaments.models import Tournament
 from journal_apps.authentication.models import User
 from journal_apps.social.models import ConnectFencers
 from .serializers import FencerSerializer, TournamentSerializer, EventSerializer, BoutSerializer, LessonSerializer, USAFencingSerializer
 from .serializers import AddFencerSerializer, AddTournamentSerializer, AddEventSerializer, AddBoutSerializer, AddLessonSerializer
 from journal_apps.authentication.authentication import JWTAuthentication
 
-from .load_usa_fencing_membership import load_membership_data
+from journal_apps.usaf_data.load_usa_fencing_membership import load_membership_data
 
  
 def manual_reload(request):

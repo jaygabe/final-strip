@@ -2,80 +2,14 @@ from django.db import models
 from django.db.models import Q
 from journal_apps.authentication.models import User
 from journal_apps.social.models import ConnectFencers
+from journal_apps.usaf_data.models import USAFencingInfo
+from journal_apps.tournaments.models import Tournament
 
 from autoslug import AutoSlugField
 
 # to drop from db using manage.py:
 # 1) pen the db shell using python manage.py dbshell
 # 2) DROP TABLE {app-name}_{model-name}
-class USAFencingInfo(models.Model):
-    member_id = models.IntegerField(unique=True)
-    last_name = models.CharField(max_length=100, null = True, blank=True)
-    first_name = models.CharField(max_length=100, null = True, blank=True)
-    middle_name = models.CharField(max_length=100, null = True, blank=True)
-    suffix = models.CharField(max_length=10, null = True, blank=True)
-    nickname = models.CharField(max_length=100, null = True, blank=True)
-    gender = models.CharField(max_length=10, null = True, blank=True)
-    birthdate = models.IntegerField(null = True, blank=True)
-    birthdate_verified = models.BooleanField(default=False)
-    division= models.CharField(max_length=100, null = True, blank=True)
-    club1 = models.CharField(max_length=100, null = True, blank=True)
-    club1_abv = models.CharField(max_length=100, null = True, blank=True)
-    club1_id = models.IntegerField(null = True, blank=True)
-    club2 = models.CharField(max_length=100, null = True, blank=True)
-    club2_abv = models.CharField(max_length=100, null = True, blank=True)
-    club2_id = models.IntegerField(null = True, blank=True)
-    school = models.CharField(max_length=100, null = True, blank=True)
-    school_abv = models.CharField(max_length=100, null = True, blank=True)
-    school_id = models.IntegerField(null = True, blank=True)
-    member_type = models.CharField(max_length=100, null = True, blank=True)
-    checked = models.BooleanField(default=False)
-    competitive = models.BooleanField(default=False)
-    expiration = models.DateField(null = True, blank=True)
-    sabre = models.CharField(max_length=7, null = True, blank=True)
-    epee = models.CharField(max_length=7, null = True, blank=True)
-    foil = models.CharField(max_length=7, null = True, blank=True)
-    us_citizen = models.BooleanField(default=False)
-    permanent = models.BooleanField(default=False)
-    country = models.CharField(max_length=100, null = True, blank=True)
-    region = models.IntegerField(null = True, blank=True)
-    background_expires = models.DateField(null = True, blank=True)
-    safesport_expires = models.DateField(null = True, blank=True)
-    non_competitive = models.BooleanField(null = True, blank=True)
-    highest_ref_rating = models.CharField(max_length=5, null = True, blank=True)
-    us_ref_foil = models.CharField(max_length=5, null = True, blank=True)
-    us_ref_foil_year = models.IntegerField(null = True, blank=True)
-    us_ref_epee = models.CharField(max_length=5, null = True, blank=True)
-    us_ref_epee_year = models.IntegerField(null = True, blank=True)
-    us_ref_sabre = models.CharField(max_length=5, null = True, blank=True)
-    us_ref_sabre_year = models.IntegerField(null = True, blank=True)
-    fie_ref_foil = models.CharField(max_length=5, null = True, blank=True)
-    fie_ref_foil_year = models.IntegerField(null = True, blank=True)
-    fie_ref_epee = models.CharField(max_length=5, null = True, blank=True)
-    fie_ref_epee_year = models.IntegerField(null = True, blank=True)
-    fie_ref_sabre = models.CharField(max_length=5, null = True, blank=True)
-    fie_ref_sabre_year = models.IntegerField(null = True, blank=True)
-    #missing date time fields for updated and modified
-
-
-class Tournament(models.Model):
-    EVENT_LEVEL = (
-        ('Local', 'Local'),
-        ('Regional', 'Regional'),
-        ('National', 'National'),
-        ('World', 'World'),
-    )
-
-    slug = AutoSlugField(max_length=10, unique=True, populate_from=('name',), editable=True)
-    user = models.ForeignKey(User, related_name="tourn_user", on_delete=models.SET_NULL, null=True, blank=True)
-    name = models.CharField(max_length=200)
-    date = models.DateField(default='2/2/2022')
-    event_level = models.CharField(max_length=200, null=True, choices=EVENT_LEVEL)
-    club = models.CharField(max_length=200, null=True, blank=True)
-    location = models.CharField(max_length=200, null=True, blank=True)
-
-    def __str__(self):
-        return self.name
 
 
 class Event(models.Model):

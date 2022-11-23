@@ -32,12 +32,20 @@ DJANGO_APPS = [
 THIRD_PARTY_APPS = [
     'rest_framework',
     'corsheaders',
+    'drf_yasg',
+    "djcelery_email",
 ]
 
 JOURNAL_APPS = [
     'journal_apps.authentication',
     'journal_apps.journal',
     'journal_apps.social',
+    'journal_apps.tournaments',
+    'journal_apps.events',
+    'journal_apps.bouts',
+    'journal_apps.fencers',
+    'journal_apps.usaf_data',
+
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + JOURNAL_APPS
