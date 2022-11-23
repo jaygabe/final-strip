@@ -25,8 +25,12 @@ export const LoginForm = (props: {
         // stores bearer token in the cookies
         axios.defaults.headers.common["Authorization"] = `Bearer ${data.token}`;
 
+        
+        if (data.status === 200) {
+            props.success();
+        }
+
         //this is duplicated in login.tsx and should be cleaned up at some point
-        setRedirect(true);
         if (redirect){
             return <Navigate to="/" />
         }
