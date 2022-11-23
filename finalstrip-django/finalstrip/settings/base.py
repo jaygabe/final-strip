@@ -126,7 +126,7 @@ USE_L10N = False
 # static and media
 STATIC_URL = "/static/"
 STATIC_ROOT = str(ROOT_DIR / "static")
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')] # add css and images here
+STATICFILES_DIRS = []
 STATICFILES_FINDERS = [  # these are defaults
     "django.contrib.staticfiles.finders.FileSystemFinder",
     "django.contrib.staticfiles.finders.AppDirectoriesFinder",
