@@ -1,9 +1,9 @@
 from django.db import models
 from django.db.models import Q
-from authentication.models import User
-from social.models import ConnectFencers
+from journal_apps.authentication.models import User
+from journal_apps.social.models import ConnectFencers
 
-from django_extensions.db.fields import AutoSlugField
+from autoslug import AutoSlugField
 
 # to drop from db using manage.py:
 # 1) pen the db shell using python manage.py dbshell

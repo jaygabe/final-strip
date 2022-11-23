@@ -1,6 +1,6 @@
 from django.db import models
 
-from authentication.models import User
+from journal_apps.authentication.models import User
 
 class ConnectFencers(models.Model):
   student = models.ForeignKey(User, related_name='student', on_delete=models.CASCADE, blank=True)

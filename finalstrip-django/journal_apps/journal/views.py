@@ -8,11 +8,11 @@ from rest_framework.response import Response
 from rest_framework import exceptions, status
 
 from .models import Fencer, Tournament, Event, Bout, Lesson, USAFencingInfo
-from authentication.models import User
-from social.models import ConnectFencers
+from journal_apps.authentication.models import User
+from journal_apps.social.models import ConnectFencers
 from .serializers import FencerSerializer, TournamentSerializer, EventSerializer, BoutSerializer, LessonSerializer, USAFencingSerializer
 from .serializers import AddFencerSerializer, AddTournamentSerializer, AddEventSerializer, AddBoutSerializer, AddLessonSerializer
-from authentication.authentication import JWTAuthentication
+from journal_apps.authentication.authentication import JWTAuthentication
 
 from .load_usa_fencing_membership import load_membership_data
 

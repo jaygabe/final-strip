@@ -1,50 +1,57 @@
 import os
 from pathlib import Path
+from datetime import timedelta
+import environ
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
+env = environ.Env()
+
+ROOT_DIR = (
+    Path(__file__).resolve().parent.parent.parent
+)  # need three to get to manage.py level
+
+# points django to where the apps are stored
+APPS_DIR = ROOT_DIR / "journal_apps"
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# connects django to environment variables
+environ.Env.read_env(os.path.join(ROOT_DIR / ".envs/.local/", ".django"))
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-g+sm3k0+cm_d9a*f!5w*v8%a-(^1d$t5p&w3zq5n6oqntiz96i'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = ['*']  #  See below
+DEBUG = env.bool("DJANGO_DEBUG", False)
 
 
-# Application definition
-
-INSTALLED_APPS = [
+DJANGO_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+]
 
-    # installed apps
+THIRD_PARTY_APPS = [
     'rest_framework',
     'corsheaders',
-
-    # apps
-    'authentication',
-    'journal',
-    'social'
 ]
+
+JOURNAL_APPS = [
+    'journal_apps.authentication',
+    'journal_apps.journal',
+    'journal_apps.social',
+]
+
+INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + JOURNAL_APPS
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware', # added
     'django.middleware.security.SecurityMiddleware',
+    # "whitenoise.middleware.WhiteNoiseMiddleware", # added for production
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    "django.middleware.common.BrokenLinkEmailsMiddleware",  # added:  sends broken link notifications to managers
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
@@ -69,9 +76,6 @@ TEMPLATES = [
 WSGI_APPLICATION = 'finalstrip.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/4.1/ref/settings/#databases
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -79,9 +83,16 @@ DATABASES = {
     }
 }
 
+# DATABASES = {"default": env.db("DATABASE_URL")}
+# DATABASES['default']['ATOMIC_REQUESTS'] = True
 
-# Password validation
-# https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
+PASSWORD_HASHERS = [
+    "django.contrib.auth.hashers.Argon2PasswordHasher",
+    "django.contrib.auth.hashers.PBKDF2PasswordHasher",
+    "django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher",
+    "django.contrib.auth.hashers.BCryptSHA256PasswordHasher",
+    # 'django.contrib.auth.hashers.ScryptPasswordHasher',  # removed for some reason
+]
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -98,10 +109,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
-# Internationalization
-# https://docs.djangoproject.com/en/4.1/topics/i18n/
-
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
@@ -110,37 +117,34 @@ USE_I18N = False
 
 USE_TZ = True
 
-STATIC_URL = 'static/'
-
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-
-
-######   ADDED FIELDS   ######
-
 
 # change date format
 DATE_FORMAT = '%m/%d/%Y'
 USE_L10N = False
 
+# static and media
+STATIC_URL = "/static/"
+STATIC_ROOT = str(ROOT_DIR / "static")
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')] # add css and images here
+STATICFILES_FINDERS = [  # these are defaults
+    "django.contrib.staticfiles.finders.FileSystemFinder",
+    "django.contrib.staticfiles.finders.AppDirectoriesFinder",
+]
+MEDIA_URL = "/media/"
+MEDIA_ROOT = str(ROOT_DIR / "media")
 
 # cross site headers
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True  # allows us to use the cookie
 SESSION_COOKIE_SAMESITE = None
 CSRF_COOKIE_SAMESITE = None
-
-
+CORS_URLS_REGEX = r"^/api/.*$" # only allows cors header on /api/
 
 REST_FRAMEWORK = {
     'DATE_FORMAT': '%m/%d/%Y',
     'EXCEPTION_HANDLER':'authentication.exceptions.status_code_handler'  # makes all 403 http errors 401
 }
-
-
-# add css and images here
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
-
 
 # custom user model
 AUTH_USER_MODEL = 'authentication.User'
@@ -153,11 +157,9 @@ ACCOUNT_AUTHENTICATION_METHOD = 'email'
 #  Settings for setting up email later on
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 ACCOUNT_EMAIL_VERIFICATION = "none"
-
 # myaccount.google.com/lesssecureapps   # this is now obsolete
 # myaccount.google.com/apppasswords
 # myaccount.google.com/DisplayUnlockCaptcha
-
 EMAIL_HOST = '0.0.0.0'  # 'smtp.gmail.com
 EMAIL_PORT = 1025 # 587 # port for gmail
 # EMAIL_HOST_USER = ''
