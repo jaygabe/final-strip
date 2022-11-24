@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import Optional, NoReturn
 import pandas as pd
 from datetime import datetime
 from .models import USAFencingInfo
@@ -12,13 +12,11 @@ def yes_no_2_tf(yes_no: str) -> Optional[bool]:
         return False
     return None
 
-
 # convert date format
 def convert_date(orig_date: str) -> Optional[datetime]:
     if orig_date !='':
         return datetime.strptime(orig_date, '%m/%d/%Y').strftime('%Y-%m-%d')
     return None
-
 
 # convert comp and non-comp to boolean
 def convert_comp(comp_stat: str) -> Optional[bool]:
@@ -27,7 +25,6 @@ def convert_comp(comp_stat: str) -> Optional[bool]:
     elif comp_stat == 'Non-Competitive':
         return False
     return None
-
 
 # Format data for SQL DB requirements
 def extract_clean_data() -> pd.DataFrame:
@@ -54,9 +51,8 @@ def extract_clean_data() -> pd.DataFrame:
 
     return  df
 
-
 # load data into django model
-def load_membership_data():
+def load_membership_data() -> NoReturn:
     
     tmp_data = extract_clean_data()
     membership_info =[]
@@ -113,5 +109,4 @@ def load_membership_data():
         )
     USAFencingInfo.objects.all().delete()
     USAFencingInfo.objects.bulk_create(membership_info)
-    return membership_info
    
