@@ -7,8 +7,14 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import exceptions, status
 
-from .models import Fencer, Event, Bout, Lesson, USAFencingInfo
+from .models import Lesson
+from journal_apps.usaf_data.models import USAFencingInfo
 from journal_apps.tournaments.models import Tournament
+from journal_apps.events.models import Event
+from journal_apps.bouts.models import Bout
+from journal_apps.fencers.models import Fencer
+
+
 from journal_apps.authentication.models import User
 from journal_apps.social.models import ConnectFencers
 from .serializers import FencerSerializer, TournamentSerializer, EventSerializer, BoutSerializer, LessonSerializer, USAFencingSerializer
