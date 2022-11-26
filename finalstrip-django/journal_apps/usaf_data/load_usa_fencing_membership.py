@@ -109,4 +109,4 @@ def load_membership_data() -> NoReturn:
         )
     USAFencingInfo.objects.all().delete()
     USAFencingInfo.objects.bulk_create(membership_info)
-   
+    

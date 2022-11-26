@@ -48,11 +48,13 @@ export const Home = () => {
                 <li>button to return to top of the page</li>
                 <li>move types and constants to one folder</li>
                 <li>cards should be counted not bool</li>
+                <li>make usfa fencer data linked</li>
                 <br />
                 <li>Journal component could be a footer bar for mobile display</li>
                 <li>views repeat a lot create a custom abstract model to handle it better</li>
                 <li>clean up paranthesis and make single over entire project (mostly auth)</li>
-                <li>make usfa fencer data linked</li>
+                <li>build out public profile pages</li>
+                
                 <li>make referee data linkable</li>
                 <li>web links to tournament</li>
                 <li>video links to bouts</li>
