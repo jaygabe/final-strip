@@ -1,6 +1,12 @@
 from pyexpat import model
 from rest_framework import serializers
-from .models import Fencer, Tournament, Event, Bout, Lesson, USAFencingInfo
+
+from journal_apps.lessons.models import Lesson
+from journal_apps.usaf_data.models import USAFencingInfo
+from journal_apps.tournaments.models import Tournament
+from journal_apps.events.models import Event
+from journal_apps.bouts.models import Bout
+from journal_apps.fencers.models import Fencer
 
 
 class FencerSerializer(serializers.ModelSerializer):
@@ -15,10 +21,7 @@ class AddFencerSerializer(serializers.ModelSerializer):
         exclude = ('id','slug')
 
 
-class TournamentSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Tournament
-        exclude = ('id',)
+
 
 
 class AddTournamentSerializer(serializers.ModelSerializer):

@@ -20,6 +20,7 @@ schema_view = get_schema_view(
 urlpatterns = [
     path("redoc/", schema_view.with_ui("redoc", cache_timeout=0), name="schema-redoc"),
     path(settings.ADMIN_URL, admin.site.urls),
-    path('auth/', include('journal_apps.authentication.urls')),
-    path('journal/', include('journal_apps.journal.urls'))
+    path('api/auth/', include('journal_apps.authentication.urls')),
+    path('api/journal/', include('journal_apps.journal.urls')),
+    path('api/usaf-data/', include('journal_apps.usaf_data.urls'))
 ]

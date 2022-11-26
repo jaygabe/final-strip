@@ -2,6 +2,8 @@ from django.db import models
 from autoslug import AutoSlugField
 from django.contrib.auth import get_user_model
 from journal_apps.fencers.models import Fencer
+from journal_apps.tournaments.models import Tournament
+from journal_apps.events.models import Event
 
 User = get_user_model()
 

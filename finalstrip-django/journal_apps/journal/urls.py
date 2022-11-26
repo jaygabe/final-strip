@@ -1,11 +1,9 @@
 from django.urls import path
 
-from .views import BoutView, EventView, FencerView, LessonView, TournamentView, manual_reload
+from .views import BoutView, EventView, FencerView, LessonView, TournamentView
 
 
 urlpatterns = [
-
-    path('manual_reload', manual_reload),
 
     path('fencer/<slug:slug>', FencerView.as_view()),
     path('tournament/', TournamentView.as_view()),
