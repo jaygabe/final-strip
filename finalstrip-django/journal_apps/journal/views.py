@@ -7,7 +7,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import exceptions, status
 
-from .models import Lesson
+from journal_apps.lessons.models import Lesson
 from journal_apps.usaf_data.models import USAFencingInfo
 from journal_apps.tournaments.models import Tournament
 from journal_apps.events.models import Event
@@ -17,49 +17,11 @@ from journal_apps.fencers.models import Fencer
 
 from journal_apps.authentication.models import User
 from journal_apps.social.models import ConnectFencers
-from .serializers import FencerSerializer, TournamentSerializer, EventSerializer, BoutSerializer, LessonSerializer, USAFencingSerializer
-from .serializers import AddFencerSerializer, AddTournamentSerializer, AddEventSerializer, AddBoutSerializer, AddLessonSerializer
+from .serializers import FencerSerializer, EventSerializer, BoutSerializer, LessonSerializer, USAFencingSerializer
+from .serializers import AddFencerSerializer, AddEventSerializer, AddBoutSerializer, AddLessonSerializer
 from journal_apps.authentication.authentication import JWTAuthentication
 
-from journal_apps.usaf_data.load_usa_fencing_membership import load_membership_data
 
- 
-def manual_reload(request):
-    
-    mem_data = load_membership_data()
-    data ={'testing': mem_data}
-
-    return Response(data, status=status.HTTP_200_OK)
-
-
-def profile_page(request, user_id):
-
-    user = request.user
-    viewed_user = User.objects.get(pk=user_id)
-    # bouts = Bout.objects.get()
-    tournaments = Tournament.objects.filter(user__id=user_id)
-
-    connect_fencers = ConnectFencers.objects.filter(Q(coach__id=user_id) | Q(student__id=user_id))
-    complete = connect_fencers.filter(Q(s_accepts=True) and Q(c_accepts=True))
-    incomplete = connect_fencers.filter((Q(s_accepts=True) and Q(c_accepts=False)) or (Q(s_accepts=False) and Q(c_accepts=True)))
-
-    students = complete.filter(Q(connected=True) and Q(coach__id=user_id))
-    coaches = complete.filter(Q(connected=True) and Q(student__id=user_id))
-    pending_students = incomplete.filter(Q(connected=False) and Q(coach__id=user_id))
-    pending_coaches = incomplete.filter(Q(connected=False) and Q(student__id=user_id))
-    testing = [False]
-
-    context = {
-        'viewed_user': viewed_user,
-        'students': students,
-        'coaches': coaches,
-        'pending_students': pending_students,
-        'pending_coaches': pending_coaches,
-        'all_connections': connect_fencers,
-        'testing': testing,
-    }
-
-    return render(request, 'authentication/auth_accounts.html', context)
 
 def get_requested_model(Model):
     pass
@@ -93,38 +55,6 @@ class FencerView(APIView):
 
             return Response({'Good Request': 'Fencer Added'}, status=status.HTTP_201_CREATED)
         return Response({'Bad Request': 'Invalid Fencer Data...'}, status=status.HTTP_400_BAD_REQUEST)
-
-
-class TournamentView(APIView):
-    # authentication_classes = [JWTAuthentication]
-    serializer_classes = [TournamentSerializer, AddTournamentSerializer, EventSerializer]
-
-    def get(self, request, slug=None):
-        if slug:
-            tournament = get_object_or_404(Tournament, slug=slug) # user=request.user,
-            events = get_list_or_404(Event, tournament=tournament.id)
-            data = {
-                'tournament': TournamentSerializer(tournament).data,
-                'events': EventSerializer(events, many=True).data
-            }
-        else:
-            raw_data = get_list_or_404(Tournament) # user=request.user
-            data = self.serializer_classes[0](raw_data, many=True).data
-
-        return Response(data, status=status.HTTP_200_OK)
-    
-    def post(self, request, slug=None):
-        serializer = self.serializer_classes[1](data=request.data)
-        if serializer.is_valid():
-            # instance = serializer
-            # instance.user = request.user
-            # instance.save()
-            serializer.save(user=request.user)   # !!!!!!!! does not save the user in db
-            
-        
-            return Response({'Good Request': 'Tournement Added'}, status=status.HTTP_201_CREATED)
-        print('ending: ',serializer.errors)
-        return Response({'Bad Request': 'Invalid Tournement Data...'}, status=status.HTTP_400_BAD_REQUEST)
 
 
 class EventView(APIView):
