@@ -9,7 +9,7 @@ from rest_framework.views import APIView
 from journal_apps.authentication.authentication import JWTAuthentication
 from journal_apps.tournaments.models import Tournament
 from journal_apps.tournaments.serializers import TournamentSerializer
-from journal_apps.common.permissions import IsOwnerOrReadOnly
+from journal_apps.common.permissions import IsOwner
 
 User = get_user_model()
 
@@ -72,7 +72,7 @@ class TournamentCreateView(generics.CreateAPIView):
 class TournamentUpdateView(APIView):
 
     
-    # permission_classes = [JWTAuthentication, IsOwnerOrReadOnly]
+    # permission_classes = [JWTAuthentication, IsOwner]
     serializer_class = TournamentSerializer
 
     def patch(self, request, slug):
@@ -91,7 +91,7 @@ class TournamentUpdateView(APIView):
 class TournamentDeleteView(generics.DestroyAPIView):
 
     
-    # permission_classes = [JWTAuthentication, IsOwnerOrReadOnly]
+    # permission_classes = [JWTAuthentication, IsOwner]
     queryset = Tournament.objects.all()
     lookup_field = "slug"
 

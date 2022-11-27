@@ -11,6 +11,8 @@ class JournalModel(models.Model):
     class Shareability(models.TextChoices):
             PRIVATE = "private", _("private")
             COACHES = "my coaches", _("my coaches")
+            # CLUB = "club members", _("club members")
+            # FRIENDS = "friends", _("friends")
             EVERYONE = "everyone", _("everyone")
 
     pkid = models.BigAutoField(primary_key=True, editable=False)
