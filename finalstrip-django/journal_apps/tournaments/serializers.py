@@ -6,4 +6,4 @@ from journal_apps.tournaments.models import Tournament
 class TournamentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Tournament
-        exclude = ('id',)
+        exclude = ('pkid','id')

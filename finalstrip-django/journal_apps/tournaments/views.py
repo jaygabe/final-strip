@@ -7,10 +7,9 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from journal_apps.authentication.authentication import JWTAuthentication
-
-from tournaments.models import Tournament
-from tournaments.serializers import TournamentSerializer
-from common.permissions import IsOwnerOrReadOnly
+from journal_apps.tournaments.models import Tournament
+from journal_apps.tournaments.serializers import TournamentSerializer
+from journal_apps.common.permissions import IsOwnerOrReadOnly
 
 User = get_user_model()
 
@@ -18,6 +17,7 @@ logger = logging.getLogger(__name__)
 
 
 class TournamentDetailView(APIView):
+
     # authentication_classes = [JWTAuthentication]
     serializer_class = TournamentSerializer
 
@@ -31,7 +31,10 @@ class TournamentDetailView(APIView):
         # this could change with users are allowed to change who can view
         user = request.user
         if tournament.user != user:
-            raise PermissionDenied("You are not allowed to view this tournament.")
+            if tournament.shareable == "private":
+                raise PermissionDenied("You are not allowed to view this tournament.")
+            elif tournament.shareable == "my coaches":
+                pass # will need to handle coach confirmation here
 
         serializer = TournamentSerializer(tournament)
         return Response(serializer.data, status=status.HTTP_200_OK)
@@ -45,7 +48,7 @@ class TournamentListView(generics.ListAPIView):
 
     def get_queryset(self):
         user = self.request.user
-        queryset = Tournament.objects.filter(user=user)
+        return Tournament.objects.filter(user=user)
 
 
 class TournamentCreateView(generics.CreateAPIView):
@@ -68,8 +71,8 @@ class TournamentCreateView(generics.CreateAPIView):
 
 class TournamentUpdateView(APIView):
 
-    # permission_classes = [JWTAuthentication]
-    permission_classes = [JWTAuthentication, IsOwnerOrReadOnly]
+    
+    # permission_classes = [JWTAuthentication, IsOwnerOrReadOnly]
     serializer_class = TournamentSerializer
 
     def patch(self, request, slug):
@@ -87,8 +90,8 @@ class TournamentUpdateView(APIView):
 
 class TournamentDeleteView(generics.DestroyAPIView):
 
-    # permission_classes = [JWTAuthentication]
-    permission_classes = [JWTAuthentication, IsOwnerOrReadOnly]
+    
+    # permission_classes = [JWTAuthentication, IsOwnerOrReadOnly]
     queryset = Tournament.objects.all()
     lookup_field = "slug"
 

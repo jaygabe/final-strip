@@ -46,6 +46,7 @@ JOURNAL_APPS = [
     'journal_apps.fencers',
     'journal_apps.usaf_data',
     'journal_apps.lessons',
+    'journal_apps.common',
 
 ]
 

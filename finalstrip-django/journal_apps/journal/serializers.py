@@ -4,7 +4,6 @@ from rest_framework import serializers
 from journal_apps.lessons.models import Lesson
 from journal_apps.usaf_data.models import USAFencingInfo
 from journal_apps.tournaments.models import Tournament
-from journal_apps.events.models import Event
 from journal_apps.bouts.models import Bout
 from journal_apps.fencers.models import Fencer
 
@@ -33,17 +32,6 @@ class AddTournamentSerializer(serializers.ModelSerializer):
     #     validated_data['user'] = self.context['request'].user
     #     return super(AddTournamentSerializer, self).create(validated_data)
 
-
-class EventSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Event
-        exclude = ('id',)
-
-
-class AddEventSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Event
-        exclude = ('id','slug')
 
 
 class BoutSerializer(serializers.ModelSerializer):

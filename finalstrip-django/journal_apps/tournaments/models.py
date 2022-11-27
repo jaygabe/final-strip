@@ -1,24 +1,23 @@
+from datetime import date
 from django.db import models
-from autoslug import AutoSlugField
-from django.contrib.auth import get_user_model
+from django.utils.translation import gettext_lazy as _
+from journal_apps.common.models import JournalModel
 
-User = get_user_model()
 
-class Tournament(models.Model):
-    EVENT_LEVEL = (
-        ('Local', 'Local'),
-        ('Regional', 'Regional'),
-        ('National', 'National'),
-        ('World', 'World'),
-    )
+class Tournament(JournalModel):
+    class EventLevel(models.TextChoices):
+        LOCAL = 'Local', _('Local')
+        REGIONAL = 'Regional', _('Regional')
+        NATIONAL = 'National', _('National')
+        WORLD = 'World', _('World')
 
-    slug = AutoSlugField(max_length=10, unique=True, populate_from=('name',), editable=True)
-    user = models.ForeignKey(User, related_name="tourn_user", on_delete=models.SET_NULL, null=True, blank=True)
     name = models.CharField(max_length=200)
-    date = models.DateField(default='2/2/2022')
-    event_level = models.CharField(max_length=200, null=True, choices=EVENT_LEVEL)
+    date = models.DateField(default=date.today)
+    event_level = models.CharField(max_length=200, null=True, choices=EventLevel.choices)
     club = models.CharField(max_length=200, null=True, blank=True)
     location = models.CharField(max_length=200, null=True, blank=True)
+    url = models.CharField(max_length=200, null=True, blank=True)
+    notes = models.TextField(null=True, blank=True)
 
     def __str__(self):
         return self.name
