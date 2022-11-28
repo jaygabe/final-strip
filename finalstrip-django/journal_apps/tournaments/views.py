@@ -26,7 +26,7 @@ class TournamentDetailView(APIView):
         try:
             tournament = Tournament.object.get(slug=slug)
         except Tournament.DoesNotExist:
-            NotFound("The tournament does not exist.")
+            NotFound("The tournament cannot be found.")
 
         # this could change with users are allowed to change who can view
         user = request.user
@@ -79,7 +79,7 @@ class TournamentUpdateView(APIView):
         try:
             tournament = Tournament.objects.get(slug=slug)
         except Tournament.DoesNotExist:
-            NotFound("The tournament does not exist.")
+            NotFound("The tournament cannot be found.")
         
         data = request.data
         serializer = self.serializer_class(tournament, data=data, many=False)
@@ -99,7 +99,7 @@ class TournamentDeleteView(generics.DestroyAPIView):
         try:
             Tournament.objects.get(slug=self.kwargs.get("slug"))
         except Tournament.DoesNotExist:
-            NotFound("The tournament does not exist.")
+            NotFound("The tournament cannot be found.")
         
         delete_operation = self.destroy(request)
         data = {}
