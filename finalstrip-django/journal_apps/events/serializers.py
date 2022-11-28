@@ -5,7 +5,7 @@ from journal_apps.events.models import Event
 class EventSerializer(serializers.ModelSerializer):
     tourn_info = serializers.SerializerMethodField(read_only=True)
 
-    def get_tourn_info(self, obj):
+    def get_tournament(self, obj):
         return {
             "name": obj.tournament.name,
             "location": obj.tournament.location,
@@ -15,7 +15,7 @@ class EventSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Event
-        exclude = ('pkid', 'id', 'deleted', 'user')
+        exclude = ('pkid', 'id', 'deleted')
 
 
 class UpdateEventSerializer(serializers.ModelSerializer):

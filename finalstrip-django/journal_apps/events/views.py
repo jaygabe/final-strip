@@ -1,5 +1,5 @@
 import logging
-
+from django.db.models import Q
 from django.contrib.auth import get_user_model
 from rest_framework import generics, status
 from rest_framework.exceptions import NotFound, PermissionDenied
@@ -7,10 +7,9 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from journal_apps.authentication.authentication import JWTAuthentication
-
+from journal_apps.common.permissions import IsOwnerOrReadOnly
 from journal_apps.events.models import Event
 from journal_apps.events.serializers import EventSerializer
-from journal_apps.common.permissions import IsOwnerOrReadOnly
 
 
 User = get_user_model()
@@ -28,30 +27,29 @@ class EventDetailView(APIView):
         try:
             event = Event.object.get(slug=slug)
         except Event.DoesNotExist:
-            NotFound("The event does not exist.")
+            NotFound("The event cannot be found.")
 
         # this could change with users are allowed to change who can view
         user = request.user
-
         if event.user != user:
             if event.shareable == "private":
                 raise PermissionDenied("You are not allowed to view this event.")
             elif event.shareable == "my coaches":
                 pass # will need to handle coach confirmation here
-
+        
         serializer = EventSerializer(event)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer, status=status.HTTP_200_OK)
 
 
 class EventListView(generics.ListAPIView):
-
     # permission_classes = [JWTAuthentication]
     serializer_class = EventSerializer
     paginate_by = 10
 
-    def get_queryset(self):
+    def get_queryset(self, slug):
         user = self.request.user
-        return Event.objects.filter(user=user)
+        events = Event.objects.filter(Q(tournament__slug=slug)) # Q(user=user)&
+        return events
 
 
 class EventCreateView(generics.CreateAPIView):
@@ -75,14 +73,14 @@ class EventCreateView(generics.CreateAPIView):
 class EventUpdateView(APIView):
 
     
-    # permission_classes = [JWTAuthentication, IsOwnerOrReadOnly]
+    # permission_classes = [JWTAuthentication, IsOwner]
     serializer_class = EventSerializer
 
     def patch(self, request, slug):
         try:
             event = Event.objects.get(slug=slug)
         except Event.DoesNotExist:
-            NotFound("The event does not exist.")
+            NotFound("The event cannot be found.")
         
         data = request.data
         serializer = self.serializer_class(event, data=data, many=False)
@@ -94,7 +92,7 @@ class EventUpdateView(APIView):
 class EventDeleteView(generics.DestroyAPIView):
 
     
-    # permission_classes = [JWTAuthentication, IsOwnerOrReadOnly]
+    # permission_classes = [JWTAuthentication, IsOwner]
     queryset = Event.objects.all()
     lookup_field = "slug"
 
@@ -102,7 +100,7 @@ class EventDeleteView(generics.DestroyAPIView):
         try:
             Event.objects.get(slug=self.kwargs.get("slug"))
         except Event.DoesNotExist:
-            NotFound("The event does not exist.")
+            NotFound("The event cannot be found.")
         
         delete_operation = self.destroy(request)
         data = {}
