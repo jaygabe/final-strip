@@ -7,7 +7,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from journal_apps.authentication.authentication import JWTAuthentication
-from journal_apps.common.permissions import IsOwnerOrReadOnly
+from journal_apps.common.permissions import IsOwner
 from journal_apps.events.models import Event
 from journal_apps.events.serializers import EventSerializer
 

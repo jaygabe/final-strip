@@ -17,12 +17,18 @@ class Bout(models.Model):
         GOOD = 'good', _('good')
         GREAT = 'great', _('great')
         EXCELLENT = 'excellent', _('excellent')
-        NA = 'Not Applicable', _('Not Applicable')
+        NA = 'not applicable', _('not applicable')
 
 
     class HandChoices(models.TextChoices):
-        RIGHT = 'Right', _('Right') 
-        LEFT = 'Left', _('Left')
+        RIGHT = 'right', _('right') 
+        LEFT = 'left', _('left')
+
+    
+    class GripChoices(models.TextChoices):
+        PISTOL = 'pistol', _('pistol')
+        FRENCH = 'french', _('french')
+        OTHER = 'other', _('other')
 
 
     class BoutChoices(models.TextChoices):
@@ -37,8 +43,10 @@ class Bout(models.Model):
     fencer_b = models.ForeignKey(Fencer, related_name="fencer_b", on_delete=models.SET_NULL, null=True, blank=True)
     score_a = models.IntegerField()
     score_b = models.IntegerField()
-    fencer_a_hand = models.CharField(choices = HandChoices, max_length=10, blank=True)
-    fencer_b_hand = models.CharField(choices = HandChoices, max_length=10, blank=True)
+    fencer_a_hand = models.CharField(choices=HandChoices.choices, max_length=10, blank=True, null=True)
+    fencer_b_hand = models.CharField(choices=HandChoices.choices, max_length=10, blank=True, null=True)
+    fencer_a_grip = models.CharField(choices=GripChoices.choices, max_length=10, blank=True, null=True)
+    fencer_b_grip = models.CharField(choices=GripChoices.choices, max_length=10, blank=True, null=True)
     fencer_a_yellow_carded = models.BooleanField(default=False)
     fencer_b_yellow_carded = models.BooleanField(default=False)
     fencer_a_red_carded = models.BooleanField(default=False)
@@ -51,23 +59,23 @@ class Bout(models.Model):
     fencer_b_medical = models.BooleanField(default=False)
     fencer_a_video_used = models.IntegerField(default=0, blank=True)
     fencer_b_video_used = models.IntegerField(default=0, blank=True)
-    fencer_a_footwork = models.CharField(max_length=20, null=True, blank=True, choices=ScaleChoices)
-    fencer_b_footwork = models.CharField(max_length=20, null=True, blank=True, choices=ScaleChoices)
-    fencer_a_bladework = models.CharField(max_length=20, null=True, blank=True, choices=ScaleChoices)
-    fencer_b_bladework = models.CharField(max_length=20, null=True, blank=True, choices=ScaleChoices)
-    fencer_a_distance = models.CharField(max_length=20, null=True, blank=True, choices=ScaleChoices)
-    fencer_b_distance = models.CharField(max_length=20, null=True, blank=True, choices=ScaleChoices)
-    fencer_a_timing = models.CharField(max_length=20, null=True, blank=True, choices=ScaleChoices)
-    fencer_b_timing = models.CharField(max_length=20, null=True, blank=True, choices=ScaleChoices)
-    fencer_a_energy = models.CharField(max_length=20, null=True, blank=True, choices=ScaleChoices)
-    fencer_b_energy = models.CharField(max_length=20, null=True, blank=True, choices=ScaleChoices)
+    fencer_a_footwork = models.CharField(max_length=20, null=True, blank=True, choices=ScaleChoices.choices)
+    fencer_b_footwork = models.CharField(max_length=20, null=True, blank=True, choices=ScaleChoices.choices)
+    fencer_a_bladework = models.CharField(max_length=20, null=True, blank=True, choices=ScaleChoices.choices)
+    fencer_b_bladework = models.CharField(max_length=20, null=True, blank=True, choices=ScaleChoices.choices)
+    fencer_a_distance = models.CharField(max_length=20, null=True, blank=True, choices=ScaleChoices.choices)
+    fencer_b_distance = models.CharField(max_length=20, null=True, blank=True, choices=ScaleChoices.choices)
+    fencer_a_timing = models.CharField(max_length=20, null=True, blank=True, choices=ScaleChoices.choices)
+    fencer_b_timing = models.CharField(max_length=20, null=True, blank=True, choices=ScaleChoices.choices)
+    fencer_a_energy = models.CharField(max_length=20, null=True, blank=True, choices=ScaleChoices.choices)
+    fencer_b_energy = models.CharField(max_length=20, null=True, blank=True, choices=ScaleChoices.choices)
     fencer_a_notes = models.TextField(null=True, blank=True)
     fencer_b_notes = models.TextField(null=True, blank=True)
     
     tournament = models.ForeignKey(Tournament, on_delete=models.CASCADE, null=True, blank=True)
     event = models.ForeignKey(Event, on_delete=models.CASCADE, null=True, blank=True)
     referee = models.CharField(max_length=200, null=True, blank=True)
-    bout_type = models.CharField(max_length=200, null=True, blank=True, choices=BoutChoices, default=BoutChoices.POOL)
+    bout_type = models.CharField(max_length=200, null=True, blank=True, choices=BoutChoices.choices, default=BoutChoices.POOL)
     round = models.IntegerField(default=1)
     notes = models.TextField(null=True, blank=True)
 

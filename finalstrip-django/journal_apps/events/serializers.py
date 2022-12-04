@@ -7,10 +7,10 @@ class EventSerializer(serializers.ModelSerializer):
 
     def get_tournament(self, obj):
         return {
-            "name": obj.tournament.name,
-            "location": obj.tournament.location,
-            "date": obj.tournament.date,
-            "url": obj.tournament.url
+            "name": obj.tournament_name.name,
+            "location": obj.tournament_name.location,
+            "date": obj.tournament_name.date,
+            "url": obj.tournament_name.url
         }
 
     class Meta:
