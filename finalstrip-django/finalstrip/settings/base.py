@@ -153,7 +153,7 @@ CORS_URLS_REGEX = r"^/api/.*$" # only allows cors header on /api/
 
 REST_FRAMEWORK = {
     'DATE_FORMAT': '%m/%d/%Y',
-    'EXCEPTION_HANDLER':'authentication.exceptions.status_code_handler'  # makes all 403 http errors 401
+    'EXCEPTION_HANDLER':'journal_apps.authentication.exceptions.status_code_handler'  # makes all 403 http errors 401
 }
 
 # custom user model

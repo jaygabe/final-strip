@@ -1,5 +1,15 @@
 from django.urls import path
-from .views import RegisterAPIView, LoginAPIView, TwoFactorAPIView, UserAPIView, RefreshAPIView, LogoutAPIView, ForgotAPIView, ResetAPIView, GoogleAuthAPIView
+from .views import (
+    RegisterAPIView, 
+    LoginAPIView, 
+    TwoFactorAPIView, 
+    UserAPIView, 
+    RefreshAPIView, 
+    LogoutAPIView, 
+    ForgotAPIView, 
+    ResetAPIView, 
+    GoogleAuthAPIView
+)
 
 
 urlpatterns = [

@@ -14,3 +14,7 @@ def manual_reload(request):
             }
 
     return Response(data, status=status.HTTP_200_OK)
+
+# serialize one row
+
+#serialze and paginate a list
