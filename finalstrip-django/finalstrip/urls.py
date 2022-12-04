@@ -23,8 +23,8 @@ urlpatterns = [
     path('api/auth/', include('journal_apps.authentication.urls')),
     path('api/tournaments/', include('journal_apps.tournaments.urls')),
     path('api/events/', include('journal_apps.events.urls')),
-    # path('api/bouts/', include('journal_apps.bouts.urls')),
-    # path('api/fencers/', include('journal_apps.fencers.urls')),
-    # path('api/lessons/', include('journal_apps.lessons.urls')),
+    path('api/bouts/', include('journal_apps.bouts.urls')),
+    path('api/fencers/', include('journal_apps.fencers.urls')),
+    path('api/lessons/', include('journal_apps.lessons.urls')),
     path('api/usaf-data/', include('journal_apps.usaf_data.urls'))
 ]
