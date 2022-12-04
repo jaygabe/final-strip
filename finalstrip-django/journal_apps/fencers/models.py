@@ -1,6 +1,6 @@
 from django.db import models
-from autoslug import AutoSlugField
 from django.contrib.auth import get_user_model
+from django.utils.translation import gettext_lazy as _
 from journal_apps.usaf_data.models import USAFencingInfo
 
 User = get_user_model()
@@ -8,19 +8,40 @@ User = get_user_model()
 
 class Fencer(models.Model):
 
-    SCALE_CHOICES = (
-    ('poor', 'poor'),
-    ('fair', 'fair'),
-    ('average', 'average'),
-    ('good', 'good'),
-    ('great', 'great'),
-    ('excellent', 'excellent')
-    )
+    class ScaleChoices(models.TextChoices):
+        POOR = ('poor', _('poor'))
+        FAIR = 'fair', _('fair')
+        AVERAGE = 'average', _('average')
+        GOOD = 'good', _('good')
+        GREAT = 'great', _('great')
+        EXCELLENT = 'excellent', _('excellent')
+        NA = 'Not Applicable', _('Not Applicable')
+    
 
-    slug = AutoSlugField(max_length=10, unique=True, populate_from=('last_name',), editable=True)
-    # defined by who created it
-    user = models.ForeignKey(User, related_name="user_fencer", on_delete=models.SET_NULL, null=True, blank=True)
-    # input by user
+    class HandChoices(models.TextChoices):
+        RIGHT = 'right', _('right') 
+        LEFT = 'left', _('left')
+    
+
+    class GripChoices(models.TextChoices):
+        PISTOL = 'pistol', _('pistol')
+        FRENCH = 'french', _('french')
+        BOTH = 'both', _('both')
+        OTHER = 'other', _('other')
+    
+
+    class RefRatingChoices(models.TextChoices):
+        P = 'P', _('P')
+        L2 = 'L2', _('L2')
+        L1 = 'L1', _('L1')
+        R2 = 'R2', _('R2')
+        R1 = 'R1', _('R1')
+        N2 = 'N2', _('N2')
+        N1 = 'N1', _('N1')
+        UNKNOWN = 'unknown', _('unknown')
+        NA = 'not applicable', _('not applicable')
+
+
     fencer_is_me = models.BooleanField(default=False)
     usa_fencing_info = models.ForeignKey(USAFencingInfo, on_delete=models.SET_NULL, null=True, blank=True)
     first_name = models.CharField(max_length=200, null=True,)
@@ -31,27 +52,24 @@ class Fencer(models.Model):
     division = models.CharField(max_length=200, null=True, blank=True)
     region = models.IntegerField(null=True, blank=True)
     nationality = models.CharField(max_length=20, default="USA", null=True, blank=True)
-    handed = models.CharField(max_length=10, null=True, blank=True)
-    grip = models.CharField(max_length=50, null=True, blank=True)
-    usfa_rating_epee = models.CharField(max_length=10, default="U", blank=True)
-    usfa_rating_sabre = models.CharField(max_length=10, default="U", blank=True)
-    usfa_rating_foil = models.CharField(max_length=10, default="U", blank=True)
-    ref_rating_epee = models.CharField(max_length=10, null = True, blank=True)
-    ref_rating_sabre = models.CharField(max_length=10, null = True, blank=True)
-    ref_rating_foil = models.CharField(max_length=10, null = True, blank=True)
-    custom_rating = models.CharField(max_length=40, null = True, blank=True)
-    timing = models.IntegerField(null = True, blank=True, choices=SCALE_CHOICES)
-    distance = models.IntegerField(null = True, blank=True, choices=SCALE_CHOICES)
-    bladework = models.IntegerField(null = True, blank=True, choices=SCALE_CHOICES)
-    endurance = models.IntegerField(null = True, blank=True, choices=SCALE_CHOICES)
-    strength = models.IntegerField(null = True, blank=True, choices=SCALE_CHOICES)
+    handed = models.CharField(max_length=10, null=True, blank=True, choices=HandChoices.choices)
+    primary_grip = models.CharField(max_length=10, null=True, blank=True, choices=GripChoices.choices)
+    usaf_rating_epee = models.CharField(max_length=10, default="U", blank=True)
+    usaf_rating_sabre = models.CharField(max_length=10, default="U", blank=True)
+    usaf_rating_foil = models.CharField(max_length=10, default="U", blank=True)
+    ref_rating_epee = models.CharField(max_length=10, null=True, blank=True)
+    ref_rating_sabre = models.CharField(max_length=10, null=True, blank=True)
+    ref_rating_foil = models.CharField(max_length=10, null=True, blank=True)
+    custom_rating = models.CharField(max_length=10, null=True, blank=True)
+    timing = models.CharField(max_length=10, null=True, blank=True, choices=ScaleChoices.choices)
+    distance = models.CharField(max_length=10, null=True, blank=True, choices=ScaleChoices.choices)
+    bladework = models.CharField(max_length=10, null=True, blank=True, choices=ScaleChoices.choices)
+    endurance = models.CharField(max_length=10, null=True, blank=True, choices=ScaleChoices.choices)
+    strength = models.CharField(max_length=10, null=True, blank=True, choices=ScaleChoices.choices)
 
-    tactical_description = models.CharField(max_length=50, blank=True)
+    tactical_description = models.CharField(max_length=200, blank=True)
     favorite_actions = models.CharField(max_length=200, blank=True)
     notes = models.TextField(blank=True)
-    public = models.BooleanField(default=True)
-    share_coach = models.BooleanField(default=True)
-    deleted = models.BooleanField(default=False)
     
     def __str__(self):
         return self.last_name + ", " + self.first_name
