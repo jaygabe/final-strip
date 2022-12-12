@@ -37,7 +37,9 @@ THIRD_PARTY_APPS = [
 ]
 
 JOURNAL_APPS = [
+
     'journal_apps.authentication',
+    'journal_apps.profiles',
     'journal_apps.journal',
     'journal_apps.social',
     'journal_apps.tournaments',
@@ -97,11 +99,11 @@ DATABASES = {
 # DATABASES['default']['ATOMIC_REQUESTS'] = True
 
 PASSWORD_HASHERS = [
-    "django.contrib.auth.hashers.Argon2PasswordHasher",
+    # "django.contrib.auth.hashers.Argon2PasswordHasher",
     "django.contrib.auth.hashers.PBKDF2PasswordHasher",
     "django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher",
     "django.contrib.auth.hashers.BCryptSHA256PasswordHasher",
-    # 'django.contrib.auth.hashers.ScryptPasswordHasher',  # removed for some reason
+    'django.contrib.auth.hashers.ScryptPasswordHasher',  # removed for some reason
 ]
 
 AUTH_PASSWORD_VALIDATORS = [

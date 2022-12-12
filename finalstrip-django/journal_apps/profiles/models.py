@@ -14,7 +14,7 @@ class Profile(models.Model):
         FEMALE = "female", _("female")
         OTHER = "other", _("other")
     
-    user = models.ForeignKey(User)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     about_me = models.TextField(
         verbose_name=_("about me"),
