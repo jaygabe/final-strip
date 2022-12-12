@@ -16,7 +16,7 @@ export const Home = () => {
     useEffect(() => {   //  first useEffect function cannot use async
         (async () => {
             try {
-                const {data} = await axios.get('auth/user');
+                const {data} = await axios.get('api/auth/user');
 
                 setMessage(`Hi ${data.first_name} ${data.last_name}`);
                 dispatch(setAuth(true))

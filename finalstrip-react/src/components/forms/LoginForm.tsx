@@ -16,7 +16,7 @@ export const LoginForm = (props: {
     const submit = async (e: SyntheticEvent) => {
         e.preventDefault();  // prevents page from reloading.
         
-        const {data} = await axios.post("auth/login", {
+        const {data} = await axios.post("api/auth/login", {
             email,
             password,
         }, {withCredentials: true});  //credentials might be added in the interceptor
@@ -48,7 +48,7 @@ export const LoginForm = (props: {
     const onSuccess = async (googleUser: any) => {
         
         // console.log(googleUser)
-        const {status, data} = await axios.post('auth/google-auth', {
+        const {status, data} = await axios.post('api/auth/google-auth', {
             token: googleUser.credential
         }, {withCredentials: true});
 
