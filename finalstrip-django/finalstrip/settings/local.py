@@ -8,7 +8,9 @@ SECRET_KEY = env(
     default="django-insecure-bnw$7^@btnzaz+%=35va-=bv3gosvkroq2tpy@ct!xe_q_3qfw",
 )
 
-ALLOWED_HOSTS = ["localhost", "0.0.0.0", "127.0.0.1"]
+ALLOWED_HOSTS = ["localhost", "0.0.0.0", "127.0.0.1" ]
+
+CSRF_TRUSTED_ORIGINS = ["http://*.localhost", "http://*.0.0.0.0", "http://*.127.0.0.1" ]
 
 ADMIN_URL = "admin/"
 

@@ -1,25 +1,16 @@
 from logging import exception
 import jwt, datetime
+from django.contrib.auth import get_user_model
 from rest_framework import exceptions
-
-# abstract class view imports
 from rest_framework.authentication import BaseAuthentication, get_authorization_header
-from .models import User
 
+User = get_user_model()
+
+# uses access token from request header to authenticate user
 class JWTAuthentication(BaseAuthentication):
     def authenticate(self, request):
         
         auth = get_authorization_header(request).split()
-
-        # cookie_headers = request.headers['Cookie'].split()
-        # print(cookie_headers)
-        # cookie_dic = {}
-        # for cookie_string in cookie_headers:
-
-        #     pair = cookie_string.split('=')
-        #     cookie_dic[pair[0]] = pair[1]
-        # print('cookie dic', cookie_dic)
-        # auth = ['filler string to maintain the rest', cookie_dic['refresh_token']]
 
         if auth and len(auth) == 2:
             token = auth[1].decode('utf-8')
@@ -29,7 +20,6 @@ class JWTAuthentication(BaseAuthentication):
 
             return (user, None)
         raise exceptions.AuthenticationFailed('jwt unauthenticated')
-
 
 
 def create_access_token(id):
@@ -48,14 +38,14 @@ def create_refresh_token(id):
 
 def decode_access_token(token):
     try:
-        payload = jwt.decode(token, 'access_secret', algorithms='HS256') # note that algorithms has an 's' here
+        payload = jwt.decode(token, 'access_secret', algorithms='HS256')
         return payload['user_id']
     except:
         raise exceptions.AuthenticationFailed('unauthenticated')
 
 def decode_refresh_token(token):
     try:
-        payload = jwt.decode(token, 'refresh_secret', algorithms='HS256') # note that algorithms has an 's' here
+        payload = jwt.decode(token, 'refresh_secret', algorithms='HS256')
         return payload['user_id']
     except:
         raise exceptions.AuthenticationFailed('unauthenticated')

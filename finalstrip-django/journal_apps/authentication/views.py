@@ -3,33 +3,43 @@ import pyotp
 
 from google.oauth2 import id_token
 from google.auth.transport.requests import Request as GoogleRequest
-
+from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import ensure_csrf_cookie
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import exceptions, status
+
 
 from .models import Reset, User, UserToken
 from .serializers import UserSerializer
 from .authentication import create_access_token, create_refresh_token, decode_refresh_token, JWTAuthentication
 
 
+class CsrfTokenView(APIView):
+    # Empty resonse that sends the CSRF token as a cookie
+    @method_decorator(ensure_csrf_cookie)
+    def get(self, request, *args, **kwargs) -> Response:
+
+        print('csrf: ', request.META["CSRF_COOKIE"])
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+
 class RegisterAPIView(APIView):
     def post(self, request):
-        print('start')
         data = request.data
-        print('data received')
         if data['password'] != data['password_confirm']:
             raise exceptions.APIException('Passwords do not match!')
-        print('password confirmed')
         serializer = UserSerializer(data=data)
         serializer.is_valid(raise_exception=True) # makes sure all fields are present
-        print('registration is valid')
         serializer.save()
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 class LoginAPIView(APIView):
+
+    
     def post(self, request):
+        # print(request.__dict__)
         email = request.data['email']
         password = request.data['password']
         print('Logging in ', email)
@@ -62,7 +72,6 @@ class LoginAPIView(APIView):
                 'secret': secret,
                 'otpauth_url': otpauth_url
             })
-        
         else:
             # create tokens
             access_token = create_access_token(user.id)

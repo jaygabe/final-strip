@@ -1,5 +1,6 @@
 from django.urls import path
 from .views import (
+    CsrfTokenView,
     RegisterAPIView, 
     LoginAPIView, 
     TwoFactorAPIView, 
@@ -14,6 +15,7 @@ from .views import (
 
 urlpatterns = [
 
+    path('csrf-token', CsrfTokenView.as_view()),
     path('register', RegisterAPIView.as_view()),
     path('login', LoginAPIView.as_view()),
     path('two-factor', TwoFactorAPIView.as_view()),
