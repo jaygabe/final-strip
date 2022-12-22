@@ -13,11 +13,10 @@ export const Home = () => {
     const dispatch = useDispatch()
     const auth = useSelector((state: RootState) => state.auth.value)
 
-    useEffect(() => {   //  first useEffect function cannot use async
+    useEffect(() => {
         (async () => {
             try {
                 const {data} = await axios.get('api/auth/user');
-
                 setMessage(`Hi ${data.first_name} ${data.last_name}`);
                 dispatch(setAuth(true))
             } catch (e) {
@@ -25,7 +24,8 @@ export const Home = () => {
                 dispatch(setAuth(false))
             }
         })()
-    }, [])
+    }, [message])
+
 
     return (
         <div className='container text-center'>
@@ -55,6 +55,7 @@ export const Home = () => {
                 <li>clean up paranthesis and make single over entire project (mostly auth)</li>
                 <li>build out public profile pages</li>
                 
+                <br />
                 <li>make referee data linkable</li>
                 <li>web links to tournament</li>
                 <li>video links to bouts</li>
@@ -62,6 +63,14 @@ export const Home = () => {
                 <li>front and backend testing</li>
                 <li></li>
             </ul>
+            <h4>best practices</h4>
+            <ul>
+                <li>useRef for forms</li>
+                <li>use function form of useState to increment data</li>
+                <li></li>
+                <li></li>
+            </ul>
+
             <h4>Other links</h4>
             <ul>
                 <li>not sure why I am saving this one: https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0218959</li>

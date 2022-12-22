@@ -21,11 +21,12 @@ export const Login = () => {
     const success = () => {
         setRedirect(true);
         dispatch(setAuth(true));
+        if (redirect){
+            return <Navigate to="/" />
+        }
     }
 
-    if (redirect){
-        return <Navigate to="/" />
-    }
+    
 
     let form;
 

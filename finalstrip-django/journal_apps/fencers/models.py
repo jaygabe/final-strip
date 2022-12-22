@@ -15,7 +15,7 @@ class Fencer(models.Model):
         GOOD = 'good', _('good')
         GREAT = 'great', _('great')
         EXCELLENT = 'excellent', _('excellent')
-        NA = 'Not Applicable', _('Not Applicable')
+        NA = 'not applicable', _('not applicable')
     
 
     class HandChoices(models.TextChoices):
@@ -61,11 +61,11 @@ class Fencer(models.Model):
     ref_rating_sabre = models.CharField(max_length=10, null=True, blank=True)
     ref_rating_foil = models.CharField(max_length=10, null=True, blank=True)
     custom_rating = models.CharField(max_length=10, null=True, blank=True)
-    timing = models.CharField(max_length=10, null=True, blank=True, choices=ScaleChoices.choices)
-    distance = models.CharField(max_length=10, null=True, blank=True, choices=ScaleChoices.choices)
-    bladework = models.CharField(max_length=10, null=True, blank=True, choices=ScaleChoices.choices)
-    endurance = models.CharField(max_length=10, null=True, blank=True, choices=ScaleChoices.choices)
-    strength = models.CharField(max_length=10, null=True, blank=True, choices=ScaleChoices.choices)
+    timing = models.CharField(max_length=20, null=True, blank=True, choices=ScaleChoices.choices)
+    distance = models.CharField(max_length=20, null=True, blank=True, choices=ScaleChoices.choices)
+    bladework = models.CharField(max_length=20, null=True, blank=True, choices=ScaleChoices.choices)
+    endurance = models.CharField(max_length=20, null=True, blank=True, choices=ScaleChoices.choices)
+    strength = models.CharField(max_length=20, null=True, blank=True, choices=ScaleChoices.choices)
 
     tactical_description = models.CharField(max_length=200, blank=True)
     favorite_actions = models.CharField(max_length=200, blank=True)
