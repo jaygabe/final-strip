@@ -5,6 +5,7 @@ import { TournamentForm } from "../../forms/TournamentForm";
 
 export const Tournaments = () => {
 
+    const [dataReceived, setDataReceived] = useState<boolean>(false)
     const [tournaments, setTournaments] = useState<[{ 
             id: number
             slug: string
@@ -20,15 +21,31 @@ export const Tournaments = () => {
         }]);
         
 
-    useEffect(() => {
+    // useEffect(() => {
+        
+    //     const getData = async () => {
+    //         const result = await axios.get('api/tournaments/all', {withCredentials: true})
+    //         console.log(result)
+    //         setTournaments(result.data)
+    //         setDataReceived(true)
+    //     }
+    
+    //     getData()
+
+    // }, []);
+
+
+    if (dataReceived == false) {
+        
         const getData = async () => {
-            const result = await axios.get('journal/tournament', {withCredentials: true})
+            const result = await axios.get('api/tournaments/all', {withCredentials: true}).catch()
+            console.log(result)
             setTournaments(result.data)
+            setDataReceived(true)
         }
-
+    
         getData()
-
-    }, []);
+    }
 
 
     return(
