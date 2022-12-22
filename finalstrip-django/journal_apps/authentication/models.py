@@ -67,5 +67,10 @@ class UserToken(models.Model):
 
 # Reset email model
 class Reset(models.Model):
-    email = models.CharField(max_length=255)
-    token = models.CharField(max_length=255, unique=True)
+  email = models.CharField(max_length=255)
+  token = models.CharField(max_length=255, unique=True)
+
+
+# blocks bad ip addresses
+class BlockList(models.Model):
+  ip_addr = models.CharField(max_length=10)

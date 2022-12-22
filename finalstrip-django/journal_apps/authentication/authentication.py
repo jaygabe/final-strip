@@ -11,7 +11,6 @@ class JWTAuthentication(BaseAuthentication):
     def authenticate(self, request):
         
         auth = get_authorization_header(request).split()
-
         if auth and len(auth) == 2:
             token = auth[1].decode('utf-8')
             id = decode_access_token(token)
@@ -20,7 +19,17 @@ class JWTAuthentication(BaseAuthentication):
 
             return (user, None)
         raise exceptions.AuthenticationFailed('jwt unauthenticated')
-
+    
+    # this should allow other views to work now
+    def has_permission(self, request, view):
+        auth = get_authorization_header(request).split()
+        if auth and len(auth) == 2:
+            token = auth[1].decode('utf-8')
+            id = decode_access_token(token)
+            user = User.objects.get(pk=id)
+            request.user.id = user.id
+            return True
+        return False
 
 def create_access_token(id):
     return jwt.encode({

@@ -18,7 +18,7 @@ export const TournamentForm = () => {
     const submit = async (e: SyntheticEvent) => {
         e.preventDefault();  // prevents page from reloading.
         
-        const {data} = await axios.post('journal/tournament/', {
+        const {data} = await axios.post('api/tournaments/create/', {
             'name': tournName,
             date,
             location,

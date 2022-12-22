@@ -5,6 +5,9 @@ import "./App.css";
 
 import {NavBar} from "./components/NavBar";
 
+// Config
+import {CSRFToken} from "./config/CSRFToken";
+
 //  Admin
 import { Home } from "./components/pages/admin/Home";
 import { About } from "./components/pages/admin/About";
@@ -40,6 +43,7 @@ function App() {
     <GoogleOAuthProvider clientId="1005506084219-mjeqr310a2kvpgo750lvn995h92e5mbl.apps.googleusercontent.com">
     <BrowserRouter>
       <NavBar />
+      <CSRFToken />
       <Routes>
 
         {/*  Admin  */}

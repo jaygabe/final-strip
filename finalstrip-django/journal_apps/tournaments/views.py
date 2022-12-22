@@ -42,12 +42,13 @@ class TournamentDetailView(APIView):
 
 class TournamentListView(generics.ListAPIView):
 
-    # permission_classes = [JWTAuthentication]
+    permission_classes = [JWTAuthentication]
     serializer_class = TournamentSerializer
     paginate_by = 10
-
+    print('tourn listview')
     def get_queryset(self):
         user = self.request.user
+        print(user)
         return Tournament.objects.filter(user=user)
 
 
