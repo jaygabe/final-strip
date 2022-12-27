@@ -8,7 +8,7 @@ from rest_framework.views import APIView
 
 from journal_apps.authentication.authentication import JWTAuthentication
 from journal_apps.tournaments.models import Tournament
-from journal_apps.tournaments.serializers import TournamentSerializer
+from journal_apps.tournaments.serializers import TournamentSerializer, TournamentCreateSerializer
 from journal_apps.common.permissions import IsOwner
 
 User = get_user_model()
@@ -18,7 +18,7 @@ logger = logging.getLogger(__name__)
 
 class TournamentDetailView(APIView):
 
-    # authentication_classes = [JWTAuthentication]
+    authentication_classes = [JWTAuthentication]
     serializer_class = TournamentSerializer
 
     def get(self, request, slug):
@@ -45,7 +45,6 @@ class TournamentListView(generics.ListAPIView):
     permission_classes = [JWTAuthentication]
     serializer_class = TournamentSerializer
     paginate_by = 10
-    print('tourn listview')
     def get_queryset(self):
         user = self.request.user
         print(user)
@@ -53,14 +52,14 @@ class TournamentListView(generics.ListAPIView):
 
 
 class TournamentCreateView(generics.CreateAPIView):
-    # permission_classes = [JWTAuthentication]
-    serializer_class = TournamentSerializer
+    permission_classes = [JWTAuthentication]
+    serializer_class = TournamentCreateSerializer
 
     def create(self, request):
         
         user = request.user
         data = request.data
-        data["user"] = user.id
+        data["user"] = user.pk
         serializer = self.serializer_class(data=data, context={"request": request})
         serializer.is_valid(raise_exception=True)
         serializer.save()
@@ -68,6 +67,8 @@ class TournamentCreateView(generics.CreateAPIView):
         logger.info(
             f"Tournament {serializer.data.get('name')} created by {user.email}"
         )
+
+        return Response({'message': 'Tournament created'}, status=status.HTTP_201_CREATED)
 
 
 class TournamentUpdateView(APIView):

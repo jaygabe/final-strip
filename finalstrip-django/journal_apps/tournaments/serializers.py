@@ -7,3 +7,18 @@ class TournamentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Tournament
         exclude = ('pkid','id')
+
+
+class TournamentCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Tournament
+        fields = (
+            'name', 
+            'date', 
+            'event_level',
+            'club', 
+            'location',
+            'url', 
+            'notes',
+            'user'
+            )

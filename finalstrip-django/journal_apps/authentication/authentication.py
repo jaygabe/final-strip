@@ -22,12 +22,19 @@ class JWTAuthentication(BaseAuthentication):
     
     # this should allow other views to work now
     def has_permission(self, request, view):
+
         auth = get_authorization_header(request).split()
+        if auth == []:
+            print('no header')
+            return False
+
+        print('getting permission')
         if auth and len(auth) == 2:
             token = auth[1].decode('utf-8')
             id = decode_access_token(token)
             user = User.objects.get(pk=id)
             request.user.id = user.id
+            request.user = user
             return True
         return False
 
