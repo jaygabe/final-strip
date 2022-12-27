@@ -13,6 +13,8 @@ export const Home = () => {
     const dispatch = useDispatch()
     const auth = useSelector((state: RootState) => state.auth.value)
 
+
+    // This should be removed eventually
     useEffect(() => {
         (async () => {
             try {

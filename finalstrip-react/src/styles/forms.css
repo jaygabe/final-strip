@@ -61,6 +61,11 @@ input[type="date"]:active {
     color: black
 }
 
+/* .form-input input[type="select"]:focus,
+.form-input input[type="select"]:active {
+    color: green;
+} */
+
 .form-input .arrow {
     top: 0;
     right: 0;

@@ -12,13 +12,12 @@ export const NavBar = () => {
 
     const auth = useSelector((state: RootState) => state.auth.value)
 
-
     // const navLinks = () => {
     //     mobileLinks ? "nav-links mobile" : "nav-links hidden"
     // }
 
     const logout = async () => {
-        await axios.post('auth/logout', {withCredentials: true});
+        await axios.post('api/auth/logout', {withCredentials: true});
         axios.defaults.headers.common['Authorization'] = '';
     }
 
@@ -50,7 +49,7 @@ export const NavBar = () => {
 
     return (
         <nav className={mobileLinks ? "navbar open-menu" : "navbar"}>
-            <div className="logo">Brand Name</div>
+            <div className="logo">Finalstrip</div>
             
             <div className={mobileLinks ? "navbar-links open-menu" : "navbar-links"}>
                 <ul>

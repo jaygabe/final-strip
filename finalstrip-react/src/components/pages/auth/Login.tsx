@@ -1,10 +1,10 @@
 import { SyntheticEvent, useState } from "react";
-import { Link, Navigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import {useDispatch} from "react-redux";
 import {setAuth} from "../../../redux/authSlice";
 
 import { LoginForm } from "../../forms/LoginForm";
-import { AuthenticatorForm } from "../../forms/AuthenticatorForm";
+// import { AuthenticatorForm } from "../../forms/AuthenticatorForm";
 
 
 export const Login = () => {
@@ -21,22 +21,20 @@ export const Login = () => {
     const success = () => {
         setRedirect(true);
         dispatch(setAuth(true));
+
         if (redirect){
             return <Navigate to="/" />
         }
     }
 
-    
-
     let form;
-
-    console.log('login id is: ', loginData?.id)
     
     if (loginData?.id === 0) {
         form = <LoginForm loginData={setLoginData} success={success} />
     } else {
         // form = <AuthenticatorForm loginData={loginData} success={success} />
-        form = <h1>You are already logged in.</h1>
+        // form = <h1>You are already logged in.</h1>
+        form = <Navigate to="/" />
     }
 
     return (

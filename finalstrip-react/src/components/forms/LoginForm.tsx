@@ -25,7 +25,6 @@ export const LoginForm = (props: {
         axios.defaults.headers.common["Authorization"] = `Bearer ${data.token}`;
         if (data.status === 200) {
             props.success();
-            
         }
 
         //this is duplicated in login.tsx and should be cleaned up at some point
@@ -59,7 +58,6 @@ export const LoginForm = (props: {
         console.log('Turns out failure was an option...');
     }
     
-    
     // gets csrf token
     function getToken(name:string){
         var cookieValue = 'cookie not found'
@@ -73,7 +71,6 @@ export const LoginForm = (props: {
                     }
                 }
         }
-        console.log('token value: ', cookieValue)
         return cookieValue
     }
 
@@ -83,6 +80,7 @@ export const LoginForm = (props: {
             <form className='auth-form' onSubmit={submit}>
                 
                 <h1 className="h1">Please sign in</h1>
+                
                 <input type="hidden" value={getToken("csrftoken")} name="csrfmiddlewaretoken"
                 />
 

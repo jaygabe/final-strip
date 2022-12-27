@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import {useState} from 'react';
 import axios from 'axios';
 import { TournamentForm } from "../../forms/TournamentForm";
 
@@ -19,26 +19,12 @@ export const Tournaments = () => {
             date: '',
             location: '',
         }]);
-        
-
-    // useEffect(() => {
-        
-    //     const getData = async () => {
-    //         const result = await axios.get('api/tournaments/all', {withCredentials: true})
-    //         console.log(result)
-    //         setTournaments(result.data)
-    //         setDataReceived(true)
-    //     }
-    
-    //     getData()
-
-    // }, []);
 
 
-    if (dataReceived == false) {
+    if (dataReceived === false) {
         
         const getData = async () => {
-            const result = await axios.get('api/tournaments/all', {withCredentials: true}).catch()
+            const result = await axios.get('api/tournaments/all', {withCredentials: true, })
             console.log(result)
             setTournaments(result.data)
             setDataReceived(true)
