@@ -10,6 +10,11 @@ SECRET_KEY = env(
 
 ALLOWED_HOSTS = ["localhost", "0.0.0.0", "127.0.0.1" ]
 
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:3000',
+    'http://127.0.0.1:3000'
+]
+
 CSRF_TRUSTED_ORIGINS = ["http://*.localhost", "http://*.0.0.0.0", "http://*.127.0.0.1", 'http://localhost:3000' ]
 
 ADMIN_URL = "admin/"
