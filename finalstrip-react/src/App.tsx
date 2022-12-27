@@ -1,7 +1,13 @@
-import React from "react";
+import axios from 'axios'
+import { useEffect } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { useDispatch, useSelector } from 'react-redux';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import "./App.css";
+
+// Authentication
+import {setAuth} from './redux/authSlice'
+import {RootState} from './redux/store'
 
 import {NavBar} from "./components/NavBar";
 
@@ -30,20 +36,36 @@ import { FencerView } from "./components/pages/journal/FencerView";
 import { Lessons } from "./components/pages/journal/Lessons";
 import { LessonView } from "./components/pages/journal/LessonView";
 
-
 //  Error
 import { Error404 } from "./components/pages/error/Error404";
-
 
 
 //  possible organize links:  https://stackoverflow.com/questions/58144678/organizing-react-routes-into-separate-components
 
 function App() {
+  const dispatch = useDispatch()
+  const auth = useSelector((state: RootState) => state.auth.value)
+
+  // should be refactored to use isAuthenticated
+  useEffect(() => {
+      (async () => {
+          try {
+              const {data} = await axios.get('api/auth/user');
+              dispatch(setAuth(true))
+              console.log('authenticated as :', data.email)
+          } catch (e) {
+              dispatch(setAuth(false))
+              console.log('not authenticated')
+          }
+      })()
+  }, [auth])
+
   return (
     <GoogleOAuthProvider clientId="1005506084219-mjeqr310a2kvpgo750lvn995h92e5mbl.apps.googleusercontent.com">
     <BrowserRouter>
       <NavBar />
       <CSRFToken />
+      
       <Routes>
 
         {/*  Admin  */}
@@ -74,6 +96,7 @@ function App() {
         <Route path="*" element={<Navigate replace to="/404" />} />
 
       </Routes>
+
     </BrowserRouter>
     </GoogleOAuthProvider>
   )
