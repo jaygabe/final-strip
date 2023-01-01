@@ -1,7 +1,7 @@
-import axios from "axios";
+import axios from "axios"
 
 
-axios.defaults.baseURL = "http://localhost:8000/";
+axios.defaults.baseURL = "http://localhost:8000/"
 axios.defaults.withCredentials = true;
 axios.defaults.xsrfCookieName = 'csrftoken'
 axios.defaults.xsrfHeaderName = 'X-CSRFToken'
@@ -19,6 +19,7 @@ const getRefreshToken = (): Promise<string | void> => {
 
 axios.interceptors.response.use(resp => resp, async error => {
   if ((error.response.status === 401 && !refresh) || (error.response.status === 500 && !refresh)) {
+    refresh = true
     console.log('interceptor')
     if (!refreshTokenPromise) {
       // if nothing is in-progress, start a new refresh token request
@@ -29,13 +30,13 @@ axios.interceptors.response.use(resp => resp, async error => {
     }
     return refreshTokenPromise.then((token) => {
         axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
-        return axios.request(error.config);
-    });
+        return axios.request(error.config)
+    })
   }
   refresh = false
-  refreshTokenPromise = null;
-  return Promise.reject(error);
-});
+  refreshTokenPromise = null
+  return Promise.reject(error)
+})
 
 
 // // use to check response before it hits django
