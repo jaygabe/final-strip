@@ -1,4 +1,5 @@
 import logging
+from datetime import date
 
 from django.contrib.auth import get_user_model
 from rest_framework import generics, status
@@ -10,6 +11,7 @@ from journal_apps.authentication.authentication import JWTAuthentication
 from journal_apps.tournaments.models import Tournament
 from journal_apps.tournaments.serializers import TournamentSerializer, TournamentCreateSerializer
 from journal_apps.common.permissions import IsOwner
+from journal_apps.common.utils import extract_data_and_assign_user, remove_empty_fields
 
 User = get_user_model()
 
@@ -41,13 +43,12 @@ class TournamentDetailView(APIView):
 
 
 class TournamentListView(generics.ListAPIView):
-
     permission_classes = [JWTAuthentication]
     serializer_class = TournamentSerializer
     paginate_by = 10
+
     def get_queryset(self):
         user = self.request.user
-        print(user)
         return Tournament.objects.filter(user=user)
 
 
@@ -56,25 +57,25 @@ class TournamentCreateView(generics.CreateAPIView):
     serializer_class = TournamentCreateSerializer
 
     def create(self, request):
-        
-        user = request.user
-        data = request.data
-        data["user"] = user.pk
-        serializer = self.serializer_class(data=data, context={"request": request})
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
+        data = extract_data_and_assign_user(request)
+        cleaned_data = remove_empty_fields(data)
+        print('cleaned data: ', cleaned_data)
+        serializer = self.serializer_class(data=cleaned_data, context={"request": request})
 
-        logger.info(
-            f"Tournament {serializer.data.get('name')} created by {user.email}"
-        )
+        if serializer.is_valid():
+            serializer.save()
+            logger.info(
+                f"Tournament {serializer.data.get('name')} created by {request.user.email}"
+            )
+            return Response({'message': 'Tournament created'}, status=status.HTTP_201_CREATED)
 
-        return Response({'message': 'Tournament created'}, status=status.HTTP_201_CREATED)
+        print('serializer errors: ', serializer.errors)
+        return Response({'message': 'invalid form error'}, status=status.HTTP_400_BAD_REQUEST)
 
 
 class TournamentUpdateView(APIView):
-
     
-    # permission_classes = [JWTAuthentication, IsOwner]
+    permission_classes = [JWTAuthentication, IsOwner]
     serializer_class = TournamentSerializer
 
     def patch(self, request, slug):
@@ -92,8 +93,7 @@ class TournamentUpdateView(APIView):
 
 class TournamentDeleteView(generics.DestroyAPIView):
 
-    
-    # permission_classes = [JWTAuthentication, IsOwner]
+    permission_classes = [JWTAuthentication, IsOwner]
     queryset = Tournament.objects.all()
     lookup_field = "slug"
 

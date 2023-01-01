@@ -23,14 +23,6 @@ export const TournamentForm = () => {
     // Send form to the backend to be processed
     const submit = async (e: SyntheticEvent) => {
         e.preventDefault();  // prevents page from reloading.
-        
-        // const response = await axios.post('api/auth/refresh') 
-        // if (response.status === 200) {
-        //     axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`
-        //     console.log('refresh success')
-        // }else{
-        //     console.log("refresh failed")
-        // }
 
         await getNewRefreshToken()
 

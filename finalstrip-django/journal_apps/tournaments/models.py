@@ -12,7 +12,7 @@ class Tournament(JournalModel):
         WORLD = 'World', _('World')
 
     name = models.CharField(max_length=200)
-    date = models.DateField(default=date.today)
+    date = models.DateField(null=True, blank=True)
     event_level = models.CharField(max_length=200, null=True, choices=EventLevel.choices)
     club = models.CharField(max_length=200, null=True, blank=True)
     location = models.CharField(max_length=200, null=True, blank=True)
