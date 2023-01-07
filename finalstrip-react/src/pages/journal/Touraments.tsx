@@ -1,7 +1,7 @@
 import {useEffect, useState} from 'react'
 import axios from 'axios'
-import { TournamentForm } from "../../forms/TournamentForm"
-import { tournamentType } from '../../../config/VarTypes'
+import { TournamentForm } from "../../components/forms/TournamentForm"
+import { tournamentType } from '../../constants/VarTypes'
 
 
 export const Tournaments = () => {

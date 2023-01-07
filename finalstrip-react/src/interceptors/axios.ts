@@ -42,7 +42,7 @@ axios.interceptors.response.use(resp => resp, async error => {
 // // use to check response before it hits django
 // axios.interceptors.request.use(function (config) {
 //     // Do something before request is sent
-//     console.log(config)
+//     console.log('request to django: ', config)
 //     return config;
 //   }, function (error) {
 //     // Do something with request error

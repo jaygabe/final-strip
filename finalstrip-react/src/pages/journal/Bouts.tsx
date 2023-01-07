@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom'
 
 import axios from 'axios';
 
-import { eventType, boutType } from '../../../config/VarTypes'
+import { eventType, boutType } from '../../constants/VarTypes'
 
 
 

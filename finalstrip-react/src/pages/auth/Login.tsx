@@ -1,9 +1,9 @@
 import { SyntheticEvent, useState } from "react";
 import { Navigate } from "react-router-dom";
 import {useDispatch} from "react-redux";
-import {setAuth} from "../../../redux/authSlice";
+import {setAuth} from "../../redux/authSlice";
 
-import { LoginForm } from "../../forms/LoginForm";
+import { LoginForm } from "../../components/forms/LoginForm";
 // import { AuthenticatorForm } from "../../forms/AuthenticatorForm";
 
 

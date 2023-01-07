@@ -2,10 +2,10 @@ import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 
-import {setAuth} from '../../../redux/authSlice'
-import {RootState} from '../../../redux/store'
+import {setAuth} from '../../redux/authSlice'
+import {RootState} from '../../redux/store'
 
-import {PushNote} from '../../PushNote';
+import {PushNote} from '../../components/PushNote';
 
 
 export const Home = () => {

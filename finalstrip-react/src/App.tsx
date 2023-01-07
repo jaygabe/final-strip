@@ -12,32 +12,32 @@ import {RootState} from './redux/store'
 import {NavBar} from "./components/NavBar";
 
 // Config
-import {CSRFToken} from "./config/CSRFToken";
+import {CSRFToken} from "./hooks/CSRFToken";
 
 //  Admin
-import { Home } from "./components/pages/admin/Home";
-import { About } from "./components/pages/admin/About";
-import { Pricing } from "./components/pages/admin/Pricing";
+import { Home } from "./pages/admin/Home";
+import { About } from "./pages/admin/About";
+import { Pricing } from "./pages/admin/Pricing";
 
 //  Authentication
-import {Login} from "./components/pages/auth/Login";
-import {Register} from "./components/pages/auth/Register";
-import { Forgot } from "./components/pages/auth/Forgot";
-import { Reset } from "./components/pages/auth/Reset";
+import {Login} from "./pages/auth/Login";
+import {Register} from "./pages/auth/Register";
+import { Forgot } from "./pages/auth/Forgot";
+import { Reset } from "./pages/auth/Reset";
 
 //  Journal
-import { Journal } from "./components/pages/journal/Journal";
-import { Tournaments } from "./components/pages/journal/Touraments";
-import { Events } from "./components/pages/journal/Events";
-import { Bouts } from "./components/pages/journal/Bouts";
-import { BoutView } from "./components/pages/journal/BoutView";
-import { Fencers } from "./components/pages/journal/Fencers";
-import { FencerView } from "./components/pages/journal/FencerView";
-import { Lessons } from "./components/pages/journal/Lessons";
-import { LessonView } from "./components/pages/journal/LessonView";
+import { Journal } from "./pages/journal/Journal";
+import { Tournaments } from "./pages/journal/Touraments";
+import { Events } from "./pages/journal/Events";
+import { Bouts } from "./pages/journal/Bouts";
+import { BoutView } from "./pages/journal/BoutView";
+import { Fencers } from "./pages/journal/Fencers";
+import { FencerView } from "./pages/journal/FencerView";
+import { Lessons } from "./pages/journal/Lessons";
+import { LessonView } from "./pages/journal/LessonView";
 
 //  Error
-import { Error404 } from "./components/pages/error/Error404";
+import { Error404 } from "./pages/error/Error404";
 
 
 //  possible organize links:  https://stackoverflow.com/questions/58144678/organizing-react-routes-into-separate-components

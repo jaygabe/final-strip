@@ -6,8 +6,8 @@ import { FormDateElement } from './form elements/FormDateElement'
 import { FormSelectElement } from './form elements/FormSelectElement'
 import { CSRF } from './form elements/CSRF'
 
-import { TOURNAMENT_LEVEL } from '../../config/VarConstants'
-import { getNewRefreshToken } from '../hooks/utils'
+import { TOURNAMENT_LEVEL } from '../../constants/VarOptions'
+import { getNewRefreshToken } from '../../hooks/utils'
 
 
 export const TournamentForm = () => {
@@ -41,8 +41,9 @@ export const TournamentForm = () => {
         <>
             <form onSubmit={submit}>
                 
+                <br />
                 <h1 className='h1'>New Tournament</h1>
-
+                <br />
                 <CSRF/>
                 <FormTextElement setValue={setTournName} elementName='tournament' placeholder='' labelText='Tournament Name'/>
                 <FormDateElement setValue={setTournDate} elementName='date' placeholder='' labelText='Date' />

@@ -3,8 +3,8 @@ import { useParams } from "react-router-dom"
 
 import axios from 'axios';
 
-import { EventForm } from "../../forms/EventForm";
-import { tournamentType, eventType } from "../../../config/VarTypes";
+import { EventForm } from "../../components/forms/EventForm";
+import { tournamentType, eventType } from "../../constants/VarTypes";
 
 
 export const Events = () => {
