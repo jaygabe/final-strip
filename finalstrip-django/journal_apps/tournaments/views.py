@@ -9,6 +9,7 @@ from rest_framework.views import APIView
 
 from journal_apps.authentication.authentication import JWTAuthentication
 from journal_apps.tournaments.models import Tournament
+from journal_apps.tournaments.pagniation import TournamentPagination
 from journal_apps.tournaments.serializers import TournamentSerializer, TournamentCreateSerializer
 from journal_apps.common.permissions import IsOwner
 from journal_apps.common.utils import extract_data_and_assign_user, remove_empty_fields
@@ -43,13 +44,15 @@ class TournamentDetailView(APIView):
 
 
 class TournamentListView(generics.ListAPIView):
-    permission_classes = [JWTAuthentication]
+    # permission_classes = [JWTAuthentication]
     serializer_class = TournamentSerializer
-    paginate_by = 10
+    pagination_class = TournamentPagination
 
     def get_queryset(self):
         user = self.request.user
-        return Tournament.objects.filter(user=user)
+        # queryset = Tournament.objects.filter(user=user).order_by('-date')
+        queryset = Tournament.objects.all().order_by('-date')
+        return queryset
 
 
 class TournamentCreateView(generics.CreateAPIView):
