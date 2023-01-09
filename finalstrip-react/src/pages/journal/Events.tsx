@@ -9,54 +9,61 @@ import { tournamentType, eventType } from "../../constants/VarTypes";
 
 export const Events = () => {
 
+    const [dataReceived, setDataReceived] = useState<boolean>(false)
     const { tournamentSlug } = useParams()
-    const [tournament, setTournament] = useState< 
-        tournamentType
-    >({
-        id: 999,
-        slug: '',
-        name: '',
-        date: '',
-        location: ''          
+    const [tournament, setTournament] = useState<tournamentType>({
+        'id':99,
+        'slug': '',
+        'name': '',
+        'location': '',
+        'date': '',
+        'url': '',
+        'notes': ''
     });
-    const [events, setEvents] = useState<[ 
-        eventType
-    ]>([{
-        id: 999,
-        slug: '',
-        name: '',
-        date: '',
-        eventLevel: '',
-        notes: ''          
-    }]);
+    const [events, setEvents] = useState<[eventType] | []>([]);
 
-
-    useEffect(() => {
-        const getData = async () => {
-            const result = await axios.get('journal/tournament/' + tournamentSlug, {withCredentials: true})
-            
-            setTournament(result.data.tournament)
-            setEvents(result.data.events.map((value: any, key: number) => {
+    const getData = async () => {
+        if (dataReceived === false) {
+            const result = await axios.get('api/events/all/' + tournamentSlug, {withCredentials: true})
+            setDataReceived(true)
+            setTournament(result.data[0].tourn_info)
+            console.log('data: ', result.data)
+            setEvents(result.data.map((value: any, key: number) => {
                 return {
                     id: key,
                     slug: value.slug,
                     name: value.name,
                     date: value.date,
+                    weapon: value.weapon,
                     eventLevel: value.event_type,
                     notes: value.notes
                 }
-            })) 
+            }))
         }
-        getData()
+        
+        
+    }
+    getData()
 
-    }, []);
+    const tournamentDetail = () => {
+        
+        return(
+            <div className='container'>
+                {tournament.name ? <h1>{tournament.name}</h1> : <></>}
+                {tournament.location ? <p className="detail">{tournament.location}</p> : <></>}
+                {tournament.date ? <p className="detail">{tournament.date}</p> : <></>}
+                {tournament.url ? <p className="detail">{tournament.url}</p> : <></>}
+                {tournament.notes ? <p className="detail">{tournament.notes}</p> : <></>}
+
+                <h4 className='test'>{tournamentSlug}</h4>
+            </div>
+        )
+    }
+
 
     return(
         <>
-            <div className='container'>
-                <h1>{tournament.name}</h1>
-                <h4 className='test'>{tournamentSlug}</h4>
-            </div>
+            {tournamentDetail()}
 
             {Object.entries(events).map(([key, value]) => (
                 

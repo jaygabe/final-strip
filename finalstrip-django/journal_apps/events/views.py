@@ -44,12 +44,12 @@ class EventDetailView(APIView):
 class EventListView(generics.ListAPIView):
     # permission_classes = [JWTAuthentication]
     serializer_class = EventSerializer
-    paginate_by = 10
 
-    def get_queryset(self, slug):
+    def get_queryset(self, *args, **kwargs):
         user = self.request.user
-        events = Event.objects.filter(Q(tournament__slug=slug)) # Q(user=user)&
-        return events
+        slug = self.kwargs.get('slug')
+        queryset = Event.objects.filter(Q(tournament__slug=slug)) # Q(user=user)&
+        return queryset
 
 
 class EventCreateView(generics.CreateAPIView):

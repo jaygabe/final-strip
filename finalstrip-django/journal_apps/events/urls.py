@@ -9,7 +9,7 @@ from .views import (
 )
 
 urlpatterns = [
-    path("all/", EventListView.as_view(), name="all-events"),
+    path("all/<slug:slug>", EventListView.as_view(), name="all-events"),
     path("create/", EventCreateView.as_view(), name="create-event"),
     path("details/<slug:slug>/", EventDetailView.as_view(), name="detail-event"),
     path("delete/<slug:slug>/", EventDeleteView.as_view(), name="delete-event"),

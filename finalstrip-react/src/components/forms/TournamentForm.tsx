@@ -22,8 +22,7 @@ export const TournamentForm = () => {
 
     // Send form to the backend to be processed
     const submit = async (e: SyntheticEvent) => {
-        e.preventDefault();  // prevents page from reloading.
-
+        // e.preventDefault();  // prevents page from reloading.
         await getNewRefreshToken()
 
         const {data} = await axios.post('api/tournaments/create/', {

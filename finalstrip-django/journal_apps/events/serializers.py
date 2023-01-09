@@ -5,12 +5,12 @@ from journal_apps.events.models import Event
 class EventSerializer(serializers.ModelSerializer):
     tourn_info = serializers.SerializerMethodField(read_only=True)
 
-    def get_tournament(self, obj):
+    def get_tourn_info(self, obj):
         return {
-            "name": obj.tournament_name.name,
-            "location": obj.tournament_name.location,
-            "date": obj.tournament_name.date,
-            "url": obj.tournament_name.url
+            "name": obj.tournament.name,
+            "location": obj.tournament.location,
+            "date": obj.tournament.date,
+            "url": obj.tournament.url
         }
 
     class Meta:

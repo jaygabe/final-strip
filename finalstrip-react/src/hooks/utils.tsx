@@ -1,5 +1,5 @@
 import axios from "axios"
-
+import { useLocation } from 'react-router-dom'
 
 export const getNewRefreshToken = (): Promise<void> => {
     return axios.post('api/auth/refresh').then((response) => {
@@ -10,4 +10,14 @@ export const getNewRefreshToken = (): Promise<void> => {
         console.log('refresh failed')
       }
     })
-  }
+}
+
+// get the slug from the url of a page, useParams instead
+// export const useSlug = (): string => {
+//   const location = useLocation()
+//   const pathname = location.pathname
+//   const parts = pathname.split('/')
+//   const slug = parts[parts.length - 1]
+
+//   return slug
+// }

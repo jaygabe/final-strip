@@ -123,6 +123,15 @@ body {
   box-shadow: 2px 1px 21px -9px rgba(0,0,0,0.38);
 }
 
+.detail {
+  font-weight: bold;
+  font-size: x-large;
+  margin: 0;
+}
+
+
+
+/* previous next buttons */
 .pagination-buttons {
   display: flex;
   align-items: center;
@@ -142,8 +151,6 @@ body {
   display: inline-block;
   text-align: center;
   justify-content: center;
-
-
   -webkit-box-shadow: 2px 1px 21px -9px rgba(0,0,0,0.8);
   -moz-box-shadow: 2px 1px 21px -9px rgba(0,0,0,0.8);
   box-shadow: 2px 1px 21px -9px rgba(0,0,0,0.8);

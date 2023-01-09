@@ -37,7 +37,7 @@ class Event(JournalModel):
 
     tournament = models.ForeignKey(Tournament, related_name='tournament_name', on_delete=models.CASCADE)
     name = models.CharField(max_length=200, null=True, blank=True)
-    date = models.DateField(default=date.today)
+    date = models.DateField(null=True, blank=True)
     event_type = models.CharField(max_length=100, choices=EventType.choices, null=True, blank=True)
     weapon = models.CharField(max_length=100, choices=WeaponType.choices, null=True, blank=True)
     notes = models.TextField(null=True, blank=True)

@@ -6,6 +6,8 @@ export type tournamentType = {
     name: string
     date?: string
     location?: string
+    url?: string
+    notes?: string
 }
 
 export type eventType = {
