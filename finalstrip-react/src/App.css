@@ -11,6 +11,7 @@ buttons:  https://codepen.io/WebDevSimplified/pen/jOEorZN
 @import './styles/hamburger.css';
 @import './styles/navbar.css';
 @import './styles/forms.css';
+@import './styles/starRating.css';
 
 
 :root {
@@ -41,7 +42,7 @@ body {
 
 /* Use for placing  */
 .test{
-  background-color: yellow;
+  background-color: lime;
   color: red;
 }
 
@@ -140,7 +141,6 @@ body {
 
 .previous-button, .next-button {
   background: var(--secondary);
-  /* background-color: lightgray; */
   font-size: 2rem;
   color: var(--primary);
   border: 0;
@@ -157,5 +157,22 @@ body {
 }
 .previous-button{
   padding: 2rem;
+}
+
+
+
+
+/* for testing rating button */
+.my-button {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+.on {
+  color: #000;
+}
+.off {
+  color: #ccc;
 }
 

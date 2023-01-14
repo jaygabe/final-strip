@@ -17,7 +17,7 @@ class Bout(models.Model):
         GOOD = 'good', _('good')
         GREAT = 'great', _('great')
         EXCELLENT = 'excellent', _('excellent')
-        NA = 'not applicable', _('not applicable')
+        NA = 'none', _('none')
 
 
     class HandChoices(models.TextChoices):

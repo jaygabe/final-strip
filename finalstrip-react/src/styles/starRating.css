@@ -1,0 +1,50 @@
+/*  https://codepen.io/aaroniker/pen/zYrzogx */
+
+
+.rating-label {
+    text-align: left;
+    font-size: 12px;
+}
+
+/* rating button element */
+.rating{
+    --star-active: gold;
+    --star-inactive: grey;
+    --star-size: 35px;
+  
+    display: flex;
+    flex-direction: row;
+    justify-content:center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+}
+
+.rating button {
+    padding: 0 4px;
+    display: inline-block;
+    outline: none;
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    height: var(--star-size);
+    width: var(--star-size);
+    transform: scale(var(.8, 1));
+    transition: transform(.25s);
+}
+.inactive > .star {
+    height: var(--star-size);
+    width: var(--star-size);
+    border-radius: 50%;
+    background-color: var(--star-inactive);
+    scale: .3;
+}
+.active > .star {
+    height: var(--star-size);
+    width: var(--star-size);
+    clip-path: polygon(50% 5%, 61% 40%, 98% 40%, 68% 62%, 79% 96%, 50% 75%, 21% 96%, 32% 62%, 2% 40%, 39% 40%);
+    background-color: var(--star-active);
+    scale: 1;
+}

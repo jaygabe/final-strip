@@ -38,6 +38,7 @@ import { LessonView } from "./pages/journal/LessonView";
 
 //  Error
 import { Error404 } from "./pages/error/Error404";
+import { Test } from './pages/test';
 
 
 //  possible organize links:  https://stackoverflow.com/questions/58144678/organizing-react-routes-into-separate-components
@@ -94,6 +95,7 @@ function App() {
         {/*  Error  */}
         <Route path="/404" element={<Error404/>} />
         <Route path="*" element={<Navigate replace to="/404" />} />
+        <Route path="test" element={<Test />} />
 
       </Routes>
 
