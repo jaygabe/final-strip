@@ -35,7 +35,7 @@ class Event(JournalModel):
         SABRE = "sabre", _("sabre")
         OTHER = "other", _("other")
 
-    tournament = models.ForeignKey(Tournament, related_name='tournament_name', on_delete=models.CASCADE)
+    tournament = models.ForeignKey(Tournament, related_name='events', on_delete=models.CASCADE)
     name = models.CharField(max_length=200, null=True, blank=True)
     date = models.DateField(null=True, blank=True)
     event_type = models.CharField(max_length=100, choices=EventType.choices, null=True, blank=True)

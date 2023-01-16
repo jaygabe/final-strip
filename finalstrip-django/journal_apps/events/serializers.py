@@ -17,6 +17,19 @@ class EventSerializer(serializers.ModelSerializer):
         model = Event
         exclude = ('pkid', 'id', 'deleted')
 
+class CreateEventSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Event
+        fields = (
+            'user',
+            'tournament',
+            'name',
+            'date',
+            'weapon',
+            'event_type',
+            'notes'
+        )
+
 
 class UpdateEventSerializer(serializers.ModelSerializer):
     class Meta:

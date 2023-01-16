@@ -26,7 +26,7 @@ export const EventForm = () => {
         
         await getNewRefreshToken()
 
-        const {data} = await axios.post('journal/event/', {
+        const {data} = await axios.post('api/events/create/', {
             'tournament_slug': tournamentSlug,
             'name': eventName,
             date,
@@ -50,7 +50,7 @@ export const EventForm = () => {
                 <FormSelectElement setValue={setEventLevel} elementName='event-level' selectOptions={EVENT_CHOICES} placeholder='' labelText='Event Level'/>
                 <FormTextElement setValue={setNotes} elementName='host' placeholder='' labelText='Notes'/>
 
-                <button className='submit-button' type='submit'>Add Tournament</button>
+                <button className='submit-button' type='submit'>Add Event</button>
             </form>
         </>  
     )}

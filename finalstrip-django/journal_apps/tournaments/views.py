@@ -10,7 +10,7 @@ from rest_framework.views import APIView
 from journal_apps.authentication.authentication import JWTAuthentication
 from journal_apps.tournaments.models import Tournament
 from journal_apps.tournaments.pagniation import TournamentPagination
-from journal_apps.tournaments.serializers import TournamentSerializer, TournamentCreateSerializer
+from journal_apps.tournaments.serializers import TournamentDetailSerializer, TournamentListSerializer, TournamentCreateSerializer
 from journal_apps.common.permissions import IsOwner
 from journal_apps.common.utils import extract_data_and_assign_user, remove_empty_fields
 
@@ -22,14 +22,15 @@ logger = logging.getLogger(__name__)
 class TournamentDetailView(APIView):
 
     authentication_classes = [JWTAuthentication]
-    serializer_class = TournamentSerializer
+    # permission_classes = [JWTAuthentication]
 
     def get(self, request, slug):
         
         try:
-            tournament = Tournament.object.get(slug=slug)
+            tournament = Tournament.objects.get(slug=slug)
         except Tournament.DoesNotExist:
             NotFound("The tournament cannot be found.")
+
 
         # this could change with users are allowed to change who can view
         user = request.user
@@ -39,13 +40,14 @@ class TournamentDetailView(APIView):
             elif tournament.shareable == "my coaches":
                 pass # will need to handle coach confirmation here
 
-        serializer = TournamentSerializer(tournament)
+
+        serializer = TournamentDetailSerializer(tournament)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 class TournamentListView(generics.ListAPIView):
-    # permission_classes = [JWTAuthentication]
-    serializer_class = TournamentSerializer
+    authentication_classes = [JWTAuthentication]
+    serializer_class = TournamentListSerializer
     pagination_class = TournamentPagination
 
     def get_queryset(self):
@@ -79,7 +81,7 @@ class TournamentCreateView(generics.CreateAPIView):
 class TournamentUpdateView(APIView):
     
     permission_classes = [JWTAuthentication, IsOwner]
-    serializer_class = TournamentSerializer
+    serializer_class = TournamentListSerializer
 
     def patch(self, request, slug):
         try:
