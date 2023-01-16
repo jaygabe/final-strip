@@ -8,9 +8,10 @@ from rest_framework.views import APIView
 
 from journal_apps.authentication.authentication import JWTAuthentication
 from journal_apps.common.permissions import IsOwner
+from journal_apps.common.utils import extract_data_and_assign_user, remove_empty_fields
 from journal_apps.events.models import Event
-from journal_apps.events.serializers import EventSerializer
-
+from journal_apps.events.serializers import EventSerializer, CreateEventSerializer
+from journal_apps.tournaments.models import Tournament
 
 User = get_user_model()
 
@@ -53,21 +54,27 @@ class EventListView(generics.ListAPIView):
 
 
 class EventCreateView(generics.CreateAPIView):
-    # permission_classes = [JWTAuthentication]
-    serializer_class = EventSerializer
+    permission_classes = [JWTAuthentication]
+    serializer_class = CreateEventSerializer
 
     def create(self, request):
+        data = extract_data_and_assign_user(request)
+        print('data:  ', data)
+        cleaned_data = remove_empty_fields(data)
+        cleaned_data['tournament'] = Tournament.objects.get(slug=cleaned_data['tournament_slug']).pkid
+        print('cleaned up:  ', cleaned_data)
         
-        user = request.user
-        data = request.data
-        data["user"] = user.id
-        serializer = self.serializer_class(data=data, context={"request": request})
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
+        serializer = self.serializer_class(data=cleaned_data, context={"request": request})
+        
+        if serializer.is_valid():
+            serializer.save()
+            logger.info(
+                f"Event {serializer.data.get('name')} created by {request.user.email}"
+            )
+            return Response({'message': 'Event created'}, status=status.HTTP_201_CREATED)
 
-        logger.info(
-            f"Event {serializer.data.get('name')} created by {user.email}"
-        )
+        print('serializer errors: ', serializer.errors)
+        return Response({'message': 'invalid form error'}, status=status.HTTP_400_BAD_REQUEST)
 
 
 class EventUpdateView(APIView):
