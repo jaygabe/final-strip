@@ -1,16 +1,40 @@
 import {Link} from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from 'react-redux';
 import axios from "axios"
-
+import {setAuth} from '../redux/authSlice'
 import { RootState } from "../redux/store";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 
 export const NavBar = () => {
+    const dispatch = useDispatch()
+    const auth = useSelector((state: RootState) => state.auth.value)
+    // const [isLoggedIn, setIsLoggedIn] = useState(false)
     const [mobileLinks, setMobileLinks] = useState(false)
     let auth_links;
 
-    const auth = useSelector((state: RootState) => state.auth.value)
+    
+    // should be refactored to use isAuthenticated
+    // useEffect(() => {
+        // (async () => {
+
+    //this originally was wrapped in a parenthesis with an extra set at the end.  Was not a 
+    // const checkAuth = async () => {
+    //         try {
+    //             const {data} = await axios.get('api/auth/user', {withCredentials: true});
+    //             dispatch(setAuth(true))
+    //             setIsLoggedIn(true)
+    //             console.log('authenticated as :', data.email)
+    //         } catch (e) {
+    //             dispatch(setAuth(false))
+    //             setIsLoggedIn(false)
+    //             console.log('not authenticated')
+    //         }
+    //     }
+    // checkAuth()
+
+
+    // }, [isLoggedIn])
 
     // const navLinks = () => {
     //     mobileLinks ? "nav-links mobile" : "nav-links hidden"
@@ -20,6 +44,7 @@ export const NavBar = () => {
         await axios.post('api/auth/logout', {withCredentials: true});
         axios.defaults.headers.common['Authorization'] = '';
     }
+
 
     if (auth) {
         auth_links = <div className={mobileLinks ? 'navbar-account open-menu' : 'navbar-account'}>

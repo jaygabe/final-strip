@@ -18,6 +18,8 @@ class JWTAuthentication(BaseAuthentication):
             user = User.objects.get(pk=id)
 
             return (user, None)
+        
+        print('JWT Auth headers: ', auth)
         raise exceptions.AuthenticationFailed('jwt unauthenticated')
     
     # this should allow other views to work now

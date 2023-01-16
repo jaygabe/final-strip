@@ -1,6 +1,11 @@
 import axios from "axios"
 import { useLocation } from 'react-router-dom'
 
+// useConfirmAuth imports
+import {setAuth} from '../redux/authSlice'
+import { useDispatch } from 'react-redux';
+import { useEffect } from "react";
+
 export const getNewRefreshToken = (): Promise<void> => {
     return axios.post('api/auth/refresh').then((response) => {
       if (response.status === 200) {
@@ -10,6 +15,17 @@ export const getNewRefreshToken = (): Promise<void> => {
         console.log('refresh failed')
       }
     })
+}
+
+export function useConfirmAuth(confirm: boolean){
+  const dispatch = useDispatch()
+  useEffect(() => {
+    if (confirm){
+      dispatch(setAuth(true))
+    }
+  }, [confirm])
+  
+  
 }
 
 // get the slug from the url of a page, useParams instead

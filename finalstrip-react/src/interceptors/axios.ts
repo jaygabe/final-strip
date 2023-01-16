@@ -1,5 +1,6 @@
 import axios from "axios"
-
+import {setAuth} from '../redux/authSlice'
+import { useDispatch } from 'react-redux';
 
 axios.defaults.baseURL = "http://localhost:8000/"
 axios.defaults.withCredentials = true;
@@ -29,7 +30,9 @@ axios.interceptors.response.use(resp => resp, async error => {
       });
     }
     return refreshTokenPromise.then((token) => {
+        
         axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
+        
         return axios.request(error.config)
     })
   }
@@ -39,15 +42,20 @@ axios.interceptors.response.use(resp => resp, async error => {
 })
 
 
-// // use to check response before it hits django
-// axios.interceptors.request.use(function (config) {
-//     // Do something before request is sent
-//     console.log('request to django: ', config)
-//     return config;
-//   }, function (error) {
-//     // Do something with request error
-//     return Promise.reject(error);
-//   });
+// use to check response before it hits django
+axios.interceptors.request.use(function (config) {
+    // Do something before request is sent
+    console.log('request to django: ', config)
+    
+    // const dispatch = useDispatch()
+    // dispatch({type: '', auth: true})
+    // console.log('authenticated')
+
+    return config;
+  }, function (error) {
+    // Do something with request error
+    return Promise.reject(error);
+  });
 
 
 // Old method that did not allow for multiple requests at the same time because of timing of auth tokens refreshing

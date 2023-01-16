@@ -12,8 +12,8 @@ def status_code_handler(exc, context):
 
     if response is not None and response.status_code == 403: 
         print('secretly 403')
+        print('exception errors:  ', response.data)
         response.status_code = 401
     
     return response
-    pass
 

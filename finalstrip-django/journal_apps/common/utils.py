@@ -5,7 +5,7 @@
 def extract_data_and_assign_user(request):
     user = request.user
     data = request.data       
-    data["user"] = user.pk
+    data["user"] = user.id
     return data
 
 # remove empty string fields
