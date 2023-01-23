@@ -132,9 +132,19 @@ USE_TZ = True
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # change date format
-# DATE_INPUT_FORMATS = ('%d-%m-%Y')
 DATE_FORMAT = '%m/%d/%Y'
 USE_L10N = False
+
+DATE_INPUT_FORMATS = (
+    '%m/%d/%Y',     # '03/21/2014'
+)
+TIME_INPUT_FORMATS = (
+    '%H:%M:%S',     # '17:59:59'
+    '%H:%M',        # '17:59'
+)
+DATETIME_INPUT_FORMATS = (
+    '%m/%d/%Y %H:%M',     # '03/21/2014 17:59'
+)
 
 # static and media
 STATIC_URL = "/static/"
