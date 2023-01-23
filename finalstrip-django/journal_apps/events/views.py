@@ -10,7 +10,7 @@ from journal_apps.authentication.authentication import JWTAuthentication
 from journal_apps.common.permissions import IsOwner
 from journal_apps.common.utils import extract_data_and_assign_user, remove_empty_fields
 from journal_apps.events.models import Event
-from journal_apps.events.serializers import EventSerializer, CreateEventSerializer
+from journal_apps.events.serializers import EventDetailSerializer, EventSerializer, CreateEventSerializer
 from journal_apps.tournaments.models import Tournament
 
 User = get_user_model()
@@ -21,12 +21,12 @@ logger = logging.getLogger(__name__)
 class EventDetailView(APIView):
     
     # authentication_classes = [JWTAuthentication]
-    serializer_class = EventSerializer
 
     def get(self, request, slug):
-        
+        print('event slug: ', slug)
+
         try:
-            event = Event.object.get(slug=slug)
+            event = Event.objects.get(slug=slug)
         except Event.DoesNotExist:
             NotFound("The event cannot be found.")
 
@@ -37,9 +37,9 @@ class EventDetailView(APIView):
                 raise PermissionDenied("You are not allowed to view this event.")
             elif event.shareable == "my coaches":
                 pass # will need to handle coach confirmation here
-        
-        serializer = EventSerializer(event)
-        return Response(serializer, status=status.HTTP_200_OK)
+
+        serializer = EventDetailSerializer(event)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 class EventListView(generics.ListAPIView):

@@ -15,6 +15,7 @@ export type eventType = {
     slug: string,
     name: string,
     date: string,
+    weapon: string,
     eventLevel: string,
     notes: string
 }

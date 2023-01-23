@@ -1,6 +1,19 @@
 from rest_framework import serializers
 
 from journal_apps.events.models import Event
+from journal_apps.bouts.serializers import BoutSerializer
+
+class EventDetailSerializer(serializers.ModelSerializer):
+    bouts = serializers.SerializerMethodField(read_only=True)
+
+    def get_bouts(self, obj):
+        events = obj.bouts.all()
+        serializer = BoutSerializer(events, many=True)
+        return serializer.data
+    
+    class Meta:
+        model = Event
+        exclude = ('pkid','id')
 
 class EventSerializer(serializers.ModelSerializer):
     tourn_info = serializers.SerializerMethodField(read_only=True)
