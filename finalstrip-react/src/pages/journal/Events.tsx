@@ -85,6 +85,7 @@ export const Events = () => {
                         
                         <p><b>Date: </b>{ value.date}</p>
                     </a>
+                    <p><b>Weapon: </b>{value.weapon}</p>
                     <p><b>Event Type: </b>{value.eventLevel}</p>
                     <p><b>Notes:</b></p>
                     <p>{value.notes}</p>
