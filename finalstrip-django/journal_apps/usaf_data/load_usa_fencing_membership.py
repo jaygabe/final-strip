@@ -4,6 +4,12 @@ from datetime import datetime
 from .models import USAFencingInfo
 
 
+
+# //TODOS:  Ask USAFencing for data endpoint for analysis
+#  data on AWS seems to go back as far as 8/10/2017
+
+
+
 # convert yes/no into true/false
 def yes_no_2_tf(yes_no: str) -> Optional[bool]:
     if yes_no in ['yes', 'Yes', 'YES']:
