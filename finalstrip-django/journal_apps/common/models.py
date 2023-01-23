@@ -20,7 +20,7 @@ class JournalModel(models.Model):
     slug = AutoSlugField(max_length=10, unique=True, editable=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     deleted = models.DateField(null=True, blank=True)
-    shareable = models.CharField(max_length=10, choices=Shareability.choices, default=Shareability.PRIVATE )
+    shareable = models.CharField(max_length=10, choices=Shareability.choices, default=Shareability.COACHES)
     
     class Meta:
         abstract = True

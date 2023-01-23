@@ -4,11 +4,12 @@ from django.utils.translation import gettext_lazy as _
 from journal_apps.fencers.models import Fencer
 from journal_apps.tournaments.models import Tournament
 from journal_apps.events.models import Event
+from journal_apps.common.models import JournalModel
 
 User = get_user_model()
 
 
-class Bout(models.Model):
+class Bout(JournalModel):
 
     class ScaleChoices(models.TextChoices):
         POOR = 'poor', _('poor')
@@ -73,7 +74,7 @@ class Bout(models.Model):
     fencer_b_notes = models.TextField(null=True, blank=True)
     
     tournament = models.ForeignKey(Tournament, on_delete=models.CASCADE, null=True, blank=True)
-    event = models.ForeignKey(Event, on_delete=models.CASCADE, null=True, blank=True)
+    event = models.ForeignKey(Event, on_delete=models.CASCADE, related_name="bouts", null=True, blank=True)
     referee = models.CharField(max_length=200, null=True, blank=True)
     bout_type = models.CharField(max_length=200, null=True, blank=True, choices=BoutChoices.choices, default=BoutChoices.POOL)
     round = models.IntegerField(default=1)
