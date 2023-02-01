@@ -18,17 +18,16 @@ logger = logging.getLogger(__name__)
 
 class BoutDetailView(APIView):
     # authentication_classes = [JWTAuthentication]
-    serializer_class = BoutSerializer
 
     def get(self, request, slug):
         
         try:
-            bout = Bout.object.get(slug=slug)
+            bout = Bout.objects.get(slug=slug)
         except Bout.DoesNotExist:
             NotFound("The bout cannot be found.")
         
         serializer = BoutSerializer(bout)
-        return Response(serializer, status=status.HTTP_200_OK)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 class BoutListView(generics.ListAPIView):

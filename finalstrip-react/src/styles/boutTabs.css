@@ -1,0 +1,50 @@
+/* 
+https://codepen.io/mirek-marchut/pen/wvqMBvW?editors=1100
+https://codepen.io/woranov/pen/NRqLWK 
+https://codepen.io/justin107d/pen/bGjmzmM
+*/
+
+.bout-tabs{
+    display: flex;
+    flex-wrap: wrap;
+    width: 400px;
+    justify-content: center;
+}
+
+.bout-tabs label{
+    padding: 10px 16px;
+    cursor: pointer;
+    align-self: center;
+}
+
+.bout-tabs input  {
+    display: none;
+}
+
+.bout-tabs section {
+    order: 1;
+    width: 100%;
+    font-size: 0.9em;
+    display: none;
+}
+
+.bout-tabs input:checked + label {
+    font-weight: bold;
+    color: var(--primary);
+    border-bottom: 2px solid var(--primary);
+    background-color: lightgray;
+
+    /* color: #009578;
+    border-bottom: 2px solid #009578; */
+}
+
+.bout-tabs input:checked + label + section {
+    display: initial;
+  }
+
+
+
+
+
+
+

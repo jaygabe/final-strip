@@ -34,8 +34,8 @@ export type boutType = {
     fencerBYellowCard: boolean
     fencerARedCard: boolean
     fencerBRedCard: boolean
-    fencerABlackCarded: boolean
-    fencerBBlackCarded: boolean
+    fencerABlackCard: boolean
+    fencerBBlackCard: boolean
     fencerAPassivity: boolean
     fencerBPassivity: boolean
     fencerAMedical: boolean

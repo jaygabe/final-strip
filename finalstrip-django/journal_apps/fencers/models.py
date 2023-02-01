@@ -2,11 +2,12 @@ from django.db import models
 from django.contrib.auth import get_user_model
 from django.utils.translation import gettext_lazy as _
 from journal_apps.usaf_data.models import USAFencingInfo
+from journal_apps.common.models import JournalModel
 
 User = get_user_model()
 
 
-class Fencer(models.Model):
+class Fencer(JournalModel):
 
     class ScaleChoices(models.TextChoices):
         POOR = ('poor', _('poor'))

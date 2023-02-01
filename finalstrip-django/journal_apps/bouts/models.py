@@ -73,7 +73,7 @@ class Bout(JournalModel):
     fencer_a_notes = models.TextField(null=True, blank=True)
     fencer_b_notes = models.TextField(null=True, blank=True)
     
-    tournament = models.ForeignKey(Tournament, on_delete=models.CASCADE, null=True, blank=True)
+    tournament = models.ForeignKey(Tournament, on_delete=models.CASCADE, related_name="bout_tournament", null=True, blank=True)
     event = models.ForeignKey(Event, on_delete=models.CASCADE, related_name="bouts", null=True, blank=True)
     referee = models.CharField(max_length=200, null=True, blank=True)
     bout_type = models.CharField(max_length=200, null=True, blank=True, choices=BoutChoices.choices, default=BoutChoices.POOL)

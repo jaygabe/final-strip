@@ -106,11 +106,9 @@ export const Bouts = () => {
                     
                 <div key={key} className='container'>
                     <a href={'/journal/bout/' + value.slug}>
-                        <h2>{value.fencerA}</h2>
-                        <h2>vs.</h2>
-                        <h2>{value.fencerB}</h2>
+                        <h2>{value.fencerA} vs. {value.fencerB}</h2>
                         
-                        <p><b>Score: </b>{value.scoreA} - {value.scoreB}</p>
+                        <p>{value.scoreA} - {value.scoreB}</p>
                     </a>
 
                     <p><b>Notes:</b></p>
