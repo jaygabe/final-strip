@@ -19,7 +19,6 @@ logger = logging.getLogger(__name__)
 
 
 class EventDetailView(APIView):
-    
     # authentication_classes = [JWTAuthentication]
 
     def get(self, request, slug):
