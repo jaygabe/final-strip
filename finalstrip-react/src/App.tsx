@@ -28,6 +28,7 @@ import { Events } from "./pages/journal/Events";
 import { Bouts } from "./pages/journal/Bouts";
 import { BoutView } from "./pages/journal/BoutView";
 import { Fencers } from "./pages/journal/Fencers";
+import { CreateFencer } from './pages/journal/CreateFencer';
 import { FencerView } from "./pages/journal/FencerView";
 import { Lessons } from "./pages/journal/Lessons";
 import { LessonView } from "./pages/journal/LessonView";
@@ -67,6 +68,7 @@ function App() {
         <Route path={"/journal/bouts/:eventSlug"} element={<Bouts />} />
         <Route path={"/journal/bout/:slug"} element={<BoutView />} />
         <Route path={"/journal/fencers"} element={<Fencers />} />
+        <Route path={"/journal/fencer/create"} element={<CreateFencer />} />
         <Route path={"/journal/fencer/:slug"} element={<FencerView />} />
         <Route path={"/journal/lessons"} element={<Lessons />} />
         <Route path={"/journal/lesson/:slug"} element={<LessonView />} />
@@ -74,7 +76,8 @@ function App() {
 
         {/*  Error  */}
         <Route path="/404" element={<Error404/>} />
-        <Route path="*" element={<Navigate replace to="/404" />} />
+        {/* <Route path="*" element={<Navigate replace to="/404" />} /> */}
+        <Route path="*" element={<Error404/>} />
         <Route path="test" element={<Test />} />
 
       </Routes>

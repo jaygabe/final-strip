@@ -35,3 +35,64 @@ export const WEAPON_CHOICES = {
     'sabre': 'sabre',
     'other': 'other'
 }
+
+export const RATING_CHOICES = {
+    'none': 'none',
+    'poor': 'poor',
+    'fair': 'fair',
+    'good': 'good',
+    'great': 'great',
+    'excellent': 'excellent',
+}
+
+export const RATING_NUMBER_CHOICES = {
+    '0': '0',
+    '1': '1',
+    '2': '2',
+    '3': '3',
+    '4': '4',
+    '5': '5',
+}
+
+export const REGION_CHOICES = {
+    '0': '0 - None',
+    '1': '1 - Northwest',
+    '2': '2 - Midwest',
+    '3': '3 - Northest',
+    '4': '4 - Southwest',
+    '5': '5 - Texas',
+    '6': '6 - Southeast',
+    '99': 'Unassigned'
+}
+
+export const HAND_CHOICES = {
+    'Right': 'Right',
+    'Left': 'Left'
+}
+        
+export const GRIP_CHOICES = {
+    'Pistol': 'Pistol',
+    'French': 'French',
+    'Both': 'Both',
+    'Other': 'Other'
+}
+
+export const USAF_RATING_CHOICES = {
+    'U': 'U',
+    'E': 'E',
+    'D': 'D',
+    'C': 'C',
+    'B': 'B',
+    'A': 'A'
+}
+
+export const REF_RATING_CHOICES = {
+    'P': 'P',
+    'L2': 'L2',
+    'L1': 'L1',
+    'R2': 'R2',
+    'R1': 'R1',
+    'N2': 'N1',
+    'Unknown': 'Unknown',
+}
+
