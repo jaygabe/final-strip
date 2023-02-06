@@ -64,7 +64,7 @@ body {
   transition: all 0.2s;
   text-decoration: none;
   overflow: hidden;
-  word-break: break-all;
+  word-break: normal;
 } 
 
 .submit-button {
