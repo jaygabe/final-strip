@@ -25,3 +25,49 @@ class UpdateFencerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Fencer
         exclude = ('pkid','id','deleted')
+
+class CreateFencerSerializer(serializers.ModelSerializer):
+
+    # !region = serializers.IntegerField(allow_null=True, required=False)
+    region = serializers.CharField(required=False, allow_null=True, allow_blank=True)
+
+    def validate_region(self, value):
+        if not value:
+            return None
+        # return value
+
+        try:
+             return int(value)
+        except ValueError:
+            raise serializers.ValidationError('Valid integer is required')
+    # removes region if the integer field comes through as an empty string
+    # def to_internal_value(self, data):
+    #     if data.get('region') == '':
+    #         data.pop('region')
+    #     return super(CreateFencerSerializer, self).to_internal_value(data)
+
+    class Meta:
+        model = Fencer
+        fields = (
+            'user',
+            'first_name',
+            'last_name',
+            'club',
+            'club2',
+            'school',
+            'division',
+            'region',
+            'nationality',
+            'handed',
+            'primary_grip',
+            'usaf_rating_epee',
+            'usaf_rating_sabre',
+            'usaf_rating_foil',
+            'ref_rating_epee',
+            'ref_rating_sabre',
+            'ref_rating_foil',
+            'custom_rating',
+            'tactical_description',
+            'favorite_actions',
+            'notes'
+        )

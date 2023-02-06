@@ -1,34 +1,36 @@
 from django.db import models
 from django.contrib.auth import get_user_model
+from django.db.models import Avg
 from django.utils.translation import gettext_lazy as _
 from journal_apps.usaf_data.models import USAFencingInfo
 from journal_apps.common.models import JournalModel
+from journal_apps.bouts.models import Bout
 
 User = get_user_model()
 
 
 class Fencer(JournalModel):
 
-    class ScaleChoices(models.TextChoices):
-        POOR = ('poor', _('poor'))
-        FAIR = 'fair', _('fair')
-        AVERAGE = 'average', _('average')
-        GOOD = 'good', _('good')
-        GREAT = 'great', _('great')
-        EXCELLENT = 'excellent', _('excellent')
-        NA = 'not applicable', _('not applicable')
+    # class ScaleChoices(models.TextChoices):
+    #     POOR = ('poor', _('poor'))
+    #     FAIR = 'fair', _('fair')
+    #     AVERAGE = 'average', _('average')
+    #     GOOD = 'good', _('good')
+    #     GREAT = 'great', _('great')
+    #     EXCELLENT = 'excellent', _('excellent')
+    #     NA = 'not applicable', _('not applicable')
     
 
     class HandChoices(models.TextChoices):
-        RIGHT = 'right', _('right') 
-        LEFT = 'left', _('left')
+        RIGHT = 'Right', _('Right') 
+        LEFT = 'Left', _('Left')
     
 
     class GripChoices(models.TextChoices):
-        PISTOL = 'pistol', _('pistol')
-        FRENCH = 'french', _('french')
-        BOTH = 'both', _('both')
-        OTHER = 'other', _('other')
+        PISTOL = 'Pistol', _('Pistol')
+        FRENCH = 'French', _('French')
+        BOTH = 'Both', _('Both')
+        OTHER = 'Other', _('Other')
     
 
     class RefRatingChoices(models.TextChoices):
@@ -39,8 +41,8 @@ class Fencer(JournalModel):
         R1 = 'R1', _('R1')
         N2 = 'N2', _('N2')
         N1 = 'N1', _('N1')
-        UNKNOWN = 'unknown', _('unknown')
-        NA = 'not applicable', _('not applicable')
+        UNKNOWN = 'Unknown', _('Unknown')
+        NA = 'Not Applicable', _('Not Applicable')
 
 
     fencer_is_me = models.BooleanField(default=False)
@@ -48,10 +50,10 @@ class Fencer(JournalModel):
     first_name = models.CharField(max_length=200, null=True,)
     last_name = models.CharField(max_length=200, null=True)
     club = models.CharField(max_length=200, null=True, blank=True)
-    club_2 = models.CharField(max_length=200, null=True, blank=True)
+    club2 = models.CharField(max_length=200, null=True, blank=True)
     school = models.CharField(max_length=200, null=True, blank=True)
     division = models.CharField(max_length=200, null=True, blank=True)
-    region = models.IntegerField(null=True, blank=True)
+    region = models.IntegerField(blank=True)
     nationality = models.CharField(max_length=20, default="USA", null=True, blank=True)
     handed = models.CharField(max_length=10, null=True, blank=True, choices=HandChoices.choices)
     primary_grip = models.CharField(max_length=10, null=True, blank=True, choices=GripChoices.choices)
@@ -62,11 +64,11 @@ class Fencer(JournalModel):
     ref_rating_sabre = models.CharField(max_length=10, null=True, blank=True)
     ref_rating_foil = models.CharField(max_length=10, null=True, blank=True)
     custom_rating = models.CharField(max_length=10, null=True, blank=True)
-    timing = models.CharField(max_length=20, null=True, blank=True, choices=ScaleChoices.choices)
-    distance = models.CharField(max_length=20, null=True, blank=True, choices=ScaleChoices.choices)
-    bladework = models.CharField(max_length=20, null=True, blank=True, choices=ScaleChoices.choices)
-    endurance = models.CharField(max_length=20, null=True, blank=True, choices=ScaleChoices.choices)
-    strength = models.CharField(max_length=20, null=True, blank=True, choices=ScaleChoices.choices)
+    timing = models.IntegerField(null=True, blank=True)
+    distance = models.IntegerField(null=True, blank=True)
+    bladework = models.IntegerField(null=True, blank=True)
+    endurance = models.IntegerField(null=True, blank=True)
+    strength = models.IntegerField(null=True, blank=True)
 
     tactical_description = models.CharField(max_length=200, blank=True)
     favorite_actions = models.CharField(max_length=200, blank=True)
@@ -74,3 +76,12 @@ class Fencer(JournalModel):
     
     def __str__(self):
         return self.last_name + ", " + self.first_name
+
+    @property
+    def average_timing(self):
+        if Bout.objects.all().count() > 0:
+            timing = (
+                Bout.objects.filter(fencer_a=self.pkid).all().aggregate(Avg("value"))
+            )
+            return round(timing["value__avg"], 1) if timing["value__avg"] else 0
+        return 0

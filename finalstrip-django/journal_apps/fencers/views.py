@@ -8,8 +8,9 @@ from rest_framework.views import APIView
 
 from journal_apps.authentication.authentication import JWTAuthentication
 from journal_apps.common.permissions import IsOwner
+from journal_apps.common.utils import extract_data_and_assign_user, remove_empty_fields
 from journal_apps.fencers.models import Fencer
-from journal_apps.fencers.serializers import FencerSerializer
+from journal_apps.fencers.serializers import FencerSerializer, CreateFencerSerializer
 
 User = get_user_model()
 
@@ -44,20 +45,22 @@ class FencerListView(generics.ListAPIView):
 
 
 class FencerCreateView(generics.CreateAPIView):
-    # permission_classes = [JWTAuthentication]
-    serializer_class = FencerSerializer
+    permission_classes = [JWTAuthentication]
+    serializer_class = CreateFencerSerializer
 
     def create(self, request):
-        user = request.user
-        data = request.data
-        data["user"] = user.id
-        serializer = self.serializer_class(data=data, context={"request": request})
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
+        data = extract_data_and_assign_user(request)
+        cleaned_data = remove_empty_fields(data)
+        serializer = self.serializer_class(data=cleaned_data, context={"request": request})
+        if serializer.is_valid(raise_exception=True):
+            serializer.save()
+            logger.info(
+                f"fencer {serializer.data.get('last_name')}, {serializer.data.get('first_name')} created by {request.user.email}"
+            )
+            return Response({'message': 'Fencer created'}, status=status.HTTP_201_CREATED)
 
-        logger.info(
-            f"fencer {serializer.data.get('last_name')}, {serializer.data.get('first_name')} created by {user.email}"
-        )
+        print('serializer errors: ', serializer.errors)
+        return Response({'message': 'invalid form error'}, status=status.HTTP_400_BAD_REQUEST)
 
 
 class FencerUpdateView(APIView):

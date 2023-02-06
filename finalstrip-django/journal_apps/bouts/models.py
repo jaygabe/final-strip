@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth import get_user_model
 from django.utils.translation import gettext_lazy as _
-from journal_apps.fencers.models import Fencer
+# from journal_apps.fencers.models import Fencer
 from journal_apps.tournaments.models import Tournament
 from journal_apps.events.models import Event
 from journal_apps.common.models import JournalModel
@@ -40,8 +40,8 @@ class Bout(JournalModel):
     
 
     winner_is_a = models.BooleanField(default=True)
-    fencer_a = models.ForeignKey(Fencer, related_name="fencer_a", on_delete=models.SET_NULL, null=True, blank=True)
-    fencer_b = models.ForeignKey(Fencer, related_name="fencer_b", on_delete=models.SET_NULL, null=True, blank=True)
+    fencer_a = models.ForeignKey("fencers.Fencer", related_name="fencer_a", on_delete=models.SET_NULL, null=True, blank=True)
+    fencer_b = models.ForeignKey("fencers.Fencer", related_name="fencer_b", on_delete=models.SET_NULL, null=True, blank=True)
     score_a = models.IntegerField()
     score_b = models.IntegerField()
     fencer_a_hand = models.CharField(choices=HandChoices.choices, max_length=10, blank=True, null=True)
@@ -60,16 +60,16 @@ class Bout(JournalModel):
     fencer_b_medical = models.BooleanField(default=False)
     fencer_a_video_used = models.IntegerField(default=0, blank=True)
     fencer_b_video_used = models.IntegerField(default=0, blank=True)
-    fencer_a_footwork = models.CharField(max_length=20, null=True, blank=True, choices=ScaleChoices.choices)
-    fencer_b_footwork = models.CharField(max_length=20, null=True, blank=True, choices=ScaleChoices.choices)
-    fencer_a_bladework = models.CharField(max_length=20, null=True, blank=True, choices=ScaleChoices.choices)
-    fencer_b_bladework = models.CharField(max_length=20, null=True, blank=True, choices=ScaleChoices.choices)
-    fencer_a_distance = models.CharField(max_length=20, null=True, blank=True, choices=ScaleChoices.choices)
-    fencer_b_distance = models.CharField(max_length=20, null=True, blank=True, choices=ScaleChoices.choices)
-    fencer_a_timing = models.CharField(max_length=20, null=True, blank=True, choices=ScaleChoices.choices)
-    fencer_b_timing = models.CharField(max_length=20, null=True, blank=True, choices=ScaleChoices.choices)
-    fencer_a_energy = models.CharField(max_length=20, null=True, blank=True, choices=ScaleChoices.choices)
-    fencer_b_energy = models.CharField(max_length=20, null=True, blank=True, choices=ScaleChoices.choices)
+    fencer_a_footwork = models.IntegerField(default=0, blank=True, null=True)
+    fencer_b_footwork = models.IntegerField(default=0, blank=True, null=True)
+    fencer_a_bladework = models.IntegerField(default=0, blank=True, null=True)
+    fencer_b_bladework = models.IntegerField(default=0, blank=True, null=True)
+    fencer_a_distance = models.IntegerField(default=0, blank=True, null=True)
+    fencer_b_distance = models.IntegerField(default=0, blank=True, null=True)
+    fencer_a_timing = models.IntegerField(default=0, blank=True, null=True)
+    fencer_b_timing = models.IntegerField(default=0, blank=True, null=True)
+    fencer_a_energy = models.IntegerField(default=0, blank=True, null=True)
+    fencer_b_energy = models.IntegerField(default=0, blank=True, null=True)
     fencer_a_notes = models.TextField(null=True, blank=True)
     fencer_b_notes = models.TextField(null=True, blank=True)
     
