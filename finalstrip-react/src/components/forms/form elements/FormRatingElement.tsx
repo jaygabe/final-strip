@@ -11,18 +11,18 @@ export function FormRatingElement({
     }) {
 
     const [rating, setRating] = useState(0);
-    const [ratingText, setRatingText] = useState('none');
+    const [ratingText, setRatingText] = useState('None');
     const [hover, setHover] = useState(0);
     
     const ratingObject: {
         [key: number]: string;
     } = {
-        0: 'none',
-        1: 'poor',
-        2: 'fair',
-        3: 'good',
-        4: 'great',
-        5: 'excellent',
+        0: 'None',
+        1: 'Poor',
+        2: 'Fair',
+        3: 'Good',
+        4: 'Great',
+        5: 'Excellent',
     }
   
     function onClick(entry: number): void {
@@ -33,7 +33,7 @@ export function FormRatingElement({
 
     function onReset(){
         setRating(0)
-        setRatingText('none')
+        setRatingText('None')
         setHover(0)
     }
  
@@ -47,6 +47,7 @@ export function FormRatingElement({
                 return (  
                     <button 
                         key={index}
+                        type='button'
                         className={index <= (hover || rating) ? "rating-button active" : "rating-button inactive"}
                         onClick={() => onClick(index)}
                         onMouseEnter={() => setHover(index)}
@@ -56,7 +57,7 @@ export function FormRatingElement({
                     </button> 
                 )
             })}
-            <button className='reset-rating' onClick={onReset}>reset</button>
+            <button type='button' className='reset-rating' onClick={onReset}>reset</button>
         </div>
     </div>
      
