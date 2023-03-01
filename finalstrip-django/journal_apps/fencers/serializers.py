@@ -50,6 +50,7 @@ class CreateFencerSerializer(serializers.ModelSerializer):
         model = Fencer
         fields = (
             'user',
+            'usa_fencing_info',
             'first_name',
             'last_name',
             'club',

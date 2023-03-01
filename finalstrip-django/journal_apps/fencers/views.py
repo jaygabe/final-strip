@@ -10,6 +10,7 @@ from journal_apps.authentication.authentication import JWTAuthentication
 from journal_apps.common.permissions import IsOwner
 from journal_apps.common.utils import extract_data_and_assign_user, remove_empty_fields
 from journal_apps.fencers.models import Fencer
+from journal_apps.usaf_data.models import USAFencingInfo
 from journal_apps.fencers.serializers import FencerSerializer, CreateFencerSerializer
 
 User = get_user_model()
@@ -50,9 +51,17 @@ class FencerCreateView(generics.CreateAPIView):
 
     def create(self, request):
         data = extract_data_and_assign_user(request)
+        print('data: ', data)
         cleaned_data = remove_empty_fields(data)
+        print('cleaned: ', cleaned_data)
+        if 'member_id' in cleaned_data.keys():
+            member_info = USAFencingInfo.objects.get(member_id=cleaned_data['member_id'])
+            cleaned_data['usa_fencing_info'] = member_info.pk
+            cleaned_data['first_name'] = member_info.first_name
+            cleaned_data['last_name'] = member_info.last_name
         serializer = self.serializer_class(data=cleaned_data, context={"request": request})
         if serializer.is_valid(raise_exception=True):
+            print('validated: ', serializer.validated_data)
             serializer.save()
             logger.info(
                 f"fencer {serializer.data.get('last_name')}, {serializer.data.get('first_name')} created by {request.user.email}"

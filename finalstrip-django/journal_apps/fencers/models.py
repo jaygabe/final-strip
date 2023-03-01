@@ -75,7 +75,13 @@ class Fencer(JournalModel):
     notes = models.TextField(blank=True)
     
     def __str__(self):
-        return self.last_name + ", " + self.first_name
+        if self.usa_fencing_info:
+            first = str('' if self.usa_fencing_info.first_name is None else self.usa_fencing_info.first_name)
+            last = str('' if self.usa_fencing_info.last_name is None else self.usa_fencing_info.last_name)
+        else:
+            first = str('' if self.first_name is None else self.first_name)
+            last = str('' if self.last_name is None else self.last_name)
+        return last + ", " + first
 
     @property
     def average_timing(self):
