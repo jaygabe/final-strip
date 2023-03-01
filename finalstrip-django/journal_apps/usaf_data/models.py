@@ -1,7 +1,7 @@
 from django.db import models
 
 class USAFencingInfo(models.Model):
-    member_id = models.IntegerField(unique=True)
+    member_id = models.CharField(max_length=15, unique=True)
     last_name = models.CharField(max_length=100, null = True, blank=True)
     first_name = models.CharField(max_length=100, null = True, blank=True)
     middle_name = models.CharField(max_length=100, null = True, blank=True)
@@ -48,3 +48,10 @@ class USAFencingInfo(models.Model):
     fie_ref_sabre = models.CharField(max_length=5, null = True, blank=True)
     fie_ref_sabre_year = models.IntegerField(null = True, blank=True)
     #missing date time fields for updated and modified
+
+    def __str__(self):
+        return str(self.member_id)
+
+    class Meta:
+        verbose_name = "USA Fencing Data"
+        verbose_name_plural = "USA Fencing Data"

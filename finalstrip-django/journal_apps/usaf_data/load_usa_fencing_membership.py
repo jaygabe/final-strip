@@ -34,8 +34,9 @@ def convert_comp(comp_stat: str) -> Optional[bool]:
 
 # Format data for SQL DB requirements
 def extract_clean_data() -> pd.DataFrame:
-    df=pd.read_csv('C:/Users/JustinD/py_projects/django/Fencing/finalstrip/journal/members04012022.csv',sep=',', keep_default_na=False).head(10)
+    df=pd.read_csv('C:/Users/JustinD/py_projects/django/Fencing/finalstrip/journal/members04012022.csv',sep=',', keep_default_na=False)
     
+    df['Member #'] = df['Member #'].apply(str)
     df['Birthdate verified'] = df['Birthdate verified'].apply(yes_no_2_tf)
     df['Club 1 ID#'] = df['Club 1 ID#'].map(lambda x: x if  x != '' else None)
     df['Club 2 ID#'] = df['Club 2 ID#'].map(lambda x: x if  x != '' else None)
@@ -45,6 +46,7 @@ def extract_clean_data() -> pd.DataFrame:
     df['Expiration'] = df['Expiration'].apply(convert_date)
     df['US Citizen'] = df['US Citizen'].apply(yes_no_2_tf)
     df['Permanent Resident'] = df['Permanent Resident'].apply(yes_no_2_tf)
+    df['Region #'] = df['Region #'].map(lambda x: x if  x != '' else None)
     df['Background Check Expires'] = df['Background Check Expires'].apply(convert_date)
     df['SafeSport Expires'] = df['SafeSport Expires'].apply(convert_date)
     df['Non-Comp Eligible'] = df['Non-Comp Eligible'].apply(yes_no_2_tf)
@@ -55,7 +57,8 @@ def extract_clean_data() -> pd.DataFrame:
     df['Referee FIE Year Epee'] = df['Referee FIE Year Epee'].map(lambda x: x if  x != '' else None)
     df['Referee FIE Year Saber'] = df['Referee FIE Year Saber'].map(lambda x: x if  x != '' else None)
 
-    return  df
+    df1 = df.drop_duplicates(keep='first')
+    return  df1
 
 # load data into django model
 def load_membership_data() -> NoReturn:

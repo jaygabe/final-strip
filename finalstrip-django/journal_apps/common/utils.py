@@ -11,6 +11,6 @@ def extract_data_and_assign_user(request):
 # remove empty string fields
 def remove_empty_fields(data):
     for field in list(data.keys()):
-            if data[field] == '':
+            if data[field] == '' or data[field] == None:
                 del data[field]
     return data
