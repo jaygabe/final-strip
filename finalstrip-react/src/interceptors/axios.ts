@@ -19,6 +19,7 @@ const getRefreshToken = (): Promise<string | void> => {
 }
 
 axios.interceptors.response.use(resp => resp, async error => {
+  console.log('refresh: ', refresh)
   if ((error.response.status === 401 && !refresh) || (error.response.status === 500 && !refresh)) {
     refresh = true
     console.log('interceptor')
