@@ -13,6 +13,7 @@ tabs:  https://codepen.io/mirek-marchut/pen/wvqMBvW?editors=1100
 @import './styles/forms.css';
 @import './styles/starRating.css';
 @import './styles/boutTabs.css';
+@import './styles/searchBar.css';
 
 
 :root {
