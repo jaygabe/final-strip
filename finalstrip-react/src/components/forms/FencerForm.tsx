@@ -1,6 +1,8 @@
-import {useState, SyntheticEvent} from 'react';
+import {useState, SyntheticEvent, useEffect} from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+// import { SearchUSAFencing } from './form elements/SearchUSAFencing';
+import { SearchUSAFencing } from './form elements/SearchUSAFencing';
 import { FormTextElement } from './form elements/FormTextElement';
 import { FormRatingElement } from './form elements/FormRatingElement';
 import { FormSelectElement } from './form elements/FormSelectElement';
@@ -10,7 +12,6 @@ import { getNewRefreshToken} from '../../hooks/utils';
 
 
 export const FencerForm = () => {
-
 
     const [usaFencingInfo, setUSAFencingInfo] = useState<string>('')
     const [firstName, setFirstName] = useState<string>('')
@@ -39,15 +40,15 @@ export const FencerForm = () => {
     const [tacticDescript, setTacticDescript] = useState<string>('')
     const [favActions, setFavActions] = useState<string>('')
     const [notes, setNotes] = useState<string>('')
-    
 
     // Send form to the backend to be processed
     const submit = async (e: SyntheticEvent) => {
-        e.preventDefault();  // prevents page from reloading.
+        e.preventDefault()  // prevents page from reloading.
         
         await getNewRefreshToken()
 
         const {data} = await axios.post('/api/fencers/create/', {
+
             'first_name': firstName,
             'last_name': lastName,
             club,
@@ -69,15 +70,28 @@ export const FencerForm = () => {
             'favorite_actions': favActions,
             notes,
             
-        }, {withCredentials: true});
+        }, {withCredentials: true})
     }
 
+    
+    let [x, setX] = useState('untest')
+    function test(){
+        if (x === 'untest'){
+            x = 'testing'
+        }else{
+            x = 'untest'
+        }
+        console.log('triggered')
+        console.log('x is now: ', x)
+    }
+    
     return(
         <>
+            <h1 className='h1'>New Fencer</h1>
+            <br />
+            <SearchUSAFencing />
+            <br />
             <form onSubmit={submit}>
-                
-                <h1 className='h1'>New Fencer</h1>
-
                 <CSRF/>
                 <FormTextElement setValue={setFirstName} elementName='first' placeholder='' labelText='First Name'/>
                 <FormTextElement setValue={setLastName} elementName='last' placeholder='' labelText='Last Name'/>

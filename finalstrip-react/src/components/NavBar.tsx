@@ -83,6 +83,7 @@ export const NavBar = () => {
                     <li><Link to="/journal/tournaments" className="navbar-link" onClick={() => setMobileLinks(!mobileLinks)}>Tournaments</Link></li>
                     <li><Link to="/journal/lessons" className="navbar-link" onClick={() => setMobileLinks(!mobileLinks)}>Lessons</Link></li>
                     <li><Link to="/journal/fencers" className="navbar-link" onClick={() => setMobileLinks(!mobileLinks)}>Fencers</Link></li>
+                    <li><Link to="/journal/fencer/create" className="navbar-link" onClick={() => setMobileLinks(!mobileLinks)}>create fencer</Link></li>
                 </ul>
             </div>
             
