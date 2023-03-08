@@ -90,6 +90,9 @@ export const FencerForm = () => {
             <h1 className='h1'>New Fencer</h1>
             <br />
             <SearchUSAFencing />
+            <hr />
+            <p>or</p>
+            <h1>Custom Profile</h1>
             <br />
             <form onSubmit={submit}>
                 <CSRF/>

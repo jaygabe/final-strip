@@ -96,3 +96,13 @@ export const REF_RATING_CHOICES = {
     'Unknown': 'Unknown',
 }
 
+export const ratingObjectOld: {
+    [key: number]: string;
+} = {
+    0: 'None',
+    1: 'Poor',
+    2: 'Fair',
+    3: 'Good',
+    4: 'Great',
+    5: 'Excellent',
+}

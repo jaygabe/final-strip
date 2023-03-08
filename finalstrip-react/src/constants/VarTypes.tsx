@@ -58,7 +58,6 @@ export type boutType = {
     boutFormat: string
     round: number
     notes: string
-    public: boolean
     shareCoach: boolean
     deleted: boolean
 }

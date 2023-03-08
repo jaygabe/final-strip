@@ -56,7 +56,8 @@ export function SearchUSAFencing(){
         // this second peice should probably be done with useRef
         // filter names for the search
         const filteredNames = fencerNames.filter(fencer => {
-            const searchTerms = targetValue.toLowerCase().split(' ')
+            const removePunctuation = targetValue.replaceAll(',',' ').replaceAll('.','')
+            const searchTerms = removePunctuation.toLowerCase().split(' ')
             return searchTerms.every(searchTerm =>
                 fencer.name.toLowerCase().includes(searchTerm)
         )})
