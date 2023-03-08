@@ -3,11 +3,9 @@ import { useState } from 'react';
 export function FormRatingElement({
         setValue,
         labelText,
-        elementName
     }:{ 
-        setValue: React.Dispatch<React.SetStateAction<string>>,  
+        setValue: React.Dispatch<React.SetStateAction<number>>,  
         labelText: string,
-        elementName: string
     }) {
 
     const [rating, setRating] = useState(0);
@@ -26,7 +24,7 @@ export function FormRatingElement({
     }
   
     function onClick(entry: number): void {
-        setValue(ratingObject[entry])
+        setValue(entry)
         setRating(entry)
         setRatingText(ratingObject[entry])
     }
