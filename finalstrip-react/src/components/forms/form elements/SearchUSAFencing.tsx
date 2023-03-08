@@ -50,12 +50,16 @@ export function SearchUSAFencing(){
                     setSearchRequested(true)
                     console.log('data: ', result.data)
                     setFencerNames(result.data)
-                })}
+                }).catch(() => {
+                    setSearchRequested(false)
+                    alert('Unable to search for opponent')
+                }
+                )}
             } 
         getData()
         // this second peice should probably be done with useRef
         // filter names for the search
-        const filteredNames = fencerNames.filter(fencer => {
+            const filteredNames = fencerNames.filter(fencer => {
             const removePunctuation = targetValue.replaceAll(',',' ').replaceAll('.','')
             const searchTerms = removePunctuation.toLowerCase().split(' ')
             return searchTerms.every(searchTerm =>

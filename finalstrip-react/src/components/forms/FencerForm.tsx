@@ -72,18 +72,6 @@ export const FencerForm = () => {
             
         }, {withCredentials: true})
     }
-
-    
-    let [x, setX] = useState('untest')
-    function test(){
-        if (x === 'untest'){
-            x = 'testing'
-        }else{
-            x = 'untest'
-        }
-        console.log('triggered')
-        console.log('x is now: ', x)
-    }
     
     return(
         <>
