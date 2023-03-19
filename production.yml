@@ -6,7 +6,7 @@ services:
             context: .
             dockerfile: ./docker/production/django/Dockerfile
         command: /start
-        image: authors-haven-api
+        image: finalstrip-django
         env_file:
             - ./.envs/.production/.django
             - ./.envs/.production/.postgres
