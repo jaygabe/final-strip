@@ -32,7 +32,7 @@ export function SearchUSAFencing(){
         // const targetValue = e.target.value
         let targetValue = searchRef.current?.value ? searchRef.current?.value : ''
 
-        if(targetValue.length <= 1) setSearchRequested(false)
+        if(targetValue.length <= 2) setSearchRequested(false)
 
         if(targetValue.length == 0) {
             setSearchState({

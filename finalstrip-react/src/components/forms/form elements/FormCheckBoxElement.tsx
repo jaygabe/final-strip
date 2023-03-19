@@ -17,7 +17,7 @@ export const FormCheckBoxElement = ({
     }
 
     return (
-        <div className="container">
+        <div className="">
             <label className="toggle">
                 <span className="toggle-label">{labelText}</span>
                 <input className="toggle-checkbox" 
