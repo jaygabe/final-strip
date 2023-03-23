@@ -1,13 +1,10 @@
 from rest_framework import serializers
-
-from journal_apps.bouts.models import Bout
+# from journal_apps.bouts.models import Bout
 from journal_apps.fencers.models import Fencer
 from journal_apps.bouts.serializers import BoutSerializer
 
-
 class FencerSerializer(serializers.ModelSerializer):
     bouts = serializers.SerializerMethodField(read_only=True)
-
 
     def get_bouts(self, obj):
         fencer_a_bouts = obj.fencer_a.all()
@@ -27,8 +24,6 @@ class UpdateFencerSerializer(serializers.ModelSerializer):
         exclude = ('pkid','id','deleted')
 
 class CreateFencerSerializer(serializers.ModelSerializer):
-
-    # !region = serializers.IntegerField(allow_null=True, required=False)
     region = serializers.CharField(required=False, allow_null=True, allow_blank=True)
 
     def validate_region(self, value):
@@ -40,11 +35,7 @@ class CreateFencerSerializer(serializers.ModelSerializer):
              return int(value)
         except ValueError:
             raise serializers.ValidationError('Valid integer is required')
-    # removes region if the integer field comes through as an empty string
-    # def to_internal_value(self, data):
-    #     if data.get('region') == '':
-    #         data.pop('region')
-    #     return super(CreateFencerSerializer, self).to_internal_value(data)
+
 
     class Meta:
         model = Fencer
@@ -72,3 +63,14 @@ class CreateFencerSerializer(serializers.ModelSerializer):
             'favorite_actions',
             'notes'
         )
+
+class ChooseFencerSerializer(serializers.ModelSerializer):
+    fencer_name = serializers.SerializerMethodField(read_only=True)
+
+    def get_fencer_name(self, obj):
+        return str(obj.last_name) + ", " + str(obj.first_name)
+
+
+    class Meta:
+        model = Fencer
+        fields = ('slug', 'fencer_name')

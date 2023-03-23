@@ -19,11 +19,9 @@ logger = logging.getLogger(__name__)
 
 
 class EventDetailView(APIView):
-    # authentication_classes = [JWTAuthentication]
+    authentication_classes = [JWTAuthentication]
 
     def get(self, request, slug):
-        print('event slug: ', slug)
-
         try:
             event = Event.objects.get(slug=slug)
         except Event.DoesNotExist:
@@ -37,7 +35,7 @@ class EventDetailView(APIView):
             elif event.shareable == "my coaches":
                 pass # will need to handle coach confirmation here
 
-        serializer = EventDetailSerializer(event)
+        serializer = EventDetailSerializer(event, context={"request": request})
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
@@ -48,7 +46,7 @@ class EventListView(generics.ListAPIView):
     def get_queryset(self, *args, **kwargs):
         user = self.request.user
         slug = self.kwargs.get('slug')
-        queryset = Event.objects.filter(Q(tournament__slug=slug)) # Q(user=user)&
+        queryset = Event.objects.filter(tournament__slug=slug, user=user)
         return queryset
 
 
@@ -77,8 +75,6 @@ class EventCreateView(generics.CreateAPIView):
 
 
 class EventUpdateView(APIView):
-
-    
     # permission_classes = [JWTAuthentication, IsOwner]
     serializer_class = EventSerializer
 

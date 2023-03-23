@@ -1,14 +1,23 @@
 from rest_framework import serializers
 
 from journal_apps.events.models import Event
+from journal_apps.fencers.models import Fencer
 from journal_apps.bouts.serializers import BoutSerializer
+from journal_apps.fencers.serializers import ChooseFencerSerializer
+
 
 class EventDetailSerializer(serializers.ModelSerializer):
     bouts = serializers.SerializerMethodField(read_only=True)
+    fencers = serializers.SerializerMethodField(read_only=True)
 
     def get_bouts(self, obj):
         events = obj.bouts.all()
         serializer = BoutSerializer(events, many=True)
+        return serializer.data
+    
+    def get_fencers(self, obj):
+        fencers = Fencer.objects.filter(user=self.context['request'].user)
+        serializer = ChooseFencerSerializer(fencers, many=True)
         return serializer.data
     
     class Meta:
