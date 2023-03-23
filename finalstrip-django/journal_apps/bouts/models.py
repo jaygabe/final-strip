@@ -11,6 +11,7 @@ User = get_user_model()
 
 class Bout(JournalModel):
 
+    # Depreceated
     class ScaleChoices(models.TextChoices):
         POOR = 'poor', _('poor')
         FAIR = 'fair', _('fair')
@@ -22,21 +23,22 @@ class Bout(JournalModel):
 
 
     class HandChoices(models.TextChoices):
-        RIGHT = 'right', _('right') 
-        LEFT = 'left', _('left')
+        RIGHT = 'Right', _('Right') 
+        LEFT = 'Left', _('Left')
 
     
     class GripChoices(models.TextChoices):
-        PISTOL = 'pistol', _('pistol')
-        FRENCH = 'french', _('french')
-        OTHER = 'other', _('other')
+        PISTOL = 'Pistol', _('Pistol')
+        FRENCH = 'French', _('French')
+        OTHER = 'Other', _('Other')
 
 
     class BoutChoices(models.TextChoices):
-        POOL = 'pool', _('pool'), 
-        DE = 'direct elimination', _('direct elimination'), 
-        TEAM = 'team relay', _('team relay'), 
-        OTHER = 'other', _('other')
+        POOL = 'Pool', _('Pool'), 
+        DE = 'DE', _('DE'),
+        DE_VET = 'DE - Vet', _('DE - Vet'),
+        TEAM = 'Team Relay', _('Team Relay'), 
+        OTHER = 'Other', _('Other')
     
 
     winner_is_a = models.BooleanField(default=True)
