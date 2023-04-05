@@ -11,13 +11,13 @@ https://codepen.io/justin107d/pen/bGjmzmM
     justify-content: center;
 }
 
-.bout-tabs label{
+.bout-tabs label.bout-tab-radio {
     padding: 10px 16px;
     cursor: pointer;
     align-self: center;
 }
 
-.bout-tabs input  {
+.bout-tabs input.bout-tab-radio {
     display: none;
 }
 
@@ -28,7 +28,7 @@ https://codepen.io/justin107d/pen/bGjmzmM
     display: none;
 }
 
-.bout-tabs input:checked + label {
+.bout-tabs input.bout-tab-radio:checked + label.bout-tab-radio {
     font-weight: bold;
     color: var(--primary);
     border-bottom: 2px solid var(--primary);
@@ -38,9 +38,14 @@ https://codepen.io/justin107d/pen/bGjmzmM
     border-bottom: 2px solid #009578; */
 }
 
-.bout-tabs input:checked + label + section {
+.bout-tabs input.bout-tab-radio:checked + label.bout-tab-radio + section {
     display: initial;
-  }
+}
+
+
+
+
+
 
 
 
