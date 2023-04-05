@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Dispatch, SetStateAction } from 'react'
 
 
 export const FormNumberElement = ({ 
@@ -8,7 +8,8 @@ export const FormNumberElement = ({
     elementName,
     // startingValue
     }:{ 
-        setValue: React.Dispatch<React.SetStateAction<number>>,  
+        // setValue: (value: number | null) => void, 
+        setValue: Dispatch<SetStateAction<number | null>> 
         // placeholder: number,
         labelText: string,
         elementName: string,
