@@ -1,5 +1,9 @@
 version: "3.9"
 
+networks:
+  finalstrip-net:
+    driver: bridge
+
 services:
   # django application
   api:
@@ -112,9 +116,7 @@ services:
 
 
 
-networks:
-  authors-api-live:
-    driver: bridge
+
 
 volumes:
   # local_postgres_data_backups: {}

@@ -1,0 +1,20 @@
+
+CELERY_BROKER=redis://redis:6379/0
+CELERY_BACKEND=redis://redis:6379/0
+
+DOMAIN=locahost:8080
+EMAIL_PORT=1025
+
+CELERY_FLOWER_USER=finalstripadmin
+CELERY_FLOWER_PASSWORD=Fencing2011
+
+SIGNING_KEY=XSm8lLNS3Jl9zrOLGBN27QjnDPmaX05PRJtnEE9B7KUToG43AzE
+
+# postgres://username:password@hostname/databasename
+DATABASE_URL=postgres://postgres:skippy@postgres:5432/FinalStripTest
+# DATABASE_URL=postgres://postgres:skippy@localhost:5432/FinalStripTest
+# DATABASE_URL=postgres://postgres:admin123456@postgres:5432/authors-haven-api
+
+DJANGO_SECRET_KEY=bnw$7^@btnzaz+%=35va-=bv3gosvkroq2tpy@ct!xe_q_3qfw
+
+DJANGO_DEBUG=True

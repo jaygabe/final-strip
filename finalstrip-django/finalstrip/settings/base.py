@@ -6,7 +6,7 @@ import environ
 env = environ.Env()
 
 ROOT_DIR = (
-    Path(__file__).resolve().parent.parent.parent
+    Path(__file__).resolve().parent.parent.parent.parent
 )  # need three to get to manage.py level
 
 # points django to where the apps are stored
@@ -88,14 +88,25 @@ TEMPLATES = [
 WSGI_APPLICATION = 'finalstrip.wsgi.application'
 
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 
-# DATABASES = {"default": env.db("DATABASE_URL")}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'FinalStripTest', 
+#         'USER': 'postgres',
+#         'PASSWORD': 'skippy',
+#         'HOST': '127.0.0.1', 
+#         'PORT': '5432',
+#     }
+# }
+
+DATABASES = {"default": env.db("DATABASE_URL")}
 # DATABASES['default']['ATOMIC_REQUESTS'] = True
 
 PASSWORD_HASHERS = [
