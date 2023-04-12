@@ -3,4 +3,5 @@
 set -o errexit
 set -o nounset
 
-watchmedo auto-restart -d authors_api/ -p '*.py' -- celery -A authors_api worker --loglevel=info
+cd finalstrip-django
+watchmedo auto-restart -d finalstrip/ -p '*.py' -- celery -A finalstrip.celery.app worker --loglevel=info --uid=nobody --gid=nogroup
