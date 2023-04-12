@@ -11,13 +11,13 @@ services:
       context: .
       dockerfile: docker/local/django/Dockerfile
     command: /start
-    container_name: django-api
+    container_name: fs-django-api
     volumes:
       - .:/app
       - static_volume:/app/staticfiles
       - media_volume:/app/mediafiles
-    # ports:
-      # - "8000:8000"
+    ports:
+      - "8000:8000"
     expose:
       - "8000"
     env_file:
@@ -35,7 +35,7 @@ services:
     build:
       context: .
       dockerfile: ./docker/local/postgres/Dockerfile
-    container_name: postgres
+    container_name: fs-postgres
     volumes:
       - local_postgres_data:/var/lib/postgresql/data
       - local_postgres_data_backups:/backups
@@ -47,7 +47,7 @@ services:
   # Email Service
   mailhog:
     image: mailhog/mailhog:v1.0.0
-    container_name: mailhog
+    container_name: fs-mailhog
     ports:
       - "8025:8025"
     networks:
@@ -56,7 +56,7 @@ services:
   # Message Broker
   redis:
     image: redis:6-alpine
-    container_name: redis
+    container_name: fs-redis
     networks:
       - finalstrip-net
   
@@ -66,7 +66,7 @@ services:
       context: .
       dockerfile: ./docker/local/django/Dockerfile
     command: /start-celeryworker
-    container_name: celery_worker
+    container_name: fs-celery_worker
     volumes:
       - .:/app
     env_file:
@@ -85,7 +85,7 @@ services:
       context: .
       dockerfile: ./docker/local/django/Dockerfile
     command: /start-flower
-    container_name: flower
+    container_name: fs-flower
     volumes:
       - .:/app
     env_file:

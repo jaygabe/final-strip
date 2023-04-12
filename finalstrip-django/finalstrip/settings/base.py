@@ -88,25 +88,25 @@ TEMPLATES = [
 WSGI_APPLICATION = 'finalstrip.wsgi.application'
 
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
 
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.postgresql_psycopg2',
 #         'NAME': 'FinalStripTest', 
 #         'USER': 'postgres',
-#         'PASSWORD': 'skippy',
+#         'PASSWORD': 'password',
 #         'HOST': '127.0.0.1', 
 #         'PORT': '5432',
 #     }
 # }
 
-DATABASES = {"default": env.db("DATABASE_URL")}
+# DATABASES = {"default": env.db("DATABASE_URL")}
 # DATABASES['default']['ATOMIC_REQUESTS'] = True
 
 PASSWORD_HASHERS = [
@@ -187,19 +187,35 @@ ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 
+# Celery settings
+CELERY_BROKER_URL = env("CELERY_BROKER")
+CELERY_RESULT_BACKEND = env("CELERY_BACKEND")
+CELERY_TIMEZONE = "UTC"
+CELERY_ACCEPT_CONTENT = ["json"]
+CELERY_TASK_SERIALIZER = "json"
+CELERY_RESULT_SERIALIZER = "json"
+# The naming convention of celery variables is supposed to change to lower case
+# Not sure if these are django specific so keeping the "old" python consant convention
 
-#  Settings for setting up email later on
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-ACCOUNT_EMAIL_VERIFICATION = "none"
-# myaccount.google.com/lesssecureapps   # this is now obsolete
-# myaccount.google.com/apppasswords
-# myaccount.google.com/DisplayUnlockCaptcha
-EMAIL_HOST = '0.0.0.0'  # 'smtp.gmail.com
-EMAIL_PORT = 1025 # 587 # port for gmail
-# EMAIL_HOST_USER = ''
-# EMAIL_HOST_PASSWORD =''
-# EMAIL_USE_TLS = False # true for gmail
-# EMAIL_USE_SSL = False
+EMAIL_BACKEND = "djcelery_email.backends.CeleryEmailBackend"
+EMAIL_HOST = env("EMAIL_HOST", default="mailhog")
+EMAIL_PORT = env("EMAIL_PORT")
+DEFAULT_FROM_EMAIL = "info@finalstrip.com"
+DOMAIN = env("DOMAIN")
+SITE_NAME = "FinalStrip"
+
+# #  Settings for setting up email later on
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# ACCOUNT_EMAIL_VERIFICATION = "none"
+# # myaccount.google.com/lesssecureapps   # this is now obsolete
+# # myaccount.google.com/apppasswords
+# # myaccount.google.com/DisplayUnlockCaptcha
+# EMAIL_HOST = '0.0.0.0'  # 'smtp.gmail.com
+# EMAIL_PORT = 1025 # 587 # port for gmail
+# # EMAIL_HOST_USER = ''
+# # EMAIL_HOST_PASSWORD =''
+# # EMAIL_USE_TLS = False # true for gmail
+# # EMAIL_USE_SSL = False
 
 
 # Configuration for django logging of errors
