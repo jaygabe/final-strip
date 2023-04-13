@@ -32,3 +32,7 @@ This project was created to allow fencers of all skill levels have an easy and q
 * better styling
 * prizes for best results at tournaments
 
+
+## Starting up the app
+
+There are two ways to start the backend in its current form.  Either through `python manage.py runserver` from `finalstrip-django` or by running the command `docker compose -f local.yml up --build -d --remove-orphans` which will build a series of containers and launch the backend.  Once that is complete you then need to start up the react app separately in another terminal with `npm start` from within the `finalstrip-react` folder.
