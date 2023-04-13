@@ -51,11 +51,11 @@ flower, nginx and mailhog require docker to be up and running
 
 ### django commands to know:
 
-`python manage.py makemigrations` creates files to update the database to changes in the models
-`python manage.py migrate` pushes the changes to the database
-`python manage.py runserver` runs the django web server
-`python manage.py createsuperuser` used to create a superuser that can log into the `localhost:8000/admin/` page and manually edit data without code.
-`python manage.py migrate --run-syncdb` sometimes the db does not migrate correctly and this command fixes that
+* `python manage.py makemigrations` creates files to update the database to changes in the models
+* `python manage.py migrate` pushes the changes to the database
+* `python manage.py runserver` runs the django web server
+* `python manage.py createsuperuser` used to create a superuser that can log into the `localhost:8000/admin/` page and manually edit data without code.
+* `python manage.py migrate --run-syncdb` sometimes the db does not migrate correctly and this command fixes that
 
 
 
