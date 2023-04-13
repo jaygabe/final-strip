@@ -96,6 +96,12 @@ export const REF_RATING_CHOICES = {
     'Unknown': 'Unknown',
 }
 
+export const SHAREABLE_CHOICES = {
+    'Private': 'Private',
+    'Club': 'Club',
+    'Public': 'Public'
+}
+
 export const ratingObjectOld: {
     [key: number]: string;
 } = {
@@ -106,3 +112,6 @@ export const ratingObjectOld: {
     4: 'Great',
     5: 'Excellent',
 }
+
+
+

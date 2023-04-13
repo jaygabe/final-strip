@@ -61,3 +61,5 @@ export type boutType = {
     shareCoach: boolean
     deleted: boolean
 }
+
+export type fencerListType = {[slug:string]: string}
