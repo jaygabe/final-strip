@@ -46,7 +46,6 @@ export function BoutView() {
         boutFormat: '',
         round: 0,
         notes: '',
-        public: true,
         shareCoach: true,
         deleted: false
         })
@@ -95,7 +94,6 @@ export function BoutView() {
                     boutFormat: result.data.bout_format,
                     round: result.data.round,
                     notes: result.data.notes,
-                    public: result.data.public,
                     shareCoach: result.data.share_coach,
                     deleted: result.data.deleted
             })
@@ -121,7 +119,6 @@ export function BoutView() {
                 {bout.boutFormat ? <p>Format: {bout.boutFormat}</p> : <></>}
                 {bout.round ? <p>Round: {bout.round}</p> : <></>}
                 {bout.notes ? <p>Notes: {bout.notes}</p> : <></>}
-                {bout.public ? <p>{bout.public}</p> : <></>}
                 {bout.shareCoach ? <p>{bout.shareCoach}</p> : <></>}
             </section>
     )}
@@ -183,16 +180,16 @@ export function BoutView() {
 
             <div className="container">
                 <div className="bout-tabs">
-                    <input type="radio" id="overall" name="bout-info" defaultChecked/>
-                    <label htmlFor="overall"><EditIcon/><br/><span>Overall</span></label>
+                    <input className='bout-tab-radio' type="radio" id="overall" name="bout-info" defaultChecked/>
+                    <label className='bout-tab-radio' htmlFor="overall"><EditIcon/><br/><span>Overall</span></label>
                     {boutOverallDetail()}
 
-                    <input type="radio" id="fencer-a" name="bout-info" />
-                    <label htmlFor="fencer-a"><EditIcon/><br/><span>Fencer A</span></label>
+                    <input className='bout-tab-radio' type="radio" id="fencer-a" name="bout-info" />
+                    <label className='bout-tab-radio' htmlFor="fencer-a"><EditIcon/><br/><span>Fencer A</span></label>
                     {fencerADetail()}
 
-                    <input type="radio" id="fencer-b" name="bout-info" />
-                    <label htmlFor="fencer-b"><EditIcon/><br/><span>Fencer B</span></label>
+                    <input className='bout-tab-radio' type="radio" id="fencer-b" name="bout-info" />
+                    <label className='bout-tab-radio' htmlFor="fencer-b"><EditIcon/><br/><span>Fencer B</span></label>
                     {fencerBDetail()}
                 </div>
             </div>

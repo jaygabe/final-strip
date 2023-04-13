@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom'
 
 import axios from 'axios';
-
-import { eventType, boutType } from '../../constants/VarTypes'
+import { BoutForm } from '../../components/forms/BoutForm'
+import { eventType, boutType, fencerListType } from '../../constants/VarTypes'
 
 
 
@@ -20,6 +20,7 @@ export const Bouts = () => {
         notes: ''
     });
     const [bouts, setBouts] = useState<[boutType] | []>([])
+    const [fencerList, setFencerList] = useState<fencerListType>({'abc':'no fencers'})
 
     const getData = async () => {
         if (dataReceived === false) {
@@ -27,6 +28,12 @@ export const Bouts = () => {
             console.log('result: ', result.data)
             setDataReceived(true)
             setEvent(result.data)
+            setFencerList(
+                result.data.fencers.reduce((result: fencerListType, item: {slug:string, fencer_name: string}) => {
+                                result[item.slug] = item.fencer_name
+                                return result
+                        },{})
+                )
             setBouts(result.data.bouts.map((value: any, key: number) => {
                 return {
                     id: key,
@@ -122,7 +129,10 @@ export const Bouts = () => {
         <>
             {eventDetail()}
             {boutList()}
-            
+
+            <div className="container">
+                <BoutForm fencerList={fencerList}/>
+            </div>
         </>
     )
 }
