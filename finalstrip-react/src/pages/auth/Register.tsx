@@ -15,10 +15,10 @@ export const Register = () => {
     const submit = async (e: SyntheticEvent) => {
         e.preventDefault();  // prevents page from reloading.
         
-        await axios.post("auth/register", {
+        await axios.post("api/auth/register", {
             first_name: firstName,
             last_name: lastName,
-            usaf_number: usafNumber,
+            usaf_number: usafNumber,  // this needs to be added to backend as well
             email,
             password,
             password_confirm: passwordConfirm
