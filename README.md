@@ -40,11 +40,11 @@ There are two ways to start the backend in its current form.  Either through `py
 
 ### Routes:
 
-All django api pages are through port 8000
-Mailhog runs on 8025
-Flower should be on 5555
-Nginx is on 8080
-React is on 3000
+* All django api pages are through port 8000
+* Mailhog runs on 8025
+* Flower should be on 5555
+* Nginx is on 8080
+* React is on 3000
 
 flower, nginx and mailhog require docker to be up and running
 
