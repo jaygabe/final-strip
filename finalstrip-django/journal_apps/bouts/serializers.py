@@ -38,3 +38,16 @@ class UpdateBoutSerializer(serializers.ModelSerializer):
     class Meta:
         model = Bout
         exclude = ('pkid','id','deleted')
+
+class CreateBoutSerializer(serializers.ModelSerializer):
+    score_a = serializers.IntegerField(required=True)
+    score_b = serializers.IntegerField(required=True)
+
+    class Meta:
+        model = Bout
+        exclude = (
+            'deleted',
+            'pkid',
+            'id',
+
+        )

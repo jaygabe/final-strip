@@ -34,11 +34,13 @@ class FencerDetailView(APIView):
 
 
 class FencerListView(generics.ListAPIView):
-    # permission_classes = [JWTAuthentication]
+    permission_classes = [JWTAuthentication]
     serializer_class = FencerSerializer
     paginate_by = 10
 
     def get_queryset(self):
+        print('request: ', self.request.__dict__)
+        print('user: ', self.request.user)
         user = self.request.user
         fencers = Fencer.objects.filter(user=user)
 

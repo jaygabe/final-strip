@@ -9,7 +9,7 @@ User = get_user_model()
 
 class JournalModel(models.Model):
     class Shareability(models.TextChoices):
-            PRIVATE = "private", _("private")
+            PRIVATE = "Private", _("Private")
             COACHES = "my coaches", _("my coaches")
             # CLUB = "club members", _("club members")
             # FRIENDS = "friends", _("friends")

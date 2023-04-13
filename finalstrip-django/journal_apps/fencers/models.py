@@ -47,7 +47,7 @@ class Fencer(JournalModel):
 
     fencer_is_me = models.BooleanField(default=False)
     usa_fencing_info = models.ForeignKey(USAFencingInfo, on_delete=models.SET_NULL, null=True, blank=True)
-    first_name = models.CharField(max_length=200, null=True,)
+    first_name = models.CharField(max_length=200, null=True)
     last_name = models.CharField(max_length=200, null=True)
     club = models.CharField(max_length=200, null=True, blank=True)
     club2 = models.CharField(max_length=200, null=True, blank=True)
