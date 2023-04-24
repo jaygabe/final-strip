@@ -1,5 +1,0 @@
--r base.txt
-
-gunicorn==20.1.0 # production server
-psycopg2==2.9.3 # connect to postgres db
-whitenoise==5.3.0 # image processing

@@ -1,9 +1,0 @@
-[tool.black]
-extend-exclude = '''
-/(
-    | env
-)/
-'''
-
-[tool.isort]
-profile = "black"

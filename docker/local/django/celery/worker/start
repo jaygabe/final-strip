@@ -1,7 +1,0 @@
-#!/bin/bash
-
-set -o errexit
-set -o nounset
-
-cd finalstrip-django
-watchmedo auto-restart -d finalstrip/ -p '*.py' -- celery -A finalstrip.celery.app worker --loglevel=info --uid=nobody --gid=nogroup
